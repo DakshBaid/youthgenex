@@ -13,12 +13,13 @@ export default function Navbar() {
           <span style={{ fontFamily: '"Playfair Display"', fontSize: '1.35rem' }}>Youth<span style={{ color: 'var(--red)' }}>Genex</span></span>
         </a>
 
-        {/* Desktop Nav */}
-        <nav style={{ display: 'flex', gap: '1rem', alignItems: 'center' }} className="nav-desktop">
+        {/* Navigation */}
+        <nav style={{ display: 'flex', gap: '1rem', alignItems: 'center' }} className={`nav-desktop ${isOpen ? 'nav-mobile-open' : ''}`}>
           {['About', 'Programs', 'Events', 'Contact'].map(item => (
             <motion.a 
               key={item} 
-              href={`#${item.toLowerCase()}`} 
+              href={`#${item.toLowerCase()}`}
+              onClick={() => setIsOpen(false)} 
               whileHover={{ scale: 1.05, backgroundColor: 'var(--red)', color: 'var(--white)' }}
               whileTap={{ scale: 0.95 }}
               style={{ 
