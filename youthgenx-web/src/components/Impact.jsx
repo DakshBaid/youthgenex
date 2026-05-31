@@ -27,12 +27,32 @@ export default function Impact() {
               
               <div style={{ marginTop: '2.5rem' }}>
                 <h4 style={{ margin: '0 0 1rem', fontSize: '1.2rem' }}>Partner Institutions</h4>
-                <ul style={{ margin: 0, paddingLeft: '1.2rem', color: 'rgba(255,255,255,0.8)', display: 'grid', gap: '0.5rem' }}>
-                  <li>Indore Municipal Corporation</li>
-                  <li>SVKM’s NMIMS, Indore</li>
-                  <li>Choithram North Campus</li>
-                  <li>INIFD Indore</li>
-                </ul>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem', marginTop: '1.5rem' }}>
+                  {[
+                    { name: 'Indore Municipal Corp.', img: 'https://upload.wikimedia.org/wikipedia/en/5/52/Indore_Municipal_Corporation_logo.png' },
+                    { name: "SVKM's NMIMS", img: 'https://upload.wikimedia.org/wikipedia/en/thumb/e/e0/NMIMS_logo.svg/300px-NMIMS_logo.svg.png' },
+                    { name: 'Choithram School', img: 'https://choithramschool.com/wp-content/uploads/2021/04/Choithram-School-Logo-1.png' },
+                    { name: 'INIFD Indore', img: 'https://nifd.net.in/wp-content/uploads/2022/10/logo-3.png' }
+                  ].map((partner, i) => (
+                    <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', background: 'rgba(0,0,0,0.2)', padding: '0.6rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                      <div style={{ width: 40, height: 40, borderRadius: '6px', background: '#fff', padding: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, overflow: 'hidden' }}>
+                        <img 
+                          src={partner.img} 
+                          alt={partner.name} 
+                          style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} 
+                          onError={(e) => { 
+                            e.target.style.display = 'none'; 
+                            e.target.nextSibling.style.display = 'block'; 
+                          }} 
+                        />
+                        <span style={{ display: 'none', color: 'var(--ink)', fontWeight: 900, fontSize: '0.85rem' }}>
+                          {partner.name.split(' ').map(w => w[0]).join('').substring(0, 3)}
+                        </span>
+                      </div>
+                      <span style={{ color: 'rgba(255,255,255,0.9)', fontSize: '0.9rem', fontWeight: 600, lineHeight: 1.2 }}>{partner.name}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
               <p style={{ marginTop: '1.5rem', fontWeight: 700, color: '#FFCED5' }}>Multiple Flagship Events Conducted</p>
             </div>
