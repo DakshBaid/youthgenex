@@ -3,9 +3,9 @@ import { motion } from 'framer-motion';
 import { Target, Users, BookOpen, Mic, Award, LayoutDashboard } from 'lucide-react';
 
 const programs = [
-  { title: "Model United Nations Conferences", icon: <Users size={24} /> },
   { title: "Youth Parliament", icon: <Target size={24} /> },
-  { title: "Leadership Conferences", icon: <Award size={24} /> },
+  { title: "Model United Nations Conferences", icon: <Users size={24} /> },
+  { title: "Community Building Events", icon: <Award size={24} /> },
   { title: "Public Speaking & Communication", icon: <Mic size={24} /> },
   { title: "Workshops & Skill Development", icon: <BookOpen size={24} /> },
   { title: "School & College Collaborations", icon: <LayoutDashboard size={24} /> },
