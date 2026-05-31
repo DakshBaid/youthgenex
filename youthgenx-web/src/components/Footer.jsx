@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Mail, ArrowRight } from 'lucide-react';
 
 export default function Footer() {

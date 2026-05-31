@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { motion } from 'framer-motion';
 import { Target, Users, BookOpen, Mic, Award, LayoutDashboard } from 'lucide-react';
 
