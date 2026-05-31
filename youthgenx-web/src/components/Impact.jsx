@@ -9,10 +9,10 @@ export default function Impact() {
           
           <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
             <h2 className="section-title" style={{ color: 'var(--white)' }}>Why Choose YouthGenex</h2>
-            <ul style={{ marginTop: '2rem', listStyle: 'none', padding: 0, display: 'grid', gap: '1rem' }}>
+            <ul style={{ marginTop: '2.5rem', listStyle: 'none', padding: 0, display: 'grid', gap: '2.5rem' }}>
               {["Impact-Driven Learning", "Student-Centered Approach", "Leadership Development", "Strong Community & Networking", "Experiential Learning"].map((item, i) => (
-                <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '1rem', fontSize: '1.1rem' }}>
-                  <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--red)' }} />
+                <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '1.2rem', fontSize: '1.55rem', fontWeight: 500 }}>
+                  <span style={{ width: 12, height: 12, borderRadius: '50%', background: 'var(--red)', flexShrink: 0 }} />
                   {item}
                 </li>
               ))}
@@ -29,13 +29,13 @@ export default function Impact() {
                 <h4 style={{ margin: '0 0 1rem', fontSize: '1.2rem' }}>Partner Institutions</h4>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem', marginTop: '1.5rem' }}>
                   {[
-                    { name: 'Indore Municipal Corp.', img: 'https://upload.wikimedia.org/wikipedia/en/5/52/Indore_Municipal_Corporation_logo.png' },
-                    { name: "SVKM's NMIMS", img: 'https://upload.wikimedia.org/wikipedia/en/thumb/e/e0/NMIMS_logo.svg/300px-NMIMS_logo.svg.png' },
-                    { name: 'Choithram School', img: 'https://choithramschool.com/wp-content/uploads/2021/04/Choithram-School-Logo-1.png' },
-                    { name: 'INIFD Indore', img: 'https://nifd.net.in/wp-content/uploads/2022/10/logo-3.png' }
+                    { name: 'Indore Municipal Corp.', img: '/imc.png' },
+                    { name: "SVKM's NMIMS", img: '/nmims.png' },
+                    { name: 'Choithram School', img: '/choithram.png' },
+                    { name: 'INIFD Indore', img: '/inifd.png' }
                   ].map((partner, i) => (
-                    <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', background: 'rgba(0,0,0,0.2)', padding: '0.6rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.05)' }}>
-                      <div style={{ width: 40, height: 40, borderRadius: '6px', background: '#fff', padding: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, overflow: 'hidden' }}>
+                    <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '1rem', background: 'rgba(0,0,0,0.2)', padding: '0.8rem', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                      <div style={{ width: 64, height: 64, borderRadius: '8px', background: '#fff', padding: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, overflow: 'hidden' }}>
                         <img 
                           src={partner.img} 
                           alt={partner.name} 
@@ -45,11 +45,11 @@ export default function Impact() {
                             e.target.nextSibling.style.display = 'block'; 
                           }} 
                         />
-                        <span style={{ display: 'none', color: 'var(--ink)', fontWeight: 900, fontSize: '0.85rem' }}>
+                        <span style={{ display: 'none', color: 'var(--ink)', fontWeight: 900, fontSize: '1.1rem' }}>
                           {partner.name.split(' ').map(w => w[0]).join('').substring(0, 3)}
                         </span>
                       </div>
-                      <span style={{ color: 'rgba(255,255,255,0.9)', fontSize: '0.9rem', fontWeight: 600, lineHeight: 1.2 }}>{partner.name}</span>
+                      <span style={{ color: 'rgba(255,255,255,0.9)', fontSize: '1.05rem', fontWeight: 700, lineHeight: 1.3 }}>{partner.name}</span>
                     </div>
                   ))}
                 </div>
