@@ -27,20 +27,6 @@ export default function Footer() {
     }
   };
 
-  const handleEmailClick = (e, email, subject, body) => {
-    e.preventDefault();
-    // Check if the user is on a mobile device
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    
-    if (isMobile) {
-      // On mobile: Open the native default mail app
-      window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    } else {
-      // On desktop: Open Gmail directly in a new tab
-      window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`, '_blank');
-    }
-  };
-
   return (
     <footer id="contact" style={{ background: 'var(--ink)', color: 'var(--white)', padding: '5.5rem 0 2rem' }}>
       <div className="container">
@@ -63,10 +49,10 @@ export default function Footer() {
               <a href="https://in.linkedin.com/company/youthgenex" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', color: 'rgba(255,255,255,0.8)', textDecoration: 'underline', textUnderlineOffset: '4px' }}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--red)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg> LinkedIn
               </a>
-              <a href="#" onClick={(e) => handleEmailClick(e, 'youthgenex.org@gmail.com', 'Hello YouthGenex Team', 'Hi there,\n\nI was browsing your website and wanted to connect with you regarding...')} style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', color: 'rgba(255,255,255,0.8)', textDecoration: 'underline', textUnderlineOffset: '4px' }}>
+              <a href="mailto:youthgenex.org@gmail.com?subject=Hello%20YouthGenex%20Team&body=Hi%20there%2C%0A%0AI%20was%20browsing%20your%20website%20and%20wanted%20to%20connect%20with%20you%20regarding..." style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', color: 'rgba(255,255,255,0.8)', textDecoration: 'underline', textUnderlineOffset: '4px' }}>
                 <Mail size={20} color="var(--red)" /> Youth Genex Email
               </a>
-              <a href="#" onClick={(e) => handleEmailClick(e, 'indoredemocraticsummit@gmail.com', 'IDS 2026 Inquiry', 'Hi IDS Team,\n\nI am interested in the Indore Democratic Summit and have a query about...')} style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', color: 'rgba(255,255,255,0.8)', textDecoration: 'underline', textUnderlineOffset: '4px' }}>
+              <a href="mailto:indoredemocraticsummit@gmail.com?subject=IDS%202026%20Inquiry&body=Hi%20IDS%20Team%2C%0A%0AI%20am%20interested%20in%20the%20Indore%20Democratic%20Summit%20and%20have%20a%20query%20about..." style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', color: 'rgba(255,255,255,0.8)', textDecoration: 'underline', textUnderlineOffset: '4px' }}>
                 <Mail size={20} color="var(--red)" /> IDS Email
               </a>
             </div>

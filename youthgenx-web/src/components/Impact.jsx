@@ -9,10 +9,10 @@ export default function Impact() {
           
           <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
             <h2 className="section-title" style={{ color: 'var(--white)' }}>Why Choose YouthGenex</h2>
-            <ul style={{ marginTop: '2.5rem', listStyle: 'none', padding: 0, display: 'grid', gap: '2.5rem' }}>
+            <ul style={{ marginTop: '2.5rem', listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '3.5rem' }}>
               {["Impact-Driven Learning", "Student-Centered Approach", "Leadership Development", "Strong Community & Networking", "Experiential Learning"].map((item, i) => (
-                <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '1.2rem', fontSize: '1.55rem', fontWeight: 500 }}>
-                  <span style={{ width: 12, height: 12, borderRadius: '50%', background: 'var(--red)', flexShrink: 0 }} />
+                <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '1.2rem', fontSize: '1.8rem', fontWeight: 600 }}>
+                  <span style={{ width: 14, height: 14, borderRadius: '50%', background: 'var(--red)', flexShrink: 0 }} />
                   {item}
                 </li>
               ))}
