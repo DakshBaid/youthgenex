@@ -1,11 +1,17 @@
 import { useState, useRef, useEffect } from 'react';
-import { MessageCircle, X, Send } from 'lucide-react';
+import { MessageCircle, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+
+const faqs = [
+  { q: "What is YouthGenex?", a: "YouthGenex is a youth leadership and civic capability-building organization that empowers young minds through leadership, communication, and experiential learning." },
+  { q: "How can I join the events?", a: "You can explore our upcoming events like the Indore Democratic Summit or GENxMUN in the 'Programs' section of our website!" },
+  { q: "Who can participate?", a: "Our programs are open to students from schools, colleges, and young leaders who want to build their civic and leadership capabilities." },
+  { q: "How do I contact you?", a: "Scroll down to the footer and click on our email buttons to reach out directly to the team!" }
+];
 
 export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState([{ sender: 'bot', text: 'Hi there! Welcome to YouthGenex. How can I help you today? Are you looking to register for IDS 2026?' }]);
-  const [input, setInput] = useState('');
+  const [messages, setMessages] = useState([{ sender: 'bot', text: 'Hi there! Welcome to YouthGenex. Please select a question below:' }]);
   const messagesEndRef = useRef(null);
 
   const scrollToBottom = () => {
@@ -16,25 +22,12 @@ export default function Chatbot() {
     scrollToBottom();
   }, [messages]);
 
-  const handleSend = async () => {
-    if (!input.trim()) return;
-    
-    const userMessage = { sender: 'user', text: input };
-    setMessages(prev => [...prev, userMessage]);
-    setInput('');
-
-    try {
-      const res = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: userMessage.text })
-      });
-      const data = await res.json();
-      setMessages(prev => [...prev, { sender: 'bot', text: data.reply }]);
-    } catch (err) {
-      console.error(err);
-      setMessages(prev => [...prev, { sender: 'bot', text: "Sorry, I'm having trouble connecting right now." }]);
-    }
+  const handleQuestionClick = (faq) => {
+    setMessages(prev => [
+      ...prev, 
+      { sender: 'user', text: faq.q },
+      { sender: 'bot', text: faq.a }
+    ]);
   };
 
   return (
@@ -116,18 +109,30 @@ export default function Chatbot() {
               <div ref={messagesEndRef} />
             </div>
             
-            <div style={{ padding: '1rem', borderTop: '1px solid var(--line)', background: 'var(--white)', display: 'flex', gap: '0.5rem' }}>
-              <input 
-                type="text" 
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-                placeholder="Type a message..." 
-                style={{ flex: 1, border: '1px solid var(--line)', borderRadius: 'var(--radius)', padding: '0.5rem 0.8rem', outline: 'none' }} 
-              />
-              <button onClick={handleSend} style={{ background: 'var(--red)', color: 'var(--white)', border: 'none', borderRadius: 'var(--radius)', width: '40px', display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer' }}>
-                <Send size={16} />
-              </button>
+            <div style={{ padding: '1rem', borderTop: '1px solid var(--line)', background: 'var(--white)', display: 'flex', flexDirection: 'column', gap: '0.5rem', maxHeight: '180px', overflowY: 'auto' }}>
+              <p style={{ fontSize: '0.8rem', color: 'var(--muted)', margin: '0 0 0.3rem', fontWeight: 600 }}>Choose a question:</p>
+              {faqs.map((faq, index) => (
+                <button 
+                  key={index} 
+                  onClick={() => handleQuestionClick(faq)}
+                  style={{
+                    background: 'var(--soft)',
+                    border: '1px solid rgba(17,17,17,0.1)',
+                    color: 'var(--ink)',
+                    padding: '0.6rem 0.8rem',
+                    borderRadius: 'var(--radius)',
+                    fontSize: '0.85rem',
+                    textAlign: 'left',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s',
+                    lineHeight: 1.3
+                  }}
+                  onMouseOver={(e) => { e.currentTarget.style.background = 'rgba(192,0,26,0.05)'; e.currentTarget.style.borderColor = 'var(--red)'; }}
+                  onMouseOut={(e) => { e.currentTarget.style.background = 'var(--soft)'; e.currentTarget.style.borderColor = 'rgba(17,17,17,0.1)'; }}
+                >
+                  {faq.q}
+                </button>
+              ))}
             </div>
           </motion.div>
         )}
