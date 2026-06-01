@@ -163,6 +163,7 @@ section { scroll-margin-top: 84px; }
   .hero-h1 { font-size: 2.8rem !important; }
   .section-title { font-size: 1.8rem; }
   .impact-bullet { font-size: 1.2rem; gap: 0.8rem; }
+  .partner-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 768px) {
