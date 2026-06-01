@@ -143,12 +143,20 @@ section { scroll-margin-top: 84px; }
   font-weight: 600;
 }
 
+.programs-grid, .events-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
 @media (max-width: 1120px) {
   .section-title { font-size: 2.4rem; }
 }
 
 @media (max-width: 900px) {
   .hero-h1 { font-size: 3.35rem !important; }
+  .programs-grid, .events-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 640px) {
@@ -157,6 +165,7 @@ section { scroll-margin-top: 84px; }
   .py-16 { padding-top: 4rem; padding-bottom: 4rem; }
   .partner-grid { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); }
   .impact-bullet { font-size: 1.4rem; gap: 1rem; }
+  .programs-grid, .events-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 480px) {

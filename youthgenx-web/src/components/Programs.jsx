@@ -21,7 +21,7 @@ export default function Programs() {
           <p className="section-copy">We create impactful learning experiences beyond classrooms for students, schools, colleges, institutions, and young leaders.</p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem', marginTop: '3rem' }}>
+        <div className="programs-grid">
           {programs.map((prog, idx) => (
             <motion.div 
               key={idx} 
