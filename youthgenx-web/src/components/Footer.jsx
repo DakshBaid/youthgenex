@@ -5,8 +5,8 @@ export default function Footer() {
 
   const handleEmailClick = (e, email, subject, body) => {
     e.preventDefault();
-    // Check if user is on mobile via User Agent or Screen Size
-    const isMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
+    // Check if user is on a mobile OS via User Agent strictly (to prevent resized desktop windows from triggering mailto)
+    const isMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     
     if (isMobile) {
       // Mobile: Open native mail app flawlessly
