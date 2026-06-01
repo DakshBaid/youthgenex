@@ -11,7 +11,7 @@ export default function Impact() {
             <h2 className="section-title" style={{ color: 'var(--white)' }}>Why Choose YouthGenex</h2>
             <ul style={{ marginTop: '2.5rem', listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '3.5rem' }}>
               {["Impact-Driven Learning", "Student-Centered Approach", "Leadership Development", "Strong Community & Networking", "Experiential Learning"].map((item, i) => (
-                <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '1.2rem', fontSize: '1.8rem', fontWeight: 600 }}>
+                <li key={i} className="impact-bullet">
                   <span style={{ width: 14, height: 14, borderRadius: '50%', background: 'var(--red)', flexShrink: 0 }} />
                   {item}
                 </li>
@@ -27,7 +27,7 @@ export default function Impact() {
               
               <div style={{ marginTop: '2.5rem' }}>
                 <h4 style={{ margin: '0 0 1rem', fontSize: '1.2rem' }}>Partner Institutions</h4>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem', marginTop: '1.5rem' }}>
+                <div className="partner-grid">
                   {[
                     { name: 'Indore Municipal Corp.', img: '/imc.png' },
                     { name: "SVKM's NMIMS", img: '/nmims.png' },

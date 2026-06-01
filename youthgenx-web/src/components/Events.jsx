@@ -37,7 +37,7 @@ export default function Events() {
           <h2 className="section-title">Platforms for Impact</h2>
         </div>
         
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '1.5rem', marginTop: '3rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '1.5rem', marginTop: '3rem' }}>
           {events.map((ev, i) => (
             <motion.div 
               key={i} 
