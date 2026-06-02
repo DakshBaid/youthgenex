@@ -9,7 +9,7 @@ export default function Hero() {
       display: 'grid',
       alignItems: 'center',
       color: 'var(--white)',
-      background: 'linear-gradient(90deg, rgba(17,17,17,0.92) 0%, rgba(17,17,17,0.76) 45%, rgba(192,0,26,0.22) 100%), url("/gallery/7.jpeg") center/cover no-repeat, var(--ink)',
+      background: 'linear-gradient(90deg, rgba(17,17,17,0.92) 0%, rgba(17,17,17,0.76) 45%, rgba(192,0,26,0.22) 100%), url("/hero.jpeg") center/cover no-repeat, var(--ink)',
       position: 'relative'
     }}>
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
