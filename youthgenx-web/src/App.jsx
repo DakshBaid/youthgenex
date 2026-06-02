@@ -8,6 +8,7 @@ import Events from './components/Events';
 import Gallery from './components/Gallery';
 import AfterMovies from './components/AfterMovies';
 import Partners from './components/Partners';
+import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Chatbot from './components/Chatbot';
 import Preloader from './components/Preloader';
@@ -43,6 +44,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/gallery" element={<GalleryPage />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       </main>
       <Footer />

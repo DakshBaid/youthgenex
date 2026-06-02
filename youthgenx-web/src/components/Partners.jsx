@@ -25,7 +25,7 @@ export default function Partners() {
           </motion.div>
 
           <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}>
-            <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=800&q=82" alt="Partnership and collaboration" style={{ borderRadius: 'var(--radius)', boxShadow: 'var(--shadow)' }} />
+            <img src="/partners-bg.jpg" alt="Partnership and collaboration" style={{ borderRadius: 'var(--radius)', boxShadow: 'var(--shadow)', width: '100%', height: 'auto' }} />
           </motion.div>
           
         </div>
