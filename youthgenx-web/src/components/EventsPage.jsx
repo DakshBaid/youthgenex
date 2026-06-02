@@ -7,39 +7,45 @@ const allEvents = [
   {
     title: "GENxMUN",
     desc: "A dynamic Model United Nations platform designed to help students enhance diplomacy, debate, and communication skills while discussing global challenges and drafting impactful resolutions for tomorrow.",
-    color: "linear-gradient(135deg, #0F172A, #1E3A8A)",
+    color: "#003049", // Cosmos Blue
+    textColor: "#FFF",
     icon: <img src="/gxm-logo.png" alt="GENxMUN" style={{ width: '80px', height: '80px', objectFit: 'contain' }} />
   },
   {
     title: "Indore Democratic Summit",
     desc: "Our premier youth initiative focused on leadership, governance, civic awareness, and youth participation. Successfully conducted across 3 impactful editions with thousands of delegates.",
     path: "/ids",
-    color: "linear-gradient(135deg, #2A0800, #7F1D1D)",
+    color: "#C1121F", // Crimson Blaze
+    textColor: "#FFF",
     icon: <img src="/ids-logo.png" alt="IDS" style={{ width: '80px', height: '80px', objectFit: 'contain' }} />
   },
   {
     title: "Samvidhan Par Charcha",
     desc: "An initiative encouraging meaningful conversations around the Constitution, civic rights, responsibilities, and democratic values among youth, ensuring Constitutional literacy for everyone.",
-    color: "linear-gradient(135deg, #271400, #78350F)",
+    color: "#780000", // Gochujang Red
+    textColor: "#FFF",
     icon: <img src="/spc-logo.png" alt="Samvidhan Par Charcha" style={{ width: '80px', height: '80px', objectFit: 'contain' }} />
   },
   {
     title: "Coffee with Mayor",
     desc: "An interactive platform directly connecting students with leaders and policymakers to discuss progressive ideas, modern governance, and youth perspectives on local administration.",
-    color: "linear-gradient(135deg, #1A1A1A, #451A03)",
-    icon: <Coffee size={48} color="#fff" />
+    color: "#FDF0D5", // Varden Cream
+    textColor: "#111",
+    icon: <img src="/cwm-logo.png" alt="Coffee with Mayor" style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '50%' }} />
   },
   {
     title: "Kho Gaye Hum Kahan?",
     desc: "A youth-focused initiative creating open conversations around self-growth, managing emotions, personal identity, and navigating modern challenges like digital wellbeing.",
-    color: "linear-gradient(135deg, #170F2E, #3B0764)",
-    icon: <Heart size={48} color="#fff" />
+    color: "#669BBC", // Blue Marble
+    textColor: "#FFF",
+    icon: <img src="/kghk-logo.png" alt="Kho Gaye Hum Kahan" style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '50%' }} />
   },
   {
     title: "About Her",
     desc: "An initiative celebrating women, leadership, empowerment, and inspiring stories that encourage immense confidence and monumental growth for young female changemakers.",
-    color: "linear-gradient(135deg, #2D0614, #831843)",
-    icon: <Star size={48} color="#fff" />
+    color: "#F77F00", // Derived 6th color
+    textColor: "#FFF",
+    icon: <img src="/ah-logo.png" alt="About Her" style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '50%' }} />
   }
 ];
 
@@ -113,7 +119,7 @@ export default function EventsPage() {
                   alignItems: 'center',
                   justifyContent: 'center',
                   textAlign: 'center',
-                  color: 'white',
+                  color: ev.textColor,
                   transform: `rotateY(${angle}deg) translateZ(400px)`,
                   boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
                   cursor: 'pointer',
@@ -132,11 +138,11 @@ export default function EventsPage() {
                 </div>
 
                 {/* Hover Details State */}
-                <div className="event-3d-back" style={{ position: 'absolute', inset: 0, padding: '2.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', background: 'rgba(0,0,0,0.4)', backdropFilter: 'blur(8px)' }}>
-                  <h3 style={{ fontSize: '1.5rem', fontFamily: '"Playfair Display"', margin: '0 0 1rem', textShadow: '0 2px 10px rgba(0,0,0,0.3)' }}>
+                <div className="event-3d-back" style={{ position: 'absolute', inset: 0, padding: '2.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', background: 'rgba(0,0,0,0.75)', backdropFilter: 'blur(8px)', color: '#FFF' }}>
+                  <h3 style={{ fontSize: '1.5rem', fontFamily: '"Playfair Display"', margin: '0 0 1rem', textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}>
                     {ev.title}
                   </h3>
-                  <p style={{ fontSize: '1rem', lineHeight: 1.6, margin: '0 0 1.5rem', opacity: 0.9 }}>
+                  <p style={{ margin: '0 0 1.5rem', fontSize: '0.95rem', lineHeight: 1.6, opacity: 0.95 }}>
                     {ev.desc}
                   </p>
                   {ev.path && (
