@@ -4,14 +4,13 @@ import { Link } from 'react-router-dom';
 
 const events = [
   {
+    title: "GENxMUN",
+    desc: "A dynamic Model United Nations platform designed to help students enhance diplomacy, debate, and communication skills while discussing global challenges.",
+  },
+  {
     title: "Indore Democratic Summit",
     desc: "One of our flagship youth initiatives focused on leadership, governance, civic awareness, and youth participation. Successfully conducted across 3 impactful editions.",
     path: "/events/ids"
-  },
-  {
-    title: "GENxMUN",
-    desc: "A dynamic Model United Nations platform designed to help students enhance diplomacy, debate, and communication skills while discussing global challenges.",
-    path: "/events/genxmun"
   },
   {
     title: "Samvidhan Par Charcha",
@@ -40,29 +39,51 @@ export default function Events() {
           <h2 className="section-title">Platforms for Impact</h2>
         </div>
         
-        <div className="events-grid">
-          {events.map((ev, i) => (
-            <motion.div 
-              key={i} 
-              className="card" 
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              style={{ display: 'flex', flexDirection: 'column' }}
-            >
-              <h3 style={{ margin: '0 0 0.8rem', fontSize: '1.25rem', fontFamily: '"Playfair Display"' }}>{ev.title}</h3>
-              <p style={{ margin: 0, color: 'var(--muted)', lineHeight: 1.6, flexGrow: 1 }}>{ev.desc}</p>
-              
-              {ev.path && (
-                <div style={{ marginTop: '1.5rem' }}>
-                  <Link to={ev.path} style={{ display: 'inline-block', color: 'var(--red)', fontWeight: 700, textDecoration: 'none' }}>
-                    View Event Details →
-                  </Link>
-                </div>
-              )}
-            </motion.div>
-          ))}
+        {/* We use a custom grid to feature IDS in the center */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          gap: '1.5rem',
+          marginTop: '3rem'
+        }}>
+          {events.map((ev, i) => {
+            const isIDS = ev.title === "Indore Democratic Summit";
+            return (
+              <motion.div 
+                key={i} 
+                className="card" 
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                style={{ 
+                  display: 'flex', 
+                  flexDirection: 'column',
+                  border: isIDS ? '2px solid var(--red)' : '1px solid rgba(17,17,17,0.08)',
+                  boxShadow: isIDS ? '0 20px 40px rgba(192,0,26,0.15)' : 'var(--shadow)',
+                  position: 'relative',
+                  transform: isIDS ? 'scale(1.02)' : 'none',
+                  zIndex: isIDS ? 10 : 1
+                }}
+              >
+                {isIDS && (
+                  <div style={{ position: 'absolute', top: '-12px', left: '50%', transform: 'translateX(-50%)', background: 'var(--red)', color: 'var(--white)', padding: '4px 12px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '1px' }}>
+                    Flagship Event
+                  </div>
+                )}
+                <h3 style={{ margin: '0 0 0.8rem', fontSize: '1.25rem', fontFamily: '"Playfair Display"', color: isIDS ? 'var(--red)' : 'var(--ink)', marginTop: isIDS ? '0.5rem' : '0' }}>{ev.title}</h3>
+                <p style={{ margin: 0, color: 'var(--muted)', lineHeight: 1.6, flexGrow: 1 }}>{ev.desc}</p>
+                
+                {ev.path && (
+                  <div style={{ marginTop: '1.5rem' }}>
+                    <Link to={ev.path} style={{ display: 'inline-block', color: 'var(--red)', fontWeight: 700, textDecoration: 'none' }}>
+                      View Event Details →
+                    </Link>
+                  </div>
+                )}
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

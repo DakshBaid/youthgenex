@@ -5,7 +5,7 @@ export default function Partners() {
   const partners = ["Schools", "Universities", "Brands", "NGOs", "Youth Organizations"];
   
   return (
-    <section className="py-16" style={{ background: 'var(--white)' }}>
+    <section className="py-16" style={{ background: 'var(--soft)' }}>
       <div className="container">
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem', alignItems: 'center' }}>
           
