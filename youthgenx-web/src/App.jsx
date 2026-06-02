@@ -5,6 +5,7 @@ import About from './components/About';
 import Programs from './components/Programs';
 import Impact from './components/Impact';
 import Events from './components/Events';
+import Gallery from './components/Gallery';
 import Partners from './components/Partners';
 import Footer from './components/Footer';
 import Chatbot from './components/Chatbot';
@@ -21,6 +22,7 @@ function App() {
         <Programs />
         <Impact />
         <Events />
+        <Gallery />
         <Partners />
       </main>
       <Footer />

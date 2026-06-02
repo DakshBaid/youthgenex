@@ -173,6 +173,23 @@ section { scroll-margin-top: 84px; }
   .section-title { font-size: 1.8rem; }
   .impact-bullet { font-size: 1.2rem; gap: 0.8rem; }
   .partner-grid { grid-template-columns: 1fr; }
+  .masonry-gallery { column-count: 1; }
+}
+
+.masonry-gallery {
+  column-count: 3;
+  column-gap: 1.5rem;
+}
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .masonry-gallery {
+    column-count: 2;
+  }
 }
 
 @media (max-width: 768px) {
