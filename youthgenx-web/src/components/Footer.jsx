@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Mail, ArrowRight } from 'lucide-react';
+import { Mail, MapPin } from 'lucide-react';
 
 export default function Footer() {
 
@@ -27,11 +27,6 @@ export default function Footer() {
               <h2 style={{ fontFamily: '"Playfair Display"', fontSize: '1.8rem', margin: '0 0 1rem' }}>Youth<span style={{ color: 'var(--red)' }}>Genex</span></h2>
               <p style={{ color: 'rgba(255,255,255,0.7)', lineHeight: 1.6 }}>Join the YouthGenex community and become a part of a growing network of young leaders, changemakers, and innovators.</p>
             </div>
-            <div style={{ marginTop: '2rem' }}>
-              <p style={{ margin: 0, color: 'rgba(255,255,255,0.8)', fontSize: '0.95rem', fontWeight: 500 }}>
-                📍 307, The View, 1 Laad Colony,<br />YN Road- Indore (MP)- 452001
-              </p>
-            </div>
           </div>
 
           <div>
@@ -50,7 +45,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 style={{ fontSize: '1.2rem', margin: '0 0 1rem' }}>Wanna Connect?</h3>
+            <h3 style={{ fontSize: '1.2rem', margin: '0 0 1rem' }}>Connect with us</h3>
             <p style={{ color: 'rgba(255,255,255,0.7)', lineHeight: 1.6, marginBottom: '1.5rem' }}>Let’s build impactful experiences together. Click below to reach out to our team directly.</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <a href="#" onClick={(e) => handleEmailClick(e, 'youthgenex.org@gmail.com', 'Hello YouthGenex Team', 'Hi there,\n\nI was browsing your website and wanted to connect with you regarding...')} className="button button-red" style={{ width: '100%', justifyContent: 'flex-start' }}>
@@ -65,6 +60,10 @@ export default function Footer() {
         </div>
 
         <div style={{ textAlign: 'center', paddingTop: '2rem' }}>
+          <h4 style={{ color: 'var(--white)', fontSize: '1.2rem', marginBottom: '0.5rem', fontFamily: '"Playfair Display"' }}>YouthGenex Office</h4>
+          <p style={{ margin: '0 0 1.5rem', color: 'rgba(255,255,255,0.8)', fontSize: '1.1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
+            <MapPin size={20} color="var(--red)" /> 307, The View, 1 Laad Colony, YN Road- Indore (MP)- 452001
+          </p>
           <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.9rem' }}>
             &copy; {new Date().getFullYear()} YouthGenex. All rights reserved.
           </div>

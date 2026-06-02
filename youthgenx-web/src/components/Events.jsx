@@ -68,7 +68,7 @@ export default function Events() {
               >
                 {isIDS && (
                   <div style={{ position: 'absolute', top: '-12px', left: '50%', transform: 'translateX(-50%)', background: 'var(--red)', color: 'var(--white)', padding: '4px 12px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '1px' }}>
-                    Flagship Event
+                    Premier Initiative
                   </div>
                 )}
                 <h3 style={{ margin: '0 0 0.8rem', fontSize: '1.25rem', fontFamily: '"Playfair Display"', color: isIDS ? 'var(--red)' : 'var(--ink)', marginTop: isIDS ? '0.5rem' : '0' }}>{ev.title}</h3>

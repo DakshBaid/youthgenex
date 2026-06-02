@@ -54,7 +54,7 @@ export default function Impact() {
                   ))}
                 </div>
               </div>
-              <p style={{ marginTop: '1.5rem', fontWeight: 700, color: '#FFCED5' }}>Multiple Flagship Events Conducted</p>
+              <p style={{ marginTop: '1.5rem', fontWeight: 700, color: '#FFCED5' }}>Multiple Mega Events Conducted</p>
             </div>
           </motion.div>
 
