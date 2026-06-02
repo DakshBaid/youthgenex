@@ -17,7 +17,7 @@ export default function Navbar() {
     <header className="glass-nav" style={{ display: 'flex', alignItems: 'center' }}>
       <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <a href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.7rem', fontWeight: 900, color: 'var(--ink)' }}>
-          <img src="/logo.png" alt="YouthGenex Logo" style={{ height: '70px', objectFit: 'contain' }} />
+          <img src="/logo.jpeg" alt="YouthGenex Logo" style={{ height: '70px', objectFit: 'contain' }} />
           <span style={{ fontFamily: '"Playfair Display"', fontSize: '1.35rem' }}>Youth<span style={{ color: 'var(--red)' }}>Genex</span></span>
         </a>
 

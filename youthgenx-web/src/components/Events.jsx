@@ -51,7 +51,7 @@ export default function Events() {
             return (
               <motion.div 
                 key={i} 
-                className="card" 
+                className={`card ${isIDS ? 'mobile-order-first' : ''}`} 
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}

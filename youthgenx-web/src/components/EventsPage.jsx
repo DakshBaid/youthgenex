@@ -122,7 +122,7 @@ export default function EventsPage() {
                 }}
               >
                 {/* Default State */}
-                <div className="event-3d-front" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', transition: 'opacity 0.3s ease' }}>
+                <div className="event-3d-front" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                   <div style={{ marginBottom: '1.5rem', background: 'rgba(255,255,255,0.2)', padding: '1rem', borderRadius: '50%', backdropFilter: 'blur(10px)' }}>
                     {ev.icon}
                   </div>
@@ -132,7 +132,7 @@ export default function EventsPage() {
                 </div>
 
                 {/* Hover Details State */}
-                <div className="event-3d-back" style={{ position: 'absolute', inset: 0, padding: '2.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', opacity: 0, transition: 'opacity 0.3s ease', background: 'rgba(0,0,0,0.4)', backdropFilter: 'blur(8px)' }}>
+                <div className="event-3d-back" style={{ position: 'absolute', inset: 0, padding: '2.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', background: 'rgba(0,0,0,0.4)', backdropFilter: 'blur(8px)' }}>
                   <h3 style={{ fontSize: '1.5rem', fontFamily: '"Playfair Display"', margin: '0 0 1rem', textShadow: '0 2px 10px rgba(0,0,0,0.3)' }}>
                     {ev.title}
                   </h3>
@@ -152,11 +152,23 @@ export default function EventsPage() {
       </div>
 
       <style>{`
-        .event-3d-card:hover .event-3d-front {
+        .event-3d-front {
+          opacity: 1;
+          transition: opacity 0.3s ease;
+        }
+        .event-3d-back {
+          opacity: 0;
+          transition: opacity 0.3s ease;
+          pointer-events: none;
+        }
+        .event-3d-card:hover .event-3d-front,
+        .event-3d-card:active .event-3d-front {
           opacity: 0;
         }
-        .event-3d-card:hover .event-3d-back {
+        .event-3d-card:hover .event-3d-back,
+        .event-3d-card:active .event-3d-back {
           opacity: 1;
+          pointer-events: auto;
         }
         @media (max-width: 900px) {
           .event-3d-card {

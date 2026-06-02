@@ -31,8 +31,8 @@ export default function Preloader() {
           }}
         >
           <motion.img 
-            src="/logo.png" 
-            alt="YouthGenex Loading"
+            src="/logo.jpeg" 
+            alt="YouthGenex Loading..."
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: [0.8, 1.1, 1], opacity: 1 }}
             transition={{ duration: 1.5, ease: "easeOut" }}

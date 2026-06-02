@@ -112,7 +112,7 @@ export default function AboutPage() {
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} style={{ color: 'var(--red)', fontWeight: 800, letterSpacing: '3px', textTransform: 'uppercase', margin: '0 0 1rem' }}>
             WHO WE ARE
           </motion.p>
-          <motion.h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} style={{ fontSize: '4.5rem', fontFamily: '"Playfair Display"', margin: '0 0 2rem', lineHeight: 1.1 }}>
+          <motion.h1 className="about-hero-title" initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} style={{ fontFamily: '"Playfair Display"', margin: '0 0 2rem', lineHeight: 1.1 }}>
             Building Opportunities For The Next Generation
           </motion.h1>
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4, duration: 1 }} style={{ maxWidth: '700px', margin: '0 auto', fontSize: '1.25rem', color: 'rgba(255,255,255,0.7)', lineHeight: 1.8 }}>
@@ -132,13 +132,14 @@ export default function AboutPage() {
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem', alignItems: 'center' }}>
             <motion.div
+              className="about-huge-year"
               initial={{ scale: 0.8, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true, margin: "-20%" }} transition={{ duration: 0.8, ease: "easeOut" }}
-              style={{ fontSize: '12rem', fontWeight: 900, color: 'var(--soft)', lineHeight: 0.8, letterSpacing: '-5px' }}
+              style={{ fontWeight: 900, color: 'var(--soft)', lineHeight: 0.8, letterSpacing: '-5px' }}
             >
               2021
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-20%" }} transition={{ duration: 0.8 }}>
-              <h2 style={{ fontSize: '3rem', fontFamily: '"Playfair Display"', margin: '0 0 1.5rem' }}>It Started With An Idea</h2>
+              <h2 className="about-section-title" style={{ fontFamily: '"Playfair Display"', margin: '0 0 1.5rem' }}>It Started With An Idea</h2>
               <div style={{ fontSize: '1.2rem', color: 'var(--muted)', lineHeight: 1.8 }}>
                 <p style={{ fontWeight: 700, color: 'var(--ink)' }}>Every student has potential.</p>
                 <p>But potential grows only when opportunities exist.</p>
@@ -153,7 +154,7 @@ export default function AboutPage() {
       <section style={{ padding: '8rem 0', background: 'var(--soft)' }}>
         <div className="container">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <h2 style={{ fontSize: '3.5rem', fontFamily: '"Playfair Display"', textAlign: 'center', margin: '0 0 4rem' }}>We Create Experiences</h2>
+            <h2 className="about-section-title" style={{ fontFamily: '"Playfair Display"', textAlign: 'center', margin: '0 0 4rem' }}>We Create Experiences</h2>
           </motion.div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
@@ -196,19 +197,19 @@ export default function AboutPage() {
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '3rem' }}>
             <div>
-              <div style={{ fontSize: '5rem', fontWeight: 900, color: 'var(--red)', fontFamily: '"Playfair Display"', lineHeight: 1 }}><Counter to={10000} suffix="+" /></div>
+              <div className="about-counter-num"><Counter to={10000} suffix="+" /></div>
               <div style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.7)', marginTop: '1rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Students Engaged</div>
             </div>
             <div>
-              <div style={{ fontSize: '5rem', fontWeight: 900, color: 'var(--red)', fontFamily: '"Playfair Display"', lineHeight: 1 }}><Counter to={100} suffix="+" /></div>
+              <div className="about-counter-num"><Counter to={100} suffix="+" /></div>
               <div style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.7)', marginTop: '1rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Events Conducted</div>
             </div>
             <div>
-              <div style={{ fontSize: '5rem', fontWeight: 900, color: 'var(--red)', fontFamily: '"Playfair Display"', lineHeight: 1 }}><Counter to={10} suffix="+" /></div>
+              <div className="about-counter-num"><Counter to={10} suffix="+" /></div>
               <div style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.7)', marginTop: '1rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Partner Institutions</div>
             </div>
             <div>
-              <div style={{ fontSize: '5rem', fontWeight: 900, color: 'var(--red)', fontFamily: '"Playfair Display"', lineHeight: 1 }}><Counter to={1} /></div>
+              <div className="about-counter-num"><Counter to={1} /></div>
               <div style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.7)', marginTop: '1rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Mission</div>
             </div>
           </div>
@@ -218,7 +219,7 @@ export default function AboutPage() {
       {/* Section 5 - Why We Exist (Emotional Quote) */}
       <section style={{ padding: '10rem 0', background: 'var(--white)', textAlign: 'center' }}>
         <div className="container" style={{ maxWidth: '900px' }}>
-          <h2 style={{ fontSize: '3.5rem', fontFamily: '"Playfair Display"', lineHeight: 1.3, margin: '0 0 3rem' }}>
+          <h2 className="about-section-title" style={{ fontFamily: '"Playfair Display"', lineHeight: 1.3, margin: '0 0 3rem' }}>
             <RevealText text="&quot;The future is not built by waiting for opportunities. It is built by creating them.&quot;" />
           </h2>
           <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.5, duration: 1 }} style={{ fontSize: '1.3rem', color: 'var(--muted)', lineHeight: 1.8 }}>
@@ -230,7 +231,7 @@ export default function AboutPage() {
       {/* Section 6 - Interactive Timeline */}
       <section style={{ padding: '8rem 0', background: 'var(--soft)', position: 'relative' }}>
         <div className="container">
-          <h2 style={{ fontSize: '3.5rem', fontFamily: '"Playfair Display"', textAlign: 'center', margin: '0 0 6rem' }}>Our Journey</h2>
+          <h2 className="about-section-title" style={{ fontFamily: '"Playfair Display"', textAlign: 'center', margin: '0 0 6rem' }}>Our Journey</h2>
 
           <div style={{ position: 'relative', maxWidth: '800px', margin: '0 auto' }}>
             {/* The Drawing Line */}
@@ -269,7 +270,7 @@ export default function AboutPage() {
       {/* Section 7 - Meet The Team */}
       <section style={{ padding: '8rem 0', background: 'var(--white)' }}>
         <div className="container">
-          <h2 style={{ fontSize: '3.5rem', fontFamily: '"Playfair Display"', textAlign: 'center', margin: '0 0 5rem' }}>Meet The Team</h2>
+          <h2 className="about-section-title" style={{ fontFamily: '"Playfair Display"', textAlign: 'center', margin: '0 0 5rem' }}>Meet The Team</h2>
 
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <motion.div
@@ -318,7 +319,7 @@ export default function AboutPage() {
       {/* Section 8 - Vision For Future */}
       <section style={{ padding: '10rem 0', background: 'linear-gradient(135deg, #0a0a0a, #300005)', color: 'var(--white)', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
         <div className="container" style={{ position: 'relative', zIndex: 10 }}>
-          <motion.h2 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ fontSize: '4rem', fontFamily: '"Playfair Display"', margin: '0 0 2rem' }}>
+          <motion.h2 className="about-hero-title" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ fontFamily: '"Playfair Display"', margin: '0 0 2rem' }}>
             The Journey Has Just Begun.
           </motion.h2>
           <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.2 }} style={{ fontSize: '1.3rem', color: 'rgba(255,255,255,0.8)', maxWidth: '700px', margin: '0 auto 4rem', lineHeight: 1.8 }}>
@@ -338,6 +339,18 @@ export default function AboutPage() {
       <style>{`
         .team-card .hover-content {
           transform: translateY(10px);
+        }
+        .about-hero-title { font-size: 4.5rem; }
+        .about-huge-year { font-size: 12rem; text-align: left; }
+        .about-section-title { font-size: 3.5rem; }
+        .about-counter-num { font-size: 5rem; font-weight: 900; color: var(--red); font-family: "Playfair Display"; line-height: 1; }
+        
+        @media (max-width: 768px) {
+          .about-hero-title { font-size: 2.8rem; }
+          .about-huge-year { font-size: 7rem; text-align: center; }
+          .about-section-title { font-size: 2.2rem; }
+          .about-counter-num { font-size: 3.5rem; }
+          section { padding: 4rem 0 !important; }
         }
       `}</style>
     </div>
