@@ -6,39 +6,39 @@ import { Globe, Users, BookOpen, Coffee, Heart, Star } from 'lucide-react';
 const allEvents = [
   {
     title: "GENxMUN",
-    desc: "A dynamic Model United Nations platform designed to help students enhance diplomacy, debate, and communication skills while discussing global challenges.",
-    color: "linear-gradient(135deg, #1E3A8A, #3B82F6)",
-    icon: <Globe size={48} color="#fff" />
+    desc: "A dynamic Model United Nations platform designed to help students enhance diplomacy, debate, and communication skills while discussing global challenges and drafting impactful resolutions for tomorrow.",
+    color: "linear-gradient(135deg, #0F172A, #1E3A8A)",
+    icon: <img src="/gxm-logo.png" alt="GENxMUN" style={{ width: '80px', height: '80px', objectFit: 'contain' }} />
   },
   {
     title: "Indore Democratic Summit",
-    desc: "Our premier youth initiative focused on leadership, governance, civic awareness, and youth participation. Successfully conducted across 3 impactful editions.",
+    desc: "Our premier youth initiative focused on leadership, governance, civic awareness, and youth participation. Successfully conducted across 3 impactful editions with thousands of delegates.",
     path: "/ids",
-    color: "linear-gradient(135deg, #8B0012, #C0001A)",
-    icon: <Users size={48} color="#fff" />
+    color: "linear-gradient(135deg, #2A0800, #7F1D1D)",
+    icon: <img src="/ids-logo.png" alt="IDS" style={{ width: '80px', height: '80px', objectFit: 'contain' }} />
   },
   {
     title: "Samvidhan Par Charcha",
-    desc: "An initiative encouraging meaningful conversations around the Constitution, civic rights, responsibilities, and democratic values among youth.",
-    color: "linear-gradient(135deg, #B45309, #F59E0B)",
-    icon: <BookOpen size={48} color="#fff" />
+    desc: "An initiative encouraging meaningful conversations around the Constitution, civic rights, responsibilities, and democratic values among youth, ensuring Constitutional literacy for everyone.",
+    color: "linear-gradient(135deg, #271400, #78350F)",
+    icon: <img src="/spc-logo.png" alt="Samvidhan Par Charcha" style={{ width: '80px', height: '80px', objectFit: 'contain' }} />
   },
   {
     title: "Coffee with Mayor",
-    desc: "An interactive platform connecting students with leaders and policymakers to discuss ideas, governance, and youth perspectives.",
-    color: "linear-gradient(135deg, #451A03, #92400E)",
+    desc: "An interactive platform directly connecting students with leaders and policymakers to discuss progressive ideas, modern governance, and youth perspectives on local administration.",
+    color: "linear-gradient(135deg, #1A1A1A, #451A03)",
     icon: <Coffee size={48} color="#fff" />
   },
   {
     title: "Kho Gaye Hum Kahan?",
-    desc: "A youth-focused initiative creating conversations around self-growth, emotions, identity, and navigating modern challenges.",
-    color: "linear-gradient(135deg, #4C1D95, #8B5CF6)",
+    desc: "A youth-focused initiative creating open conversations around self-growth, managing emotions, personal identity, and navigating modern challenges like digital wellbeing.",
+    color: "linear-gradient(135deg, #170F2E, #3B0764)",
     icon: <Heart size={48} color="#fff" />
   },
   {
     title: "About Her",
-    desc: "An initiative celebrating women, leadership, empowerment, and inspiring stories that encourage confidence and growth.",
-    color: "linear-gradient(135deg, #BE185D, #EC4899)",
+    desc: "An initiative celebrating women, leadership, empowerment, and inspiring stories that encourage immense confidence and monumental growth for young female changemakers.",
+    color: "linear-gradient(135deg, #2D0614, #831843)",
     icon: <Star size={48} color="#fff" />
   }
 ];

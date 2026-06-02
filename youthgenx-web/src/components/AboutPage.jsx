@@ -78,7 +78,7 @@ export default function AboutPage() {
   return (
     <div style={{ background: 'var(--white)', overflowX: 'hidden', color: 'var(--ink)' }}>
 
-      
+
       <MouseGlow />
 
       {/* Section 1 - Hero */}
@@ -200,11 +200,11 @@ export default function AboutPage() {
               <div style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.7)', marginTop: '1rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Students Engaged</div>
             </div>
             <div>
-              <div style={{ fontSize: '5rem', fontWeight: 900, color: 'var(--red)', fontFamily: '"Playfair Display"', lineHeight: 1 }}><Counter to={50} suffix="+" /></div>
+              <div style={{ fontSize: '5rem', fontWeight: 900, color: 'var(--red)', fontFamily: '"Playfair Display"', lineHeight: 1 }}><Counter to={100} suffix="+" /></div>
               <div style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.7)', marginTop: '1rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Events Conducted</div>
             </div>
             <div>
-              <div style={{ fontSize: '5rem', fontWeight: 900, color: 'var(--red)', fontFamily: '"Playfair Display"', lineHeight: 1 }}><Counter to={5} suffix="+" /></div>
+              <div style={{ fontSize: '5rem', fontWeight: 900, color: 'var(--red)', fontFamily: '"Playfair Display"', lineHeight: 1 }}><Counter to={10} suffix="+" /></div>
               <div style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.7)', marginTop: '1rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Partner Institutions</div>
             </div>
             <div>
