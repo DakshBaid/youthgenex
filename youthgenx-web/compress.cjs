@@ -14,6 +14,7 @@ const files = fs.readdirSync(dir);
       
       try {
         await sharp(filePath)
+          .rotate() // Auto-rotates based on EXIF orientation!
           .resize({ width: 800, withoutEnlargement: true })
           .jpeg({ quality: 80 })
           .toFile(tempPath);
@@ -25,5 +26,10 @@ const files = fs.readdirSync(dir);
       }
     }
   }
+  
+  // Write JSON
+  const finalFiles = fs.readdirSync(dir).filter(f => f.match(/\.(jpg|jpeg|png)$/i));
+  fs.writeFileSync(path.join(process.cwd(), 'src', 'data', 'gallery-images.json'), JSON.stringify(finalFiles, null, 2));
+  
   console.log('Done compressing');
 })();
