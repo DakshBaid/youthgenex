@@ -8,7 +8,6 @@ export default function Navbar() {
   const links = [
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
-    { name: 'IDS', path: '/ids' },
     { name: 'Events', path: '/events' },
     { name: 'Gallery', path: '/gallery' },
     { name: 'Contact', path: '/#contact' },
@@ -44,6 +43,27 @@ export default function Navbar() {
               {item.name}
             </motion.a>
           ))}
+          <motion.a
+            href="/ids"
+            onClick={() => setIsOpen(false)}
+            whileHover={{ scale: 1.05, filter: 'brightness(1.1)' }}
+            whileTap={{ scale: 0.95 }}
+            style={{
+              fontWeight: 800,
+              color: 'var(--white)',
+              backgroundColor: 'var(--red)',
+              padding: '0.7rem 1.5rem',
+              borderRadius: '99px',
+              textDecoration: 'none',
+              marginLeft: '0.5rem',
+              boxShadow: '0 4px 15px rgba(192,0,26,0.3)',
+              textTransform: 'uppercase',
+              fontSize: '0.9rem',
+              letterSpacing: '0.5px'
+            }}
+          >
+            Indore Democratic Summit
+          </motion.a>
         </nav>
 
         {/* Mobile Toggle */}
