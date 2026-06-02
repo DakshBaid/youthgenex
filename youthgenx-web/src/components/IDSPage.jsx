@@ -40,14 +40,17 @@ export default function IDSPage() {
 
   return (
     <div style={{ paddingTop: '80px', background: 'var(--soft)', minHeight: '100vh', paddingBottom: '6rem' }}>
-      
+
       {/* Header */}
       <section style={{ padding: '6rem 0 4rem', textAlign: 'center' }}>
         <div className="container">
-          <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} style={{ color: 'var(--red)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '2px', margin: '0 0 1rem' }}>
-            Indore Democratic Summit
-          </motion.p>
-          <motion.h1 
+          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '0 0 1.5rem' }}>
+            <img src="/ids-logo.png" alt="IDS Logo" style={{ height: '120px', marginBottom: '1rem', objectFit: 'contain' }} />
+            <h2 style={{ color: 'var(--red)', fontWeight: 900, fontSize: '2rem', textTransform: 'uppercase', letterSpacing: '2px', margin: 0 }}>
+              Indore Democratic Summit
+            </h2>
+          </motion.div>
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
@@ -55,7 +58,7 @@ export default function IDSPage() {
           >
             Empowering the Next Generation<br />of Leaders and Policymakers
           </motion.h1>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
@@ -68,7 +71,7 @@ export default function IDSPage() {
 
       {/* 2026 Section */}
       <section className="container" style={{ marginBottom: '5rem' }}>
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
           style={{ background: 'var(--ink)', color: 'var(--white)', padding: '4rem', borderRadius: '24px', textAlign: 'center', position: 'relative', overflow: 'hidden' }}
         >
@@ -94,12 +97,12 @@ export default function IDSPage() {
           </div>
           <div>
             <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', borderRadius: '16px', boxShadow: 'var(--shadow)' }}>
-              <iframe 
+              <iframe
                 style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
-                src="https://www.youtube.com/embed/KUlO88KciPs" 
-                title="IDS 2025 AfterMovie" 
-                frameBorder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                src="https://youtu.be/KUlO88KciPs?si=oGX39DqGdh0EOQrF"
+                title="IDS 2025 AfterMovie"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               />
             </div>
@@ -120,12 +123,12 @@ export default function IDSPage() {
           </div>
           <div style={{ order: 1 }}>
             <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', borderRadius: '16px', boxShadow: 'var(--shadow)' }}>
-              <iframe 
+              <iframe
                 style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
-                src="https://www.youtube.com/embed/VVFfbHWWAUw" 
-                title="IDS 2024 AfterMovie" 
-                frameBorder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                src="https://youtu.be/VVFfbHWWAUw?si=Rfj4ubHrP7P35Xs3"
+                title="IDS 2024 AfterMovie"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               />
             </div>
@@ -146,12 +149,12 @@ export default function IDSPage() {
           </div>
           <div>
             <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', borderRadius: '16px', boxShadow: 'var(--shadow)' }}>
-              <iframe 
+              <iframe
                 style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
-                src="https://www.youtube.com/embed/XhHmRZW2Rck" 
-                title="IDS 2023 AfterMovie" 
-                frameBorder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                src="https://youtu.be/XhHmRZW2Rck?si=xWYadJ_-IE2bIDVH"
+                title="IDS 2023 AfterMovie"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               />
             </div>
