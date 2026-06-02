@@ -1,4 +1,4 @@
-
+import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -6,10 +6,33 @@ import Programs from './components/Programs';
 import Impact from './components/Impact';
 import Events from './components/Events';
 import Gallery from './components/Gallery';
+import AfterMovies from './components/AfterMovies';
 import Partners from './components/Partners';
 import Footer from './components/Footer';
 import Chatbot from './components/Chatbot';
 import Preloader from './components/Preloader';
+
+function Home() {
+  return (
+    <>
+      <Hero />
+      <About />
+      <Programs />
+      <Impact />
+      <Events />
+      <Partners />
+    </>
+  );
+}
+
+function GalleryPage() {
+  return (
+    <div style={{ paddingTop: '80px' }}>
+      <Gallery />
+      <AfterMovies />
+    </div>
+  );
+}
 
 function App() {
   return (
@@ -17,13 +40,10 @@ function App() {
       <Preloader />
       <Navbar />
       <main>
-        <Hero />
-        <About />
-        <Programs />
-        <Impact />
-        <Events />
-        <Gallery />
-        <Partners />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/gallery" element={<GalleryPage />} />
+        </Routes>
       </main>
       <Footer />
       <Chatbot />

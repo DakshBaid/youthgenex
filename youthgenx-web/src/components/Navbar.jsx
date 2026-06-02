@@ -5,20 +5,29 @@ import { motion } from 'framer-motion';
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
+  const links = [
+    { name: 'Home', path: '/' },
+    { name: 'About', path: '/#about' },
+    { name: 'Programs', path: '/#programs' },
+    { name: 'Events', path: '/#events' },
+    { name: 'Gallery', path: '/gallery' },
+    { name: 'Contact', path: '/#contact' },
+  ];
+
   return (
     <header className="glass-nav" style={{ display: 'flex', alignItems: 'center' }}>
       <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <a href="#top" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.7rem', fontWeight: 900, color: 'var(--ink)' }}>
+        <a href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.7rem', fontWeight: 900, color: 'var(--ink)' }}>
           <img src="/logo.png" alt="YouthGenex Logo" style={{ height: '70px', objectFit: 'contain' }} />
           <span style={{ fontFamily: '"Playfair Display"', fontSize: '1.35rem' }}>Youth<span style={{ color: 'var(--red)' }}>Genex</span></span>
         </a>
 
         {/* Navigation */}
         <nav style={{ display: 'flex', gap: '1rem', alignItems: 'center' }} className={`nav-desktop ${isOpen ? 'nav-mobile-open' : ''}`}>
-          {['About', 'Programs', 'Events', 'Contact'].map(item => (
+          {links.map(item => (
             <motion.a 
-              key={item} 
-              href={`#${item.toLowerCase()}`}
+              key={item.name} 
+              href={item.path}
               onClick={() => setIsOpen(false)} 
               whileHover={{ scale: 1.05, backgroundColor: 'var(--red)', color: 'var(--white)' }}
               whileTap={{ scale: 0.95 }}
@@ -32,7 +41,7 @@ export default function Navbar() {
                 transition: 'border-color 0.2s ease'
               }}
             >
-              {item}
+              {item.name}
             </motion.a>
           ))}
         </nav>
