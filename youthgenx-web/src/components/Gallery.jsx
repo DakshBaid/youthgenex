@@ -5,8 +5,8 @@ import galleryList from '../data/gallery-images.json';
 export default function Gallery() {
   const [showAll, setShowAll] = useState(false);
   
-  // Show 10 initially, or all if expanded
-  const images = showAll ? galleryList : galleryList.slice(0, 10);
+  // Show 9 initially for a perfect 3x3 grid, or all if expanded
+  const images = showAll ? galleryList : galleryList.slice(0, 9);
 
   return (
     <section id="gallery" className="section-padding bg-soft" style={{ paddingBottom: '6rem' }}>
@@ -47,16 +47,16 @@ export default function Gallery() {
           </AnimatePresence>
         </div>
 
-        {!showAll && galleryList.length > 10 && (
+        {galleryList.length > 9 && (
           <div style={{ textAlign: 'center', marginTop: '4rem' }}>
             <motion.button 
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => setShowAll(true)}
+              onClick={() => setShowAll(!showAll)}
               className="button button-red"
               style={{ padding: '1rem 3rem', fontSize: '1.1rem', cursor: 'pointer' }}
             >
-              View More Photos
+              {showAll ? 'View Less' : 'View More Photos'}
             </motion.button>
           </div>
         )}

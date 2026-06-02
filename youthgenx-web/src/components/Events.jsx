@@ -1,14 +1,17 @@
 
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const events = [
   {
     title: "Indore Democratic Summit",
-    desc: "One of our flagship youth initiatives focused on leadership, governance, civic awareness, and youth participation. Successfully conducted across 3 impactful editions."
+    desc: "One of our flagship youth initiatives focused on leadership, governance, civic awareness, and youth participation. Successfully conducted across 3 impactful editions.",
+    path: "/events/ids"
   },
   {
     title: "GENxMUN",
-    desc: "A dynamic Model United Nations platform designed to help students enhance diplomacy, debate, and communication skills while discussing global challenges."
+    desc: "A dynamic Model United Nations platform designed to help students enhance diplomacy, debate, and communication skills while discussing global challenges.",
+    path: "/events/genxmun"
   },
   {
     title: "Samvidhan Par Charcha",
@@ -46,9 +49,18 @@ export default function Events() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
+              style={{ display: 'flex', flexDirection: 'column' }}
             >
               <h3 style={{ margin: '0 0 0.8rem', fontSize: '1.25rem', fontFamily: '"Playfair Display"' }}>{ev.title}</h3>
-              <p style={{ margin: 0, color: 'var(--muted)', lineHeight: 1.6 }}>{ev.desc}</p>
+              <p style={{ margin: 0, color: 'var(--muted)', lineHeight: 1.6, flexGrow: 1 }}>{ev.desc}</p>
+              
+              {ev.path && (
+                <div style={{ marginTop: '1.5rem' }}>
+                  <Link to={ev.path} style={{ display: 'inline-block', color: 'var(--red)', fontWeight: 700, textDecoration: 'none' }}>
+                    View Event Details →
+                  </Link>
+                </div>
+              )}
             </motion.div>
           ))}
         </div>
