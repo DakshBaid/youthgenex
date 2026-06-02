@@ -2,7 +2,6 @@ import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
-import Programs from './components/Programs';
 import Impact from './components/Impact';
 import Events from './components/Events';
 import Gallery from './components/Gallery';
@@ -20,7 +19,6 @@ function Home() {
     <>
       <Hero />
       <About />
-      <Programs />
       <Impact />
       <Events />
       <Partners />

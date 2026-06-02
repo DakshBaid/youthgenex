@@ -71,9 +71,9 @@ export default function Events() {
                 
                 {ev.path && (
                   <div style={{ marginTop: '1.5rem' }}>
-                    <Link to={ev.path} style={{ display: 'inline-block', color: 'var(--red)', fontWeight: 700, textDecoration: 'none' }}>
+                    <a href={ev.path} style={{ display: 'inline-block', color: 'var(--red)', fontWeight: 700, textDecoration: 'none' }}>
                       View Event Details →
-                    </Link>
+                    </a>
                   </div>
                 )}
               </motion.div>
