@@ -77,7 +77,9 @@ export default function EventsPage() {
         </motion.p>
       </div>
 
+      {/* Desktop 3D Carousel */}
       <div
+        className="events-carousel-container"
         style={{
           height: '600px',
           display: 'flex',
@@ -166,7 +168,51 @@ export default function EventsPage() {
         </div>
       </div>
 
+      {/* Mobile Vertical Grid */}
+      <div className="events-mobile-grid">
+        {allEvents.map((ev, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            style={{
+              background: ev.color,
+              borderRadius: '24px',
+              padding: '2.5rem 1.5rem',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              textAlign: 'center',
+              color: ev.textColor,
+              boxShadow: '0 15px 35px -5px rgba(0, 0, 0, 0.3)',
+              position: 'relative',
+              overflow: 'hidden'
+            }}
+          >
+            <div style={{ marginBottom: '1.5rem', background: 'rgba(255,255,255,0.2)', padding: '1rem', borderRadius: '50%', backdropFilter: 'blur(10px)' }}>
+              {ev.icon}
+            </div>
+            <h2 style={{ fontSize: '2rem', fontFamily: '"Playfair Display"', margin: '0 0 1rem', textShadow: '0 2px 10px rgba(0,0,0,0.3)' }}>
+              {ev.title}
+            </h2>
+            <p style={{ margin: '0 0 2rem', fontSize: '1.05rem', lineHeight: 1.6, opacity: 0.9 }}>
+              {ev.desc}
+            </p>
+            {ev.path && (
+              <Link to={ev.path} className="button" style={{ background: 'rgba(0,0,0,0.4)', color: '#FFF', border: 'none', padding: '1rem 2rem', width: '100%' }}>
+                Explore Event
+              </Link>
+            )}
+          </motion.div>
+        ))}
+      </div>
+
       <style>{`
+        .events-mobile-grid {
+          display: none;
+        }
         .event-3d-front {
           opacity: 1;
           transition: opacity 0.3s ease;
@@ -185,16 +231,17 @@ export default function EventsPage() {
           opacity: 1;
           pointer-events: auto;
         }
+        
         @media (max-width: 900px) {
-          .event-3d-card {
-            transform: rotateY(var(--angle)) translateZ(300px) !important;
+          .events-carousel-container {
+            display: none !important;
           }
-        }
-        @media (max-width: 600px) {
-          .event-3d-card {
-            transform: rotateY(var(--angle)) translateZ(200px) !important;
-            width: 260px !important;
-            left: 30px !important;
+          .events-mobile-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            padding: 0 1rem;
+            margin-top: 2rem;
           }
         }
       `}</style>
