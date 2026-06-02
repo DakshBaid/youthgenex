@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, useInView, useTransform } from 'framer-motion';
 import { Mic, Building2, Users, Rocket, ArrowDown, ChevronRight } from 'lucide-react';
-import { playHoverSound } from '../utils/sound';
 
 // Word-by-word text reveal component
 const RevealText = ({ text }) => {
@@ -167,7 +166,6 @@ export default function AboutPage() {
             ].map((card, i) => (
               <motion.div
                 key={i}
-                onMouseEnter={playHoverSound}
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-10%" }}

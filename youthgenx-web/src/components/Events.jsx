@@ -1,7 +1,6 @@
 
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { playHoverSound } from '../utils/sound';
 
 const events = [
   {
@@ -53,7 +52,6 @@ export default function Events() {
               <motion.div 
                 key={i} 
                 className={`card ${isIDS ? 'mobile-order-first' : ''}`} 
-                onMouseEnter={playHoverSound}
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}

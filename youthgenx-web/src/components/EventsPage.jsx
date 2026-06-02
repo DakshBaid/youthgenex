@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { playHoverSound } from '../utils/sound';
 
 const allEvents = [
   {
@@ -106,7 +105,6 @@ export default function EventsPage() {
                 onMouseEnter={() => {
                   setIsHovered(true);
                   setHoveredIndex(i);
-                  playHoverSound();
                 }}
                 onMouseLeave={() => {
                   setIsHovered(false);
@@ -114,7 +112,6 @@ export default function EventsPage() {
                 }}
                 onClick={() => {
                   setHoveredIndex(hoveredIndex === i ? null : i);
-                  if (hoveredIndex !== i) playHoverSound();
                 }}
                 className="event-3d-card"
                 style={{
