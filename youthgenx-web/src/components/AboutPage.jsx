@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { motion, useScroll, useSpring, useInView, useTransform } from 'framer-motion';
+import { motion, useInView, useTransform } from 'framer-motion';
 import { Mic, Building2, Users, Rocket, ArrowDown, ChevronRight } from 'lucide-react';
 
 // Word-by-word text reveal component
@@ -75,14 +75,10 @@ const MouseGlow = () => {
 };
 
 export default function AboutPage() {
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
-
   return (
     <div style={{ background: 'var(--white)', overflowX: 'hidden', color: 'var(--ink)' }}>
+
       
-      {/* Scroll Progress Bar */}
-      <motion.div style={{ position: 'fixed', top: 0, left: 0, right: 0, height: '4px', background: 'var(--red)', transformOrigin: '0%', scaleX, zIndex: 10000 }} />
       <MouseGlow />
 
       {/* Section 1 - Hero */}
@@ -135,7 +131,7 @@ export default function AboutPage() {
       <section id="journey" style={{ padding: '8rem 0', background: 'var(--white)' }}>
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem', alignItems: 'center' }}>
-            <motion.div 
+            <motion.div
               initial={{ scale: 0.8, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true, margin: "-20%" }} transition={{ duration: 0.8, ease: "easeOut" }}
               style={{ fontSize: '12rem', fontWeight: 900, color: 'var(--soft)', lineHeight: 0.8, letterSpacing: '-5px' }}
             >
@@ -159,7 +155,7 @@ export default function AboutPage() {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <h2 style={{ fontSize: '3.5rem', fontFamily: '"Playfair Display"', textAlign: 'center', margin: '0 0 4rem' }}>We Create Experiences</h2>
           </motion.div>
-          
+
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
             {[
               { icon: <Mic size={32} color="var(--red)" />, title: 'Leadership Summits', text: 'Helping students learn from experts and industry leaders.' },
@@ -167,7 +163,7 @@ export default function AboutPage() {
               { icon: <Users size={32} color="var(--red)" />, title: 'Community Building', text: 'Connecting ambitious young minds across institutions.' },
               { icon: <Rocket size={32} color="var(--red)" />, title: 'Skill Development', text: 'Creating opportunities to learn beyond classrooms.' }
             ].map((card, i) => (
-              <motion.div 
+              <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -200,15 +196,15 @@ export default function AboutPage() {
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '3rem' }}>
             <div>
-              <div style={{ fontSize: '5rem', fontWeight: 900, color: 'var(--red)', fontFamily: '"Playfair Display"', lineHeight: 1 }}><Counter to={500} suffix="+" /></div>
+              <div style={{ fontSize: '5rem', fontWeight: 900, color: 'var(--red)', fontFamily: '"Playfair Display"', lineHeight: 1 }}><Counter to={10000} suffix="+" /></div>
               <div style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.7)', marginTop: '1rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Students Engaged</div>
             </div>
             <div>
-              <div style={{ fontSize: '5rem', fontWeight: 900, color: 'var(--red)', fontFamily: '"Playfair Display"', lineHeight: 1 }}><Counter to={20} suffix="+" /></div>
+              <div style={{ fontSize: '5rem', fontWeight: 900, color: 'var(--red)', fontFamily: '"Playfair Display"', lineHeight: 1 }}><Counter to={50} suffix="+" /></div>
               <div style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.7)', marginTop: '1rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Events Conducted</div>
             </div>
             <div>
-              <div style={{ fontSize: '5rem', fontWeight: 900, color: 'var(--red)', fontFamily: '"Playfair Display"', lineHeight: 1 }}><Counter to={10} suffix="+" /></div>
+              <div style={{ fontSize: '5rem', fontWeight: 900, color: 'var(--red)', fontFamily: '"Playfair Display"', lineHeight: 1 }}><Counter to={5} suffix="+" /></div>
               <div style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.7)', marginTop: '1rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Partner Institutions</div>
             </div>
             <div>
@@ -235,10 +231,10 @@ export default function AboutPage() {
       <section style={{ padding: '8rem 0', background: 'var(--soft)', position: 'relative' }}>
         <div className="container">
           <h2 style={{ fontSize: '3.5rem', fontFamily: '"Playfair Display"', textAlign: 'center', margin: '0 0 6rem' }}>Our Journey</h2>
-          
+
           <div style={{ position: 'relative', maxWidth: '800px', margin: '0 auto' }}>
             {/* The Drawing Line */}
-            <motion.div 
+            <motion.div
               initial={{ height: 0 }} whileInView={{ height: '100%' }} viewport={{ once: true, margin: "-20%" }} transition={{ duration: 2, ease: "easeInOut" }}
               style={{ position: 'absolute', left: '50px', top: 0, width: '2px', background: 'var(--red)' }}
             />
@@ -251,7 +247,7 @@ export default function AboutPage() {
               { year: '2025', text: 'Growing Across Institutions' },
               { year: '2026', text: 'IDS 2026' }
             ].map((item, i) => (
-              <motion.div 
+              <motion.div
                 key={i}
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -261,7 +257,7 @@ export default function AboutPage() {
               >
                 {/* Dot */}
                 <div style={{ position: 'absolute', left: '7px', top: '50%', transform: 'translateY(-50%)', width: '12px', height: '12px', background: 'var(--red)', borderRadius: '50%', border: '4px solid var(--soft)' }} />
-                
+
                 <div style={{ fontSize: '2rem', fontWeight: 900, color: 'var(--ink)' }}>{item.year}</div>
                 <div style={{ fontSize: '1.25rem', color: 'var(--muted)' }}>{item.text}</div>
               </motion.div>
@@ -274,9 +270,9 @@ export default function AboutPage() {
       <section style={{ padding: '8rem 0', background: 'var(--white)' }}>
         <div className="container">
           <h2 style={{ fontSize: '3.5rem', fontFamily: '"Playfair Display"', textAlign: 'center', margin: '0 0 5rem' }}>Meet The Team</h2>
-          
+
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <motion.div 
+            <motion.div
               className="team-card"
               whileHover="hover"
               style={{
@@ -328,7 +324,7 @@ export default function AboutPage() {
           <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.2 }} style={{ fontSize: '1.3rem', color: 'rgba(255,255,255,0.8)', maxWidth: '700px', margin: '0 auto 4rem', lineHeight: 1.8 }}>
             We envision a future where every student has access to opportunities that inspire growth, leadership, and meaningful impact.
           </motion.p>
-          <motion.a 
+          <motion.a
             href="/events"
             initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: 0.4 }}
             className="button button-red"
