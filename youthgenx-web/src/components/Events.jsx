@@ -32,7 +32,7 @@ const events = [
 
 export default function Events() {
   return (
-    <section id="events" className="py-16" style={{ background: 'var(--cream)' }}>
+    <section id="events" className="py-16" style={{ background: 'var(--soft)' }}>
       <div className="container">
         <div className="section-heading center">
           <p className="eyebrow">Events & Initiatives</p>
@@ -66,11 +66,6 @@ export default function Events() {
                   zIndex: isIDS ? 10 : 1
                 }}
               >
-                {isIDS && (
-                  <div style={{ position: 'absolute', top: '-12px', left: '50%', transform: 'translateX(-50%)', background: 'var(--red)', color: 'var(--white)', padding: '4px 12px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '1px' }}>
-                    Premier Initiative
-                  </div>
-                )}
                 <h3 style={{ margin: '0 0 0.8rem', fontSize: '1.25rem', fontFamily: '"Playfair Display"', color: isIDS ? 'var(--red)' : 'var(--ink)', marginTop: isIDS ? '0.5rem' : '0' }}>{ev.title}</h3>
                 <p style={{ margin: 0, color: 'var(--muted)', lineHeight: 1.6, flexGrow: 1 }}>{ev.desc}</p>
                 
