@@ -73,21 +73,21 @@ export default function EventsPage() {
           Our Initiatives
         </motion.h1>
         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} style={{ color: 'var(--muted)', fontSize: '1.2rem', maxWidth: '700px', margin: '0 auto' }}>
-          Hover over an initiative to stop the carousel and explore details.
+
         </motion.p>
       </div>
 
-      <div 
-        style={{ 
-          height: '600px', 
-          display: 'flex', 
-          justifyContent: 'center', 
-          alignItems: 'center', 
+      <div
+        style={{
+          height: '600px',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
           perspective: '1200px',
           marginTop: '2rem'
         }}
       >
-        <div 
+        <div
           style={{
             position: 'relative',
             width: '320px',
@@ -100,7 +100,7 @@ export default function EventsPage() {
           {allEvents.map((ev, i) => {
             const angle = i * (360 / allEvents.length);
             return (
-              <div 
+              <div
                 key={i}
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}

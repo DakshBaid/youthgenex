@@ -36,7 +36,7 @@ export default function Preloader() {
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: [0.8, 1.1, 1], opacity: 1 }}
             transition={{ duration: 1.5, ease: "easeOut" }}
-            style={{ height: '120px', objectFit: 'contain', marginBottom: '1rem' }}
+            style={{ height: '160px', objectFit: 'contain', marginBottom: '1rem' }}
           />
           <motion.div
             initial={{ opacity: 0, y: 10 }}
