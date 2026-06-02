@@ -178,6 +178,7 @@ export default function EventsPage() {
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
             style={{
+              order: ev.title === "Indore Democratic Summit" ? -1 : 0,
               background: ev.color,
               borderRadius: '24px',
               padding: '2.5rem 1.5rem',
