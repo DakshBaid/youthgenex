@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Globe, Users, BookOpen, Coffee, Heart, Star } from 'lucide-react';
+import { playHoverSound } from '../utils/sound';
 
 const allEvents = [
   {
@@ -52,6 +52,7 @@ const allEvents = [
 export default function EventsPage() {
   const [isHovered, setIsHovered] = useState(false);
   const [rotation, setRotation] = useState(0);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   // Manual animation loop for the cylinder
   useEffect(() => {
@@ -102,8 +103,19 @@ export default function EventsPage() {
             return (
               <div
                 key={i}
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
+                onMouseEnter={() => {
+                  setIsHovered(true);
+                  setHoveredIndex(i);
+                  playHoverSound();
+                }}
+                onMouseLeave={() => {
+                  setIsHovered(false);
+                  setHoveredIndex(null);
+                }}
+                onClick={() => {
+                  setHoveredIndex(hoveredIndex === i ? null : i);
+                  if (hoveredIndex !== i) playHoverSound();
+                }}
                 className="event-3d-card"
                 style={{
                   position: 'absolute',

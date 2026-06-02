@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, useInView, useTransform } from 'framer-motion';
 import { Mic, Building2, Users, Rocket, ArrowDown, ChevronRight } from 'lucide-react';
+import { playHoverSound } from '../utils/sound';
 
 // Word-by-word text reveal component
 const RevealText = ({ text }) => {
@@ -166,6 +167,7 @@ export default function AboutPage() {
             ].map((card, i) => (
               <motion.div
                 key={i}
+                onMouseEnter={playHoverSound}
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-10%" }}
@@ -325,14 +327,6 @@ export default function AboutPage() {
           <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.2 }} style={{ fontSize: '1.3rem', color: 'rgba(255,255,255,0.8)', maxWidth: '700px', margin: '0 auto 4rem', lineHeight: 1.8 }}>
             We envision a future where every student has access to opportunities that inspire growth, leadership, and meaningful impact.
           </motion.p>
-          <motion.a
-            href="/events"
-            initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: 0.4 }}
-            className="button button-red"
-            style={{ fontSize: '1.2rem', padding: '1.2rem 3rem', borderRadius: '50px', background: 'var(--white)', color: 'var(--red)' }}
-          >
-            Join The Movement <ChevronRight size={20} />
-          </motion.a>
         </div>
       </section>
 
