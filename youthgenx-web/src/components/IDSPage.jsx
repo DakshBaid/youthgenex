@@ -96,7 +96,7 @@ export default function IDSPage() {
             <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', borderRadius: '16px', boxShadow: 'var(--shadow)' }}>
               <iframe 
                 style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
-                src="https://www.youtube.com/embed/Pj1L68t_9h0" 
+                src="https://www.youtube.com/embed/KUlO88KciPs" 
                 title="IDS 2025 AfterMovie" 
                 frameBorder="0" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
@@ -122,7 +122,7 @@ export default function IDSPage() {
             <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', borderRadius: '16px', boxShadow: 'var(--shadow)' }}>
               <iframe 
                 style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
-                src="https://www.youtube.com/embed/fW49Z5XmEIs" 
+                src="https://www.youtube.com/embed/VVFfbHWWAUw" 
                 title="IDS 2024 AfterMovie" 
                 frameBorder="0" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
@@ -148,7 +148,7 @@ export default function IDSPage() {
             <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', borderRadius: '16px', boxShadow: 'var(--shadow)' }}>
               <iframe 
                 style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
-                src="https://www.youtube.com/embed/5aL-hHwG_oM" 
+                src="https://www.youtube.com/embed/XhHmRZW2Rck" 
                 title="IDS 2023 AfterMovie" 
                 frameBorder="0" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 

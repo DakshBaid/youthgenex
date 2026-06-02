@@ -9,8 +9,8 @@ const events = [
   },
   {
     title: "Indore Democratic Summit",
-    desc: "One of our flagship youth initiatives focused on leadership, governance, civic awareness, and youth participation. Successfully conducted across 3 impactful editions.",
-    path: "/events/ids"
+    desc: "One of our premier youth initiatives focused on leadership, governance, civic awareness, and youth participation. Successfully conducted across 3 impactful editions.",
+    path: "/ids"
   },
   {
     title: "Samvidhan Par Charcha",
