@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Mail, MapPin, Phone, Send, Globe, MessageSquare } from 'lucide-react';
+import { Mail, MapPin, Send } from 'lucide-react';
 
 export default function Contact() {
   return (
@@ -67,25 +67,7 @@ export default function Contact() {
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', gap: '1.2rem', alignItems: 'flex-start' }}>
-                  <Phone size={28} color="var(--red)" />
-                  <div>
-                    <h4 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.3rem' }}>Call Us</h4>
-                    <p style={{ color: 'rgba(255,255,255,0.7)' }}>+91 (Contact Number Here)</p>
-                  </div>
                 </div>
-              </div>
-            </div>
-
-            <div style={{ marginTop: '4rem' }}>
-              <h4 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '1rem' }}>Follow Our Journey</h4>
-              <div style={{ display: 'flex', gap: '1rem' }}>
-                <a href="#" style={{ width: 45, height: 45, borderRadius: '50%', background: 'rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--white)', transition: 'background 0.3s' }} onMouseOver={e=>e.currentTarget.style.background='var(--red)'} onMouseOut={e=>e.currentTarget.style.background='rgba(255,255,255,0.1)'}>
-                  <Globe size={20} />
-                </a>
-                <a href="#" style={{ width: 45, height: 45, borderRadius: '50%', background: 'rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--white)', transition: 'background 0.3s' }} onMouseOver={e=>e.currentTarget.style.background='var(--red)'} onMouseOut={e=>e.currentTarget.style.background='rgba(255,255,255,0.1)'}>
-                  <MessageSquare size={20} />
-                </a>
               </div>
             </div>
           </div>
