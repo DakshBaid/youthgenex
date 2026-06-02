@@ -57,8 +57,11 @@ export default function Footer() {
 
         </div>
         
-        <div style={{ textAlign: 'center', paddingTop: '2rem', color: 'rgba(255,255,255,0.5)', fontSize: '0.9rem' }}>
-          &copy; {new Date().getFullYear()} YouthGenex. All rights reserved.
+        <div style={{ textAlign: 'center', paddingTop: '3rem', color: 'rgba(255,255,255,0.8)', fontSize: '1rem', fontWeight: 500 }}>
+          <p style={{ margin: '0 0 1rem' }}>📍 307, The View, 1 Laad Colony, YN Road- Indore (MP)- 452001</p>
+          <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.9rem' }}>
+            &copy; {new Date().getFullYear()} YouthGenex. All rights reserved.
+          </div>
         </div>
       </div>
     </footer>
