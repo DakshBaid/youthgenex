@@ -45,7 +45,7 @@ export default function IDSPage() {
       <section style={{ padding: '6rem 0 4rem', textAlign: 'center' }}>
         <div className="container">
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '0 0 1.5rem' }}>
-            <img src="/ids-logo.png" alt="IDS Logo" style={{ height: '120px', marginBottom: '1rem', objectFit: 'contain' }} />
+            <img src="/ids-logo.png" alt="IDS Logo" style={{ height: '180px', marginBottom: '1rem', objectFit: 'contain' }} />
             <h2 style={{ color: 'var(--red)', fontWeight: 900, fontSize: '2rem', textTransform: 'uppercase', letterSpacing: '2px', margin: 0 }}>
               Indore Democratic Summit
             </h2>
@@ -63,7 +63,7 @@ export default function IDSPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            style={{ fontSize: '1.25rem', color: 'var(--muted)', maxWidth: '800px', margin: '0 auto', lineHeight: 1.8 }}
+            style={{ fontSize: '1.25rem', color: 'var(--muted)', maxWidth: '800px', margin: '0 auto', lineHeight: 1.8, textAlign: 'justify' }}
           >
             A premier platform for young minds to engage in diplomatic discourse, civic awareness, and impactful debates. Bringing together youth from across the nation to shape the future.
           </motion.p>

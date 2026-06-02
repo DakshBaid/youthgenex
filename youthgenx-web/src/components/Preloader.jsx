@@ -36,13 +36,13 @@ export default function Preloader() {
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: [0.8, 1.1, 1], opacity: 1 }}
             transition={{ duration: 1.5, ease: "easeOut" }}
-            style={{ height: '160px', objectFit: 'contain', marginBottom: '1rem' }}
+            style={{ height: '220px', objectFit: 'contain', marginBottom: '1.5rem' }}
           />
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-            style={{ fontFamily: '"Playfair Display"', fontSize: '2rem', color: 'var(--ink)' }}
+            transition={{ delay: 0.3 }}
+            style={{ fontFamily: '"Playfair Display"', fontSize: '2.5rem', fontWeight: 900, color: 'var(--ink)' }}
           >
             Youth<span style={{ color: 'var(--red)' }}>Genex</span>
           </motion.div>
