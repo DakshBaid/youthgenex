@@ -66,12 +66,9 @@ export default function Contact() {
                     <a href="mailto:indoredemocraticsummit@gmail.com" style={{ display: 'block', color: 'rgba(255,255,255,0.7)', textDecoration: 'none' }}>indoredemocraticsummit@gmail.com</a>
                   </div>
                 </div>
-
-                </div>
               </div>
             </div>
           </div>
-          
         </motion.div>
       </div>
     </section>
