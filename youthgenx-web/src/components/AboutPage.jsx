@@ -1,95 +1,349 @@
-import { motion } from 'framer-motion';
+import { useState, useEffect, useRef } from 'react';
+import { motion, useScroll, useSpring, useInView, useTransform } from 'framer-motion';
+import { Mic, Building2, Users, Rocket, ArrowDown, ChevronRight } from 'lucide-react';
+
+// Word-by-word text reveal component
+const RevealText = ({ text }) => {
+  const words = text.split(" ");
+  return (
+    <motion.span initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-10%" }}>
+      {words.map((word, i) => (
+        <motion.span
+          key={i}
+          style={{ display: 'inline-block', marginRight: '0.25em' }}
+          variants={{
+            hidden: { opacity: 0, y: 20 },
+            visible: { opacity: 1, y: 0 }
+          }}
+          transition={{ duration: 0.5, delay: i * 0.05, ease: [0.2, 0.65, 0.3, 0.9] }}
+        >
+          {word}
+        </motion.span>
+      ))}
+    </motion.span>
+  );
+};
+
+// Counter animation component
+const Counter = ({ from = 0, to, duration = 2, suffix = "" }) => {
+  const [count, setCount] = useState(from);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  useEffect(() => {
+    if (isInView) {
+      let startTimestamp = null;
+      const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / (duration * 1000), 1);
+        setCount(Math.floor(progress * (to - from) + from));
+        if (progress < 1) window.requestAnimationFrame(step);
+      };
+      window.requestAnimationFrame(step);
+    }
+  }, [isInView, from, to, duration]);
+
+  return <span ref={ref}>{count}{suffix}</span>;
+};
+
+// Mouse Glow Component
+const MouseGlow = () => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const updateMousePosition = ev => setMousePosition({ x: ev.clientX, y: ev.clientY });
+    window.addEventListener('mousemove', updateMousePosition);
+    return () => window.removeEventListener('mousemove', updateMousePosition);
+  }, []);
+
+  return (
+    <motion.div
+      animate={{ x: mousePosition.x - 200, y: mousePosition.y - 200 }}
+      transition={{ type: "tween", ease: "backOut", duration: 0.5 }}
+      style={{
+        position: 'fixed',
+        top: 0, left: 0,
+        width: 400, height: 400,
+        borderRadius: '50%',
+        background: 'radial-gradient(circle, rgba(192,0,26,0.15) 0%, rgba(192,0,26,0) 70%)',
+        pointerEvents: 'none',
+        zIndex: 9999,
+        mixBlendMode: 'screen'
+      }}
+    />
+  );
+};
 
 export default function AboutPage() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
+
   return (
-    <div style={{ paddingTop: '120px', paddingBottom: '6rem', minHeight: '100vh', background: 'var(--white)' }}>
-      {/* Hero Section of About */}
-      <div className="container" style={{ marginBottom: '5rem' }}>
-        <div style={{ maxWidth: '800px' }}>
-          <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} style={{ color: 'var(--red)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '2px', margin: '0 0 1rem' }}>
-            Building the Leaders of Tomorrow
+    <div style={{ background: 'var(--white)', overflowX: 'hidden', color: 'var(--ink)' }}>
+      
+      {/* Scroll Progress Bar */}
+      <motion.div style={{ position: 'fixed', top: 0, left: 0, right: 0, height: '4px', background: 'var(--red)', transformOrigin: '0%', scaleX, zIndex: 10000 }} />
+      <MouseGlow />
+
+      {/* Section 1 - Hero */}
+      <section style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', background: '#0a0a0a' }}>
+        {/* Subtly animated floating particles */}
+        {[...Array(20)].map((_, i) => (
+          <motion.div
+            key={i}
+            animate={{
+              y: [0, -Math.random() * 200 - 100],
+              x: [0, (Math.random() - 0.5) * 200],
+              opacity: [0, Math.random() * 0.5, 0]
+            }}
+            transition={{ duration: Math.random() * 10 + 10, repeat: Infinity, ease: "linear" }}
+            style={{
+              position: 'absolute',
+              bottom: '-10%',
+              left: `${Math.random() * 100}%`,
+              width: Math.random() * 6 + 2,
+              height: Math.random() * 6 + 2,
+              background: 'rgba(255,255,255,0.4)',
+              borderRadius: '50%',
+              boxShadow: '0 0 10px rgba(192,0,26,0.8)'
+            }}
+          />
+        ))}
+        {/* Red Gradient Glow */}
+        <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at center, rgba(192,0,26,0.15) 0%, transparent 60%)' }} />
+
+        <div className="container" style={{ position: 'relative', zIndex: 10, textAlign: 'center', color: 'var(--white)' }}>
+          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} style={{ color: 'var(--red)', fontWeight: 800, letterSpacing: '3px', textTransform: 'uppercase', margin: '0 0 1rem' }}>
+            WHO WE ARE
           </motion.p>
-          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} style={{ fontSize: '4rem', fontFamily: '"Playfair Display"', color: 'var(--ink)', margin: '0 0 2rem', lineHeight: 1.1 }}>
-            About YouthGenex
+          <motion.h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} style={{ fontSize: '4.5rem', fontFamily: '"Playfair Display"', margin: '0 0 2rem', lineHeight: 1.1 }}>
+            Building Opportunities For The Next Generation
           </motion.h1>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4, duration: 1 }} style={{ maxWidth: '700px', margin: '0 auto', fontSize: '1.25rem', color: 'rgba(255,255,255,0.7)', lineHeight: 1.8 }}>
+            <p style={{ marginBottom: '1.5rem' }}>YouthGenex started with a simple belief — young people deserve platforms that help them grow beyond academics.</p>
+            <p>Today, we bring together students, educators, and future leaders through experiences that encourage learning, collaboration, and meaningful conversations.</p>
+          </motion.div>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }} style={{ marginTop: '4rem' }}>
+            <a href="#journey" style={{ color: 'var(--white)', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none', borderBottom: '1px solid var(--red)', paddingBottom: '0.5rem', fontSize: '1.1rem', fontWeight: 600 }}>
+              Our Journey <ArrowDown size={20} color="var(--red)" />
+            </a>
+          </motion.div>
         </div>
+      </section>
 
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '4rem', marginTop: '3rem' }}>
-          <div>
-            <p style={{ fontSize: '1.2rem', lineHeight: 1.8, color: 'var(--muted)', margin: '0 0 1.5rem' }}>
-              <strong>YouthGenex</strong> is a youth-driven organization dedicated to empowering the next generation of leaders, innovators, and changemakers. Founded with the vision of creating meaningful opportunities for young minds, we believe that leadership is not just about positions—it's about purpose, responsibility, and the courage to create impact.
-            </p>
-            <p style={{ fontSize: '1.2rem', lineHeight: 1.8, color: 'var(--muted)', margin: 0 }}>
-              We provide platforms where students can develop critical thinking, communication skills, civic awareness, and leadership capabilities through experiential learning. From youth parliaments and leadership summits to workshops, training programs, and community initiatives, every experience is designed to inspire confidence and encourage action.
-            </p>
-          </div>
-          <div style={{ background: 'var(--soft)', padding: '3rem', borderRadius: '16px', borderLeft: '4px solid var(--red)' }}>
-             <h3 style={{ fontSize: '1.8rem', fontFamily: '"Playfair Display"', margin: '0 0 1rem' }}>Our Goal</h3>
-             <p style={{ fontSize: '1.15rem', lineHeight: 1.7, color: 'var(--ink)' }}>
-               We envision a future where every young individual has access to opportunities that help them discover their potential, amplify their voice, and contribute positively to society. Through collaboration, innovation, and inclusivity, we are building a community of young leaders who are prepared to tackle the challenges of tomorrow.
-             </p>
-          </div>
-        </motion.div>
-      </div>
-
-      {/* Vision & Mission */}
-      <div style={{ background: 'var(--ink)', color: 'var(--white)', padding: '6rem 0' }}>
+      {/* Section 2 - The Beginning Story */}
+      <section id="journey" style={{ padding: '8rem 0', background: 'var(--white)' }}>
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '4rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem', alignItems: 'center' }}>
+            <motion.div 
+              initial={{ scale: 0.8, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true, margin: "-20%" }} transition={{ duration: 0.8, ease: "easeOut" }}
+              style={{ fontSize: '12rem', fontWeight: 900, color: 'var(--soft)', lineHeight: 0.8, letterSpacing: '-5px' }}
+            >
+              2021
+            </motion.div>
+            <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-20%" }} transition={{ duration: 0.8 }}>
+              <h2 style={{ fontSize: '3rem', fontFamily: '"Playfair Display"', margin: '0 0 1.5rem' }}>It Started With An Idea</h2>
+              <div style={{ fontSize: '1.2rem', color: 'var(--muted)', lineHeight: 1.8 }}>
+                <p style={{ fontWeight: 700, color: 'var(--ink)' }}>Every student has potential.</p>
+                <p>But potential grows only when opportunities exist.</p>
+                <p style={{ marginTop: '1rem' }}>YouthGenex was created to provide those opportunities through events, discussions, leadership experiences, and communities where students can learn from one another.</p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 3 - What We Actually Do */}
+      <section style={{ padding: '8rem 0', background: 'var(--soft)' }}>
+        <div className="container">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            <h2 style={{ fontSize: '3.5rem', fontFamily: '"Playfair Display"', textAlign: 'center', margin: '0 0 4rem' }}>We Create Experiences</h2>
+          </motion.div>
+          
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
+            {[
+              { icon: <Mic size={32} color="var(--red)" />, title: 'Leadership Summits', text: 'Helping students learn from experts and industry leaders.' },
+              { icon: <Building2 size={32} color="var(--red)" />, title: 'Youth Parliaments', text: 'Building awareness, confidence, and public speaking skills.' },
+              { icon: <Users size={32} color="var(--red)" />, title: 'Community Building', text: 'Connecting ambitious young minds across institutions.' },
+              { icon: <Rocket size={32} color="var(--red)" />, title: 'Skill Development', text: 'Creating opportunities to learn beyond classrooms.' }
+            ].map((card, i) => (
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-10%" }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                whileHover={{ y: -10, rotateX: 5, rotateY: 5, boxShadow: '0 25px 50px rgba(0,0,0,0.1)' }}
+                style={{
+                  background: 'var(--white)',
+                  padding: '3rem 2rem',
+                  borderRadius: '24px',
+                  boxShadow: 'var(--shadow)',
+                  border: '1px solid rgba(0,0,0,0.03)',
+                  transformStyle: 'preserve-3d',
+                  perspective: '1000px'
+                }}
+              >
+                <div style={{ marginBottom: '1.5rem', background: 'rgba(192,0,26,0.05)', display: 'inline-block', padding: '1rem', borderRadius: '16px' }}>
+                  {card.icon}
+                </div>
+                <h3 style={{ fontSize: '1.5rem', fontFamily: '"Playfair Display"', margin: '0 0 1rem' }}>{card.title}</h3>
+                <p style={{ color: 'var(--muted)', fontSize: '1.05rem', lineHeight: 1.6, margin: 0 }}>{card.text}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Section 4 - Numbers That Matter */}
+      <section style={{ padding: '8rem 0', background: '#111', color: '#fff', textAlign: 'center' }}>
+        <div className="container">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '3rem' }}>
             <div>
-              <h2 style={{ fontSize: '2.5rem', fontFamily: '"Playfair Display"', color: 'var(--red)', marginBottom: '1.5rem' }}>Our Vision</h2>
-              <p style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.8)', lineHeight: 1.8 }}>
-                To create a generation of confident, socially conscious, and purpose-driven leaders who contribute meaningfully to society and drive positive change at local, national, and global levels.
-              </p>
+              <div style={{ fontSize: '5rem', fontWeight: 900, color: 'var(--red)', fontFamily: '"Playfair Display"', lineHeight: 1 }}><Counter to={500} suffix="+" /></div>
+              <div style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.7)', marginTop: '1rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Students Engaged</div>
             </div>
             <div>
-              <h2 style={{ fontSize: '2.5rem', fontFamily: '"Playfair Display"', color: 'var(--red)', marginBottom: '1.5rem' }}>Our Mission</h2>
-              <ul style={{ paddingLeft: '1.2rem', color: 'rgba(255,255,255,0.8)', fontSize: '1.15rem', lineHeight: 1.8, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                <li>Empower youth through leadership development and experiential learning.</li>
-                <li>Foster critical thinking, public speaking, and problem-solving skills.</li>
-                <li>Promote civic engagement and democratic participation.</li>
-                <li>Create opportunities for collaboration, innovation, and personal growth.</li>
-                <li>Build a community that inspires young people to lead with integrity and purpose.</li>
-              </ul>
+              <div style={{ fontSize: '5rem', fontWeight: 900, color: 'var(--red)', fontFamily: '"Playfair Display"', lineHeight: 1 }}><Counter to={20} suffix="+" /></div>
+              <div style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.7)', marginTop: '1rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Events Conducted</div>
+            </div>
+            <div>
+              <div style={{ fontSize: '5rem', fontWeight: 900, color: 'var(--red)', fontFamily: '"Playfair Display"', lineHeight: 1 }}><Counter to={10} suffix="+" /></div>
+              <div style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.7)', marginTop: '1rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Partner Institutions</div>
+            </div>
+            <div>
+              <div style={{ fontSize: '5rem', fontWeight: 900, color: 'var(--red)', fontFamily: '"Playfair Display"', lineHeight: 1 }}><Counter to={1} /></div>
+              <div style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.7)', marginTop: '1rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Mission</div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* What We Stand For */}
-      <div className="container" style={{ paddingTop: '6rem' }}>
-        <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-          <h2 style={{ fontSize: '3rem', fontFamily: '"Playfair Display"', margin: 0 }}>What We Stand For</h2>
-          <div style={{ width: '60px', height: '3px', background: 'var(--red)', margin: '1.5rem auto 0' }}></div>
+      {/* Section 5 - Why We Exist (Emotional Quote) */}
+      <section style={{ padding: '10rem 0', background: 'var(--white)', textAlign: 'center' }}>
+        <div className="container" style={{ maxWidth: '900px' }}>
+          <h2 style={{ fontSize: '3.5rem', fontFamily: '"Playfair Display"', lineHeight: 1.3, margin: '0 0 3rem' }}>
+            <RevealText text="&quot;The future is not built by waiting for opportunities. It is built by creating them.&quot;" />
+          </h2>
+          <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.5, duration: 1 }} style={{ fontSize: '1.3rem', color: 'var(--muted)', lineHeight: 1.8 }}>
+            YouthGenex exists to create spaces where young people can discover their strengths, express their ideas, and develop the confidence to take initiative.
+          </motion.p>
         </div>
+      </section>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem', marginBottom: '6rem' }}>
-          {[
-            { title: 'Leadership', text: 'We inspire young minds to take initiative, embrace responsibility, and lead with confidence.' },
-            { title: 'Excellence', text: 'We strive to deliver impactful experiences that encourage continuous growth and learning.' },
-            { title: 'Inclusivity', text: 'We believe every young person deserves an opportunity to learn, contribute, and succeed.' },
-            { title: 'Innovation', text: 'We encourage creative thinking and fresh perspectives to solve real-world challenges.' },
-            { title: 'Impact', text: 'Everything we do is focused on creating meaningful and lasting change.' }
-          ].map((item, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} style={{ background: 'var(--soft)', padding: '2.5rem', borderRadius: '16px', boxShadow: 'var(--shadow)', borderTop: '4px solid var(--red)' }}>
-              <h3 style={{ fontSize: '1.6rem', fontFamily: '"Playfair Display"', margin: '0 0 1rem', color: 'var(--ink)' }}>{item.title}</h3>
-              <p style={{ margin: 0, fontSize: '1.05rem', color: 'var(--muted)', lineHeight: 1.7 }}>{item.text}</p>
+      {/* Section 6 - Interactive Timeline */}
+      <section style={{ padding: '8rem 0', background: 'var(--soft)', position: 'relative' }}>
+        <div className="container">
+          <h2 style={{ fontSize: '3.5rem', fontFamily: '"Playfair Display"', textAlign: 'center', margin: '0 0 6rem' }}>Our Journey</h2>
+          
+          <div style={{ position: 'relative', maxWidth: '800px', margin: '0 auto' }}>
+            {/* The Drawing Line */}
+            <motion.div 
+              initial={{ height: 0 }} whileInView={{ height: '100%' }} viewport={{ once: true, margin: "-20%" }} transition={{ duration: 2, ease: "easeInOut" }}
+              style={{ position: 'absolute', left: '50px', top: 0, width: '2px', background: 'var(--red)' }}
+            />
+
+            {[
+              { year: '2021', text: 'YouthGenex Founded' },
+              { year: '2022', text: 'First Major Event' },
+              { year: '2023', text: 'Community Expansion' },
+              { year: '2024', text: 'Leadership Programs' },
+              { year: '2025', text: 'Growing Across Institutions' },
+              { year: '2026', text: 'IDS 2026' }
+            ].map((item, i) => (
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-10%" }}
+                transition={{ delay: i * 0.2 + 0.5, duration: 0.6 }}
+                style={{ display: 'flex', alignItems: 'center', gap: '3rem', marginBottom: '4rem', paddingLeft: '40px', position: 'relative' }}
+              >
+                {/* Dot */}
+                <div style={{ position: 'absolute', left: '7px', top: '50%', transform: 'translateY(-50%)', width: '12px', height: '12px', background: 'var(--red)', borderRadius: '50%', border: '4px solid var(--soft)' }} />
+                
+                <div style={{ fontSize: '2rem', fontWeight: 900, color: 'var(--ink)' }}>{item.year}</div>
+                <div style={{ fontSize: '1.25rem', color: 'var(--muted)' }}>{item.text}</div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Section 7 - Meet The Team */}
+      <section style={{ padding: '8rem 0', background: 'var(--white)' }}>
+        <div className="container">
+          <h2 style={{ fontSize: '3.5rem', fontFamily: '"Playfair Display"', textAlign: 'center', margin: '0 0 5rem' }}>Meet The Team</h2>
+          
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <motion.div 
+              className="team-card"
+              whileHover="hover"
+              style={{
+                width: '320px',
+                position: 'relative',
+                borderRadius: '24px',
+                overflow: 'hidden',
+                background: 'var(--soft)',
+                boxShadow: 'var(--shadow)',
+                cursor: 'pointer'
+              }}
+            >
+              <motion.div
+                variants={{ hover: { scale: 1.1 } }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                style={{ width: '100%', height: '350px', background: 'url("/gallery/11.jpeg") center/cover', borderBottomLeftRadius: '50%', borderBottomRightRadius: '50%' }}
+              />
+              <motion.div
+                variants={{ hover: { y: -20, opacity: 1 } }}
+                style={{
+                  position: 'absolute', bottom: 0, left: 0, width: '100%',
+                  background: 'rgba(255, 255, 255, 0.85)',
+                  backdropFilter: 'blur(20px)',
+                  padding: '2rem 1.5rem',
+                  borderTopLeftRadius: '24px',
+                  borderTopRightRadius: '24px',
+                  textAlign: 'center',
+                  transform: 'translateY(100%)', // hidden by default, wait no let's make it visible but pop up
+                  y: 10,
+                  opacity: 0.9,
+                  transition: 'all 0.3s ease'
+                }}
+              >
+                <h3 style={{ fontSize: '1.6rem', fontFamily: '"Playfair Display"', margin: '0 0 0.5rem', color: 'var(--red)' }}>Ansh Jain</h3>
+                <p style={{ margin: '0 0 1rem', fontWeight: 600, color: 'var(--ink)' }}>Founder</p>
+                <p style={{ margin: 0, fontSize: '0.95rem', color: 'var(--muted)', fontStyle: 'italic' }}>"Building opportunities for students to grow."</p>
+              </motion.div>
             </motion.div>
-          ))}
+          </div>
         </div>
+      </section>
 
-        {/* Conclusion */}
-        <div style={{ background: 'linear-gradient(135deg, #111, #222)', color: 'var(--white)', padding: '4rem', borderRadius: '24px', textAlign: 'center', boxShadow: 'var(--shadow)' }}>
-          <h2 style={{ fontSize: '2.5rem', fontFamily: '"Playfair Display"', margin: '0 0 1.5rem' }}>Why YouthGenex?</h2>
-          <p style={{ fontSize: '1.4rem', color: 'var(--red)', fontWeight: 800, marginBottom: '2rem' }}>Because the future belongs to those who are prepared to lead it.</p>
-          <p style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.85)', marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 2rem', lineHeight: 1.8 }}>
-            At YouthGenex, we don't just organize events—we create experiences that shape perspectives, build confidence, and empower young people to become the leaders their communities need.
-          </p>
-          <h3 style={{ fontSize: '1.6rem', fontFamily: '"Playfair Display"', margin: 0, color: 'var(--white)' }}>
-            YouthGenex is where potential meets opportunity, and leaders are born.
-          </h3>
+      {/* Section 8 - Vision For Future */}
+      <section style={{ padding: '10rem 0', background: 'linear-gradient(135deg, #0a0a0a, #300005)', color: 'var(--white)', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
+        <div className="container" style={{ position: 'relative', zIndex: 10 }}>
+          <motion.h2 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ fontSize: '4rem', fontFamily: '"Playfair Display"', margin: '0 0 2rem' }}>
+            The Journey Has Just Begun.
+          </motion.h2>
+          <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.2 }} style={{ fontSize: '1.3rem', color: 'rgba(255,255,255,0.8)', maxWidth: '700px', margin: '0 auto 4rem', lineHeight: 1.8 }}>
+            We envision a future where every student has access to opportunities that inspire growth, leadership, and meaningful impact.
+          </motion.p>
+          <motion.a 
+            href="/events"
+            initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: 0.4 }}
+            className="button button-red"
+            style={{ fontSize: '1.2rem', padding: '1.2rem 3rem', borderRadius: '50px', background: 'var(--white)', color: 'var(--red)' }}
+          >
+            Join The Movement <ChevronRight size={20} />
+          </motion.a>
         </div>
-      </div>
+      </section>
+
+      <style>{`
+        .team-card .hover-content {
+          transform: translateY(10px);
+        }
+      `}</style>
     </div>
   );
 }
