@@ -112,9 +112,9 @@ export default function Gallery() {
     ? (90 - rotationIndex * anglePerItem) 
     : (-rotationIndex * anglePerItem);
 
-  const wheelRadius = isMobile ? 260 : 360; 
-  const itemRadius = isMobile ? 210 : 300;  
-  const logoSize = isMobile ? 55 : 80;
+  const wheelRadius = isMobile ? 240 : 320; 
+  const itemRadius = isMobile ? 190 : 270;  
+  const logoSize = isMobile ? 55 : 70;
 
   return (
     <section id="gallery" style={{ 
@@ -127,10 +127,10 @@ export default function Gallery() {
       {/* LEFT / TOP: The Massive Rotating Wheel (Sticky and perfectly centered vertically) */}
       <div style={{ 
         position: isMobile ? 'relative' : 'sticky',
-        top: isMobile ? 0 : 'calc(50vh - 250px)', // Centers the 500px container perfectly vertically
+        top: isMobile ? 0 : 'calc(50vh - 300px)', // Centers the 600px container perfectly vertically
         left: 0,
         width: isMobile ? '100%' : '420px', 
-        height: isMobile ? '350px' : '500px',
+        height: isMobile ? '350px' : '600px',
         zIndex: 10,
         overflow: 'hidden',
         display: 'flex',
@@ -178,13 +178,14 @@ export default function Gallery() {
           {/* DECORATIVE: Active Event Title inside the wheel's visible arc */}
           <div style={{
             position: 'absolute',
-            left: isMobile ? '50%' : '20px',
-            right: isMobile ? 'auto' : '160px',
+            left: isMobile ? '50%' : '30px',
+            right: isMobile ? 'auto' : '200px',
             top: isMobile ? '160px' : '50%',
             transform: isMobile ? 'translate(-50%, -50%)' : 'translateY(-50%)',
             pointerEvents: 'none',
             zIndex: 5,
-            textAlign: isMobile ? 'center' : 'right'
+            textAlign: isMobile ? 'center' : 'left',
+            width: isMobile ? '250px' : 'auto'
           }}>
             <AnimatePresence mode="wait">
               <motion.div
@@ -194,16 +195,9 @@ export default function Gallery() {
                 exit={{ opacity: 0, scale: 0.8, y: -10 }}
                 transition={{ duration: 0.3 }}
               >
-                <h4 style={{ margin: 0, color: 'var(--red)', fontFamily: '"Playfair Display"', fontSize: isMobile ? '1.4rem' : '1.8rem', lineHeight: 1.1 }}>
+                <h4 style={{ margin: 0, color: 'var(--red)', fontFamily: '"Playfair Display"', fontSize: isMobile ? '1.4rem' : '1.8rem', lineHeight: 1.2 }}>
                   {activeEvent.title}
                 </h4>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: isMobile ? 'center' : 'flex-end', gap: '6px', marginTop: '0.8rem' }}>
-                  <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--red)' }} />
-                  <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--muted)', letterSpacing: '1px', textTransform: 'uppercase' }}>
-                    Gallery
-                  </p>
-                  <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--red)' }} />
-                </div>
               </motion.div>
             </AnimatePresence>
           </div>
