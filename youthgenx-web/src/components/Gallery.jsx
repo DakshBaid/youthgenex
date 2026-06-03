@@ -64,8 +64,18 @@ export default function Gallery() {
 
   const handleManualClick = (clickedIndex) => {
     const currentMod = rotationIndex % rouletteEvents.length;
-    let diff = clickedIndex - currentMod;
-    if (diff < 0) diff += rouletteEvents.length;
+    // Handle negative modulo correctly
+    const normalizedMod = currentMod < 0 ? currentMod + rouletteEvents.length : currentMod;
+    
+    let diff = clickedIndex - normalizedMod;
+    
+    // Shortest path calculation
+    const half = rouletteEvents.length / 2;
+    if (diff > half) {
+      diff -= rouletteEvents.length;
+    } else if (diff < -half) {
+      diff += rouletteEvents.length;
+    }
     
     setRotationIndex(prev => prev + diff);
     startTimeRef.current = Date.now();
@@ -187,9 +197,13 @@ export default function Gallery() {
                 <h4 style={{ margin: 0, color: 'var(--red)', fontFamily: '"Playfair Display"', fontSize: isMobile ? '1.2rem' : '1.5rem', lineHeight: 1.2 }}>
                   {activeEvent.title}
                 </h4>
-                <p style={{ margin: '0.5rem 0 0', fontSize: '0.85rem', color: 'var(--muted)' }}>
-                  {activeEvent.id === 'ids' ? '15s Highlight' : '10s Highlight'}
-                </p>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', marginTop: '0.8rem' }}>
+                  <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--red)' }} />
+                  <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--muted)', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                    Gallery
+                  </p>
+                  <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--red)' }} />
+                </div>
               </motion.div>
             </AnimatePresence>
           </div>
