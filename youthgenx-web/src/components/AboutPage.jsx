@@ -267,54 +267,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Section 7 - Meet The Team */}
-      <section style={{ padding: '8rem 0', background: 'var(--white)' }}>
-        <div className="container">
-          <h2 className="about-section-title" style={{ fontFamily: '"Playfair Display"', textAlign: 'center', margin: '0 0 5rem' }}>Meet The Team</h2>
-
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <motion.div
-              className="team-card"
-              whileHover="hover"
-              style={{
-                width: '320px',
-                position: 'relative',
-                borderRadius: '24px',
-                overflow: 'hidden',
-                background: 'var(--soft)',
-                boxShadow: 'var(--shadow)',
-                cursor: 'pointer'
-              }}
-            >
-              <motion.div
-                variants={{ hover: { scale: 1.1 } }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
-                style={{ width: '100%', height: '350px', background: 'url("/gallery/11.jpeg") center/cover', borderBottomLeftRadius: '50%', borderBottomRightRadius: '50%' }}
-              />
-              <motion.div
-                variants={{ hover: { y: -20, opacity: 1 } }}
-                style={{
-                  position: 'absolute', bottom: 0, left: 0, width: '100%',
-                  background: 'rgba(255, 255, 255, 0.85)',
-                  backdropFilter: 'blur(20px)',
-                  padding: '2rem 1.5rem',
-                  borderTopLeftRadius: '24px',
-                  borderTopRightRadius: '24px',
-                  textAlign: 'center',
-                  transform: 'translateY(100%)', // hidden by default, wait no let's make it visible but pop up
-                  y: 10,
-                  opacity: 0.9,
-                  transition: 'all 0.3s ease'
-                }}
-              >
-                <h3 style={{ fontSize: '1.6rem', fontFamily: '"Playfair Display"', margin: '0 0 0.5rem', color: 'var(--red)' }}>Ansh Jain</h3>
-                <p style={{ margin: '0 0 1rem', fontWeight: 600, color: 'var(--ink)' }}>Founder</p>
-                <p style={{ margin: 0, fontSize: '0.95rem', color: 'var(--muted)', fontStyle: 'italic' }}>"Building opportunities for students to grow."</p>
-              </motion.div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
 
       {/* Section 8 - Vision For Future */}
       <section style={{ padding: '10rem 0', background: 'linear-gradient(135deg, #0a0a0a, #300005)', color: 'var(--white)', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
