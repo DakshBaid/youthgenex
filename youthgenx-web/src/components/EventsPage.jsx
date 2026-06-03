@@ -7,6 +7,7 @@ const allEvents = [
   {
     title: "GENxMUN",
     desc: "A dynamic Model United Nations platform designed to help students enhance diplomacy, debate, and communication skills while discussing global challenges and drafting impactful resolutions for tomorrow.",
+    path: "/event-gallery/genxmun",
     color: "#003049", // Cosmos Blue
     textColor: "#FFF",
     icon: <img src="/gxm-logo.png" alt="GENxMUN" style={{ width: '80px', height: '80px', objectFit: 'contain' }} />
@@ -29,6 +30,7 @@ const allEvents = [
   {
     title: "Coffee with Mayor",
     desc: "An interactive platform directly connecting students with leaders and policymakers to discuss progressive ideas, modern governance, and youth perspectives on local administration.",
+    path: "/event-gallery/coffee-with-mayor",
     color: "#FDF0D5", // Varden Cream
     textColor: "#111",
     icon: <img src="/cwm-logo.png" alt="Coffee with Mayor" style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '50%' }} />
@@ -36,6 +38,7 @@ const allEvents = [
   {
     title: "Kho Gaye Hum Kahan?",
     desc: "A youth-focused initiative creating open conversations around self-growth, managing emotions, personal identity, and navigating modern challenges like digital wellbeing.",
+    path: "/event-gallery/kho-gaye-hum-kahan",
     color: "#669BBC", // Blue Marble
     textColor: "#FFF",
     icon: <img src="/kghk-logo.png" alt="Kho Gaye Hum Kahan" style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '50%' }} />
@@ -43,6 +46,7 @@ const allEvents = [
   {
     title: "About Her",
     desc: "An initiative celebrating women, leadership, empowerment, and inspiring stories that encourage immense confidence and monumental growth for young female changemakers.",
+    path: "/event-gallery/about-her",
     color: "#F77F00", // Derived 6th color
     textColor: "#FFF",
     icon: <img src="/ah-logo.png" alt="About Her" style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '50%' }} />

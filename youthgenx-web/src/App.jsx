@@ -10,6 +10,7 @@ import Partners from './components/Partners';
 import AboutPage from './components/AboutPage';
 import IDSPage from './components/IDSPage';
 import EventsPage from './components/EventsPage';
+import EventGalleryPage from './components/EventGalleryPage';
 import Footer from './components/Footer';
 import Chatbot from './components/Chatbot';
 import Preloader from './components/Preloader';
@@ -53,7 +54,6 @@ function GalleryPage() {
     <div style={{ paddingTop: '80px' }}>
       <SEO title="Gallery" description="Explore the vibrant journey of YouthGenex through our gallery and after-movies." />
       <Gallery />
-      <AfterMovies />
     </div>
   );
 }
@@ -70,6 +70,7 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/ids" element={<IDSPage />} />
           <Route path="/events" element={<EventsPage />} />
+          <Route path="/event-gallery/:eventId" element={<EventGalleryPage />} />
           <Route path="/gallery" element={<GalleryPage />} />
         </Routes>
       </main>
