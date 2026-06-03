@@ -118,7 +118,7 @@ export default function Gallery() {
 
   return (
     <section id="gallery" style={{ 
-      background: 'var(--line)', // Darker background to make the white glass wheel pop
+      background: 'var(--soft)', // Restored original soft background
       display: 'flex', 
       flexDirection: isMobile ? 'column' : 'row',
       position: 'relative'
@@ -211,10 +211,9 @@ export default function Gallery() {
               width: `${wheelRadius * 2}px`,
               height: `${wheelRadius * 2}px`,
               borderRadius: '50%',
-              background: 'rgba(255,255,255,0.4)',
-              backdropFilter: 'blur(10px)',
-              border: '1px solid rgba(255,255,255,0.6)',
-              boxShadow: '0 20px 40px rgba(0,0,0,0.05)',
+              background: 'var(--white)', // Solid white stands out perfectly against --soft
+              border: '1px solid rgba(0,0,0,0.05)',
+              boxShadow: '0 20px 50px rgba(0,0,0,0.08)', // Stronger shadow for clear differentiation
               left: isMobile ? '50%' : '0px',
               top: isMobile ? '20px' : '50%',
               x: '-50%',
