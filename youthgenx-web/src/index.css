@@ -67,9 +67,15 @@ section { scroll-margin-top: 84px; }
   text-align: justify;
 }
 
-p:not(.eyebrow), .card p, .event-3d-back p, .events-mobile-grid p, .section-copy {
+/* Target specific body copy for justification to avoid breaking layout alignments */
+.card p, .event-3d-back p, .events-mobile-grid p, .section-copy,
+#about p, #impact p, #after-movies p {
   text-align: justify !important;
 }
+
+/* Explicit exceptions to ensure no overlap */
+p.eyebrow { text-align: inherit !important; }
+.section-heading.center, .section-heading.center p.eyebrow { text-align: center !important; }
 
 .button {
   display: inline-flex;
