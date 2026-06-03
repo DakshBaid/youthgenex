@@ -45,6 +45,7 @@ export default function Gallery() {
   const timerRef = useRef(null);
   const startTimeRef = useRef(Date.now());
   const [isMobile, setIsMobile] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 900);
@@ -300,17 +301,15 @@ export default function Gallery() {
             className="masonry-gallery"
           >
             {activeEvent.images.map((filename, idx) => (
-              <div key={filename} className="masonry-item">
+              <div 
+                key={filename} 
+                className="masonry-item"
+                onClick={() => setSelectedImage(`/gallery/${filename}`)}
+              >
                 <img 
                   src={`/gallery/${filename}`} 
                   alt={`${activeEvent.title} highlight ${idx + 1}`}
                   loading="lazy"
-                  style={{
-                    width: '100%',
-                    borderRadius: '12px',
-                    boxShadow: 'var(--shadow)',
-                    objectFit: 'cover'
-                  }}
                 />
               </div>
             ))}
@@ -329,6 +328,46 @@ export default function Gallery() {
 
         </div>
       </div>
+
+      {/* LIGHTBOX POPUP */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedImage(null)}
+            style={{
+              position: 'fixed',
+              inset: 0,
+              background: 'rgba(0,0,0,0.85)',
+              backdropFilter: 'blur(5px)',
+              zIndex: 99999,
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              padding: isMobile ? '1rem' : '3rem',
+              cursor: 'zoom-out'
+            }}
+          >
+            <motion.img
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ type: "spring", stiffness: 300, damping: 25 }}
+              src={selectedImage}
+              alt="Zoomed highlight"
+              style={{
+                maxWidth: '100%',
+                maxHeight: '100%',
+                objectFit: 'contain',
+                borderRadius: '12px',
+                boxShadow: '0 25px 50px rgba(0,0,0,0.5)'
+              }}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
     </section>
   );

@@ -199,11 +199,23 @@ p.eyebrow { text-align: inherit !important; }
   gap: 1.5rem;
 }
 
+.masonry-item {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  cursor: zoom-in;
+}
+
 .masonry-item img {
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
-  border-radius: 12px;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  display: block;
+}
+
+.masonry-item:hover img {
+  transform: scale(1.08);
 }
 
 @media (max-width: 768px) {
