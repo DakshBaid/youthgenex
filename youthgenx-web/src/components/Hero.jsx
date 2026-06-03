@@ -30,7 +30,7 @@ export default function Hero() {
             A youth leadership and civic capability-building organization founded with the vision of empowering young minds through leadership, communication, and experiential learning. We believe today’s youth are tomorrow’s changemakers.
           </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.85rem', marginTop: '2rem' }}>
-            <a className="button button-red" href="#programs">Explore Programs</a>
+            <a className="button button-red" href="/events">Explore Programs</a>
             <a className="button button-light" href="#contact">Contact Us</a>
           </div>
         </motion.div>

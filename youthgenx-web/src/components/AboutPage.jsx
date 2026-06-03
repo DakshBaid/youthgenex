@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, useInView, useTransform } from 'framer-motion';
 import { Mic, Building2, Users, Rocket, ArrowDown, ChevronRight } from 'lucide-react';
+import SEO from './SEO';
 
 // Word-by-word text reveal component
 const RevealText = ({ text }) => {
@@ -76,8 +77,10 @@ const MouseGlow = () => {
 
 export default function AboutPage() {
   return (
-    <div style={{ background: 'var(--white)', overflowX: 'hidden', color: 'var(--ink)' }}>
-
+    <div style={{ background: 'var(--white)', minHeight: '100vh', overflow: 'hidden' }}>
+      <SEO title="About Us" description="YouthGenex started with a simple belief — young people deserve platforms that help them grow beyond academics. Learn more about our story and mission." />
+      
+      {/* Dynamic Red Gradient Flow Element */}
 
       <MouseGlow />
 

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FileText, MapPin } from 'lucide-react';
+import SEO from './SEO';
 
 const ImageSlider = ({ images }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -39,7 +40,8 @@ export default function IDSPage() {
   const data2023 = ['/gallery/7.JPG', '/gallery/8.JPG', '/gallery/9.JPG'];
 
   return (
-    <div style={{ paddingTop: '80px', background: 'var(--soft)', minHeight: '100vh', paddingBottom: '6rem' }}>
+    <div style={{ paddingTop: '80px', background: 'var(--soft)', minHeight: '100vh', paddingBottom: '6rem', overflowX: 'hidden' }}>
+      <SEO title="Indore Democratic Summit" description="A premier platform for young minds to engage in diplomatic discourse, civic awareness, and impactful debates. Bringing together youth from across the nation to shape the future." />
 
       {/* Header */}
       <section style={{ padding: '6rem 0 4rem', textAlign: 'center' }}>

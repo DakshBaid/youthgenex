@@ -13,6 +13,7 @@ import EventsPage from './components/EventsPage';
 import Footer from './components/Footer';
 import Chatbot from './components/Chatbot';
 import Preloader from './components/Preloader';
+import SEO from './components/SEO';
 import { motion, useScroll, useSpring } from 'framer-motion';
 
 function ScrollProgress() {
@@ -37,6 +38,7 @@ function ScrollProgress() {
 function Home() {
   return (
     <>
+      <SEO title="Home" />
       <Hero />
       <About />
       <Impact />
@@ -49,6 +51,7 @@ function Home() {
 function GalleryPage() {
   return (
     <div style={{ paddingTop: '80px' }}>
+      <SEO title="Gallery" description="Explore the vibrant journey of YouthGenex through our gallery and after-movies." />
       <Gallery />
       <AfterMovies />
     </div>

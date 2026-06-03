@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import SEO from './SEO';
 
 const allEvents = [
   {
@@ -68,6 +69,7 @@ export default function EventsPage() {
 
   return (
     <section style={{ paddingTop: '120px', paddingBottom: '6rem', minHeight: '100vh', background: 'var(--soft)', overflow: 'hidden' }}>
+      <SEO title="Our Initiatives" description="Explore the various youth leadership initiatives by YouthGenex including GENxMUN, Indore Democratic Summit, Samvidhan Par Charcha, and more." />
       <div className="container" style={{ textAlign: 'center', marginBottom: '2rem' }}>
         <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} style={{ fontSize: '3.5rem', fontFamily: '"Playfair Display"', color: 'var(--ink)', margin: '0 0 1rem' }}>
           Our Initiatives
