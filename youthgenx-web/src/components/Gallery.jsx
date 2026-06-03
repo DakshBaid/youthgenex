@@ -11,7 +11,6 @@ const rouletteEvents = [
   { id: 'ah', title: 'About Her', icon: '/ah-logo.png', images: galleryList.slice(21, 28) }
 ];
 
-// Circular progress SVG that wraps around the active logo
 const CircularProgress = ({ progress, size }) => {
   const radius = (size / 2) + 6; 
   const center = (size / 2) + 10;
@@ -64,10 +63,9 @@ export default function Gallery() {
   };
 
   const handleManualClick = (clickedIndex) => {
-    // Determine shortest path to clicked index to maintain forward momentum if possible
     const currentMod = rotationIndex % rouletteEvents.length;
     let diff = clickedIndex - currentMod;
-    if (diff < 0) diff += rouletteEvents.length; // Always rotate forward
+    if (diff < 0) diff += rouletteEvents.length;
     
     setRotationIndex(prev => prev + diff);
     startTimeRef.current = Date.now();
@@ -116,13 +114,13 @@ export default function Gallery() {
       position: 'relative'
     }}>
       
-      {/* LEFT / TOP: The Massive Rotating Wheel (Sticky) */}
+      {/* LEFT / TOP: The Massive Rotating Wheel (Sticky and perfectly centered vertically) */}
       <div style={{ 
         position: isMobile ? 'relative' : 'sticky',
-        top: isMobile ? 0 : '120px', 
+        top: isMobile ? 0 : 'calc(50vh - 250px)', // Centers the 500px container perfectly vertically
         left: 0,
         width: isMobile ? '100%' : '350px', 
-        height: isMobile ? '240px' : '500px',
+        height: isMobile ? '300px' : '500px',
         zIndex: 10,
         overflow: 'hidden',
         display: 'flex',
@@ -131,21 +129,86 @@ export default function Gallery() {
       }}>
         <div style={{ position: 'relative', width: '100%', height: '100%' }}>
           
+          {/* DECORATIVE: Slow rotating inner dashed ring */}
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+            style={{
+              position: 'absolute',
+              width: `${wheelRadius * 1.4}px`,
+              height: `${wheelRadius * 1.4}px`,
+              borderRadius: '50%',
+              border: '2px dashed rgba(192,0,26,0.15)',
+              left: isMobile ? '50%' : '0px',
+              top: isMobile ? '20px' : '50%',
+              x: '-50%',
+              y: '-50%',
+              pointerEvents: 'none'
+            }}
+          />
+
+          {/* DECORATIVE: Pulsing gradient core */}
+          <motion.div
+            animate={{ scale: [1, 1.15, 1], opacity: [0.5, 0.8, 0.5] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            style={{
+              position: 'absolute',
+              width: `${wheelRadius * 0.8}px`,
+              height: `${wheelRadius * 0.8}px`,
+              borderRadius: '50%',
+              background: 'radial-gradient(circle, rgba(192,0,26,0.1) 0%, transparent 70%)',
+              left: isMobile ? '50%' : '0px',
+              top: isMobile ? '20px' : '50%',
+              x: '-50%',
+              y: '-50%',
+              pointerEvents: 'none'
+            }}
+          />
+
+          {/* DECORATIVE: Active Event Title inside the wheel's visible arc */}
+          <div style={{
+            position: 'absolute',
+            left: isMobile ? '50%' : '140px',
+            top: isMobile ? '140px' : '50%',
+            transform: 'translate(-50%, -50%)',
+            pointerEvents: 'none',
+            zIndex: 5,
+            width: '180px',
+            textAlign: 'center'
+          }}>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeEvent.id}
+                initial={{ opacity: 0, scale: 0.8, y: 10 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.8, y: -10 }}
+                transition={{ duration: 0.3 }}
+              >
+                <h4 style={{ margin: 0, color: 'var(--red)', fontFamily: '"Playfair Display"', fontSize: isMobile ? '1.2rem' : '1.5rem', lineHeight: 1.2 }}>
+                  {activeEvent.title}
+                </h4>
+                <p style={{ margin: '0.5rem 0 0', fontSize: '0.85rem', color: 'var(--muted)' }}>
+                  {activeEvent.id === 'ids' ? '15s Highlight' : '10s Highlight'}
+                </p>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+          
+          {/* THE MAIN WHEEL */}
           <motion.div 
             animate={{ rotate: targetRotation }}
-            transition={{ type: "spring", stiffness: 60, damping: 20 }}
+            transition={{ type: "spring", stiffness: 45, damping: 14, mass: 1 }} // Smoother, slightly bouncy rotation
             style={{
               position: 'absolute',
               width: `${wheelRadius * 2}px`,
               height: `${wheelRadius * 2}px`,
               borderRadius: '50%',
-              // Glassmorphism beautiful wheel
               background: 'rgba(255,255,255,0.4)',
               backdropFilter: 'blur(10px)',
               border: '1px solid rgba(255,255,255,0.6)',
               boxShadow: '0 20px 40px rgba(0,0,0,0.05)',
               left: isMobile ? '50%' : '0px',
-              top: isMobile ? '0px' : '50%',
+              top: isMobile ? '20px' : '50%',
               x: '-50%',
               y: '-50%'
             }}
@@ -170,10 +233,9 @@ export default function Gallery() {
                     height: `${logoSize}px`,
                   }}
                 >
-                  {/* Counter-rotate the logos so they always stay perfectly upright */}
                   <motion.div
                     animate={{ rotate: -targetRotation }}
-                    transition={{ type: "spring", stiffness: 60, damping: 20 }}
+                    transition={{ type: "spring", stiffness: 45, damping: 14, mass: 1 }}
                     style={{
                       width: '100%',
                       height: '100%',
@@ -188,7 +250,7 @@ export default function Gallery() {
                     
                     <motion.div
                       animate={{ 
-                        scale: isActive ? 1.15 : 0.85,
+                        scale: isActive ? 1.2 : 0.8,
                         opacity: isActive ? 1 : 0.6,
                         boxShadow: isActive ? '0 10px 25px rgba(192,0,26,0.3)' : '0 5px 15px rgba(0,0,0,0.08)'
                       }}
@@ -204,34 +266,6 @@ export default function Gallery() {
                     >
                       <img src={ev.icon} alt={ev.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     </motion.div>
-
-                    {/* Show title dynamically near the active logo */}
-                    <AnimatePresence>
-                      {isActive && (
-                        <motion.div
-                          initial={{ opacity: 0, x: isMobile ? 0 : -10, y: isMobile ? -10 : 0 }}
-                          animate={{ opacity: 1, x: isMobile ? 0 : (logoSize + 15), y: isMobile ? (logoSize + 15) : 0 }}
-                          exit={{ opacity: 0 }}
-                          style={{
-                            position: 'absolute',
-                            whiteSpace: 'nowrap',
-                            background: 'rgba(255,255,255,0.95)',
-                            padding: '0.4rem 1rem',
-                            borderRadius: '30px',
-                            boxShadow: 'var(--shadow)',
-                            fontFamily: '"Playfair Display"',
-                            fontSize: '1.1rem',
-                            color: 'var(--red)',
-                            fontWeight: 700,
-                            pointerEvents: 'none',
-                            zIndex: 100
-                          }}
-                        >
-                          {ev.title}
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-
                   </motion.div>
                 </div>
               );
