@@ -12,21 +12,23 @@ const rouletteEvents = [
 ];
 
 // Circular progress SVG that wraps around the active logo
-const CircularProgress = ({ progress }) => {
-  const radius = 48; // Slightly larger than the 40px logo radius
+const CircularProgress = ({ progress, size }) => {
+  const radius = (size / 2) + 6; 
+  const center = (size / 2) + 10;
+  const svgSize = size + 20;
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference - (progress / 100) * circumference;
 
   return (
-    <svg style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%) rotate(-90deg)', width: '100px', height: '100px', pointerEvents: 'none' }}>
+    <svg style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%) rotate(-90deg)', width: `${svgSize}px`, height: `${svgSize}px`, pointerEvents: 'none' }}>
       <circle
-        cx="50" cy="50" r={radius}
+        cx={center} cy={center} r={radius}
         fill="transparent"
         stroke="rgba(192,0,26,0.15)"
         strokeWidth="3"
       />
       <circle
-        cx="50" cy="50" r={radius}
+        cx={center} cy={center} r={radius}
         fill="transparent"
         stroke="var(--red)"
         strokeWidth="3"
@@ -39,7 +41,7 @@ const CircularProgress = ({ progress }) => {
 };
 
 export default function Gallery() {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [rotationIndex, setRotationIndex] = useState(0);
   const [progress, setProgress] = useState(0);
   const timerRef = useRef(null);
   const startTimeRef = useRef(Date.now());
@@ -52,16 +54,22 @@ export default function Gallery() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
   
+  const activeIndex = rotationIndex % rouletteEvents.length;
   const currentDuration = rouletteEvents[activeIndex].id === 'ids' ? 15000 : 10000;
 
   const goToNext = () => {
-    setActiveIndex(prev => (prev + 1) % rouletteEvents.length);
+    setRotationIndex(prev => prev + 1);
     startTimeRef.current = Date.now();
     setProgress(0);
   };
 
-  const handleManualClick = (index) => {
-    setActiveIndex(index);
+  const handleManualClick = (clickedIndex) => {
+    // Determine shortest path to clicked index to maintain forward momentum if possible
+    const currentMod = rotationIndex % rouletteEvents.length;
+    let diff = clickedIndex - currentMod;
+    if (diff < 0) diff += rouletteEvents.length; // Always rotate forward
+    
+    setRotationIndex(prev => prev + diff);
     startTimeRef.current = Date.now();
     setProgress(0);
   };
@@ -85,44 +93,38 @@ export default function Gallery() {
     return () => {
       if (timerRef.current) cancelAnimationFrame(timerRef.current);
     };
-  }, [activeIndex, currentDuration]);
+  }, [rotationIndex, currentDuration]);
 
   const activeEvent = rouletteEvents[activeIndex];
   
-  // Angle calculations for the massive wheel
   const itemsCount = rouletteEvents.length;
   const anglePerItem = 360 / itemsCount;
   
-  // For Desktop: Active item is at 0 degrees (3 o'clock). The wheel is on the left (-X).
-  // For Mobile: Active item is at 90 degrees (6 o'clock). The wheel is on the top (-Y).
   const targetRotation = isMobile 
-    ? (90 - activeIndex * anglePerItem) 
-    : (-activeIndex * anglePerItem);
+    ? (90 - rotationIndex * anglePerItem) 
+    : (-rotationIndex * anglePerItem);
 
-  const wheelRadius = isMobile ? 300 : 400; // Size of the massive circle
-  const itemRadius = isMobile ? 260 : 340;  // Distance of logos from the center of the massive circle
+  const wheelRadius = isMobile ? 220 : 300; 
+  const itemRadius = isMobile ? 180 : 250;  
+  const logoSize = isMobile ? 50 : 60;
 
   return (
     <section id="gallery" style={{ 
       background: 'var(--soft)', 
-      minHeight: '100vh', 
       display: 'flex', 
       flexDirection: isMobile ? 'column' : 'row',
-      overflow: 'hidden'
+      position: 'relative'
     }}>
       
-      {/* LEFT / TOP: The Massive Rotating Wheel */}
+      {/* LEFT / TOP: The Massive Rotating Wheel (Sticky) */}
       <div style={{ 
-        position: isMobile ? 'relative' : 'fixed',
-        left: 0, 
-        top: isMobile ? 0 : '72px', // below navbar
-        width: isMobile ? '100%' : '400px', 
-        height: isMobile ? '280px' : 'calc(100vh - 72px)',
+        position: isMobile ? 'relative' : 'sticky',
+        top: isMobile ? 0 : '120px', 
+        left: 0,
+        width: isMobile ? '100%' : '350px', 
+        height: isMobile ? '240px' : '500px',
         zIndex: 10,
         overflow: 'hidden',
-        borderRight: isMobile ? 'none' : '1px solid rgba(0,0,0,0.05)',
-        borderBottom: isMobile ? '1px solid rgba(0,0,0,0.05)' : 'none',
-        background: 'var(--white)',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center'
@@ -137,8 +139,11 @@ export default function Gallery() {
               width: `${wheelRadius * 2}px`,
               height: `${wheelRadius * 2}px`,
               borderRadius: '50%',
-              border: '1px dashed rgba(0,0,0,0.1)',
-              // Position the massive circle so its center is exactly on the left edge (desktop) or top edge (mobile)
+              // Glassmorphism beautiful wheel
+              background: 'rgba(255,255,255,0.4)',
+              backdropFilter: 'blur(10px)',
+              border: '1px solid rgba(255,255,255,0.6)',
+              boxShadow: '0 20px 40px rgba(0,0,0,0.05)',
               left: isMobile ? '50%' : '0px',
               top: isMobile ? '0px' : '50%',
               x: '-50%',
@@ -149,8 +154,8 @@ export default function Gallery() {
               const angleDeg = i * anglePerItem;
               const angleRad = angleDeg * (Math.PI / 180);
               
-              const x = wheelRadius + itemRadius * Math.cos(angleRad) - 40; // 40 is half of logo size
-              const y = wheelRadius + itemRadius * Math.sin(angleRad) - 40;
+              const x = wheelRadius + itemRadius * Math.cos(angleRad) - (logoSize/2); 
+              const y = wheelRadius + itemRadius * Math.sin(angleRad) - (logoSize/2);
               
               const isActive = i === activeIndex;
 
@@ -161,8 +166,8 @@ export default function Gallery() {
                     position: 'absolute',
                     left: `${x}px`,
                     top: `${y}px`,
-                    width: '80px',
-                    height: '80px',
+                    width: `${logoSize}px`,
+                    height: `${logoSize}px`,
                   }}
                 >
                   {/* Counter-rotate the logos so they always stay perfectly upright */}
@@ -179,22 +184,22 @@ export default function Gallery() {
                     }}
                     onClick={() => handleManualClick(i)}
                   >
-                    {isActive && <CircularProgress progress={progress} />}
+                    {isActive && <CircularProgress progress={progress} size={logoSize} />}
                     
                     <motion.div
                       animate={{ 
-                        scale: isActive ? 1.1 : 0.8,
-                        opacity: isActive ? 1 : 0.5,
-                        boxShadow: isActive ? '0 10px 25px rgba(192,0,26,0.3)' : '0 5px 10px rgba(0,0,0,0.1)'
+                        scale: isActive ? 1.15 : 0.85,
+                        opacity: isActive ? 1 : 0.6,
+                        boxShadow: isActive ? '0 10px 25px rgba(192,0,26,0.3)' : '0 5px 15px rgba(0,0,0,0.08)'
                       }}
                       style={{
-                        width: '80px',
-                        height: '80px',
+                        width: '100%',
+                        height: '100%',
                         borderRadius: '50%',
                         background: '#FFF',
                         overflow: 'hidden',
                         cursor: 'pointer',
-                        border: isActive ? '2px solid var(--red)' : '1px solid rgba(0,0,0,0.1)'
+                        border: isActive ? '2px solid var(--red)' : '2px solid #FFF'
                       }}
                     >
                       <img src={ev.icon} alt={ev.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
@@ -204,18 +209,18 @@ export default function Gallery() {
                     <AnimatePresence>
                       {isActive && (
                         <motion.div
-                          initial={{ opacity: 0, x: isMobile ? 0 : -20, y: isMobile ? -20 : 0 }}
-                          animate={{ opacity: 1, x: isMobile ? 0 : 70, y: isMobile ? 70 : 0 }}
+                          initial={{ opacity: 0, x: isMobile ? 0 : -10, y: isMobile ? -10 : 0 }}
+                          animate={{ opacity: 1, x: isMobile ? 0 : (logoSize + 15), y: isMobile ? (logoSize + 15) : 0 }}
                           exit={{ opacity: 0 }}
                           style={{
                             position: 'absolute',
                             whiteSpace: 'nowrap',
                             background: 'rgba(255,255,255,0.95)',
-                            padding: '0.5rem 1rem',
+                            padding: '0.4rem 1rem',
                             borderRadius: '30px',
                             boxShadow: 'var(--shadow)',
                             fontFamily: '"Playfair Display"',
-                            fontSize: '1.2rem',
+                            fontSize: '1.1rem',
                             color: 'var(--red)',
                             fontWeight: 700,
                             pointerEvents: 'none',
@@ -236,14 +241,12 @@ export default function Gallery() {
         </div>
       </div>
 
-      {/* RIGHT / BOTTOM: Scrollable Content Area */}
+      {/* RIGHT / BOTTOM: Natural Scroll Content Area */}
       <div style={{ 
         flex: 1, 
-        marginLeft: isMobile ? 0 : '400px', // Push content past the fixed left bar
-        padding: isMobile ? '2rem 1rem' : '4rem',
-        overflowY: 'auto',
-        height: isMobile ? 'auto' : 'calc(100vh - 72px)',
-        paddingTop: isMobile ? '2rem' : '100px'
+        padding: isMobile ? '1rem' : '3rem 4rem',
+        paddingTop: isMobile ? '1rem' : '120px',
+        paddingBottom: '6rem'
       }}>
         
         <div className="container" style={{ maxWidth: '1000px', margin: '0 auto' }}>
@@ -283,9 +286,7 @@ export default function Gallery() {
             </motion.div>
           )}
 
-          <div style={{ height: '4rem' }} /> {/* Spacer at bottom */}
         </div>
-
       </div>
 
     </section>
