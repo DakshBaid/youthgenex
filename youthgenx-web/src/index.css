@@ -67,7 +67,7 @@ section { scroll-margin-top: 84px; }
   text-align: justify;
 }
 
-p, .card p, .event-3d-back p, .events-mobile-grid p, .section-copy {
+p:not(.eyebrow), .card p, .event-3d-back p, .events-mobile-grid p, .section-copy {
   text-align: justify !important;
 }
 
