@@ -46,6 +46,7 @@ export default function Gallery() {
   const startTimeRef = useRef(Date.now());
   const [isMobile, setIsMobile] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [visibleCount, setVisibleCount] = useState(12);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 900);
@@ -103,6 +104,11 @@ export default function Gallery() {
       if (timerRef.current) cancelAnimationFrame(timerRef.current);
     };
   }, [rotationIndex, currentDuration]);
+
+  // Reset image visibility count when the active event changes
+  useEffect(() => {
+    setVisibleCount(12);
+  }, [activeIndex]);
 
   const activeEvent = rouletteEvents[activeIndex];
   
@@ -298,21 +304,33 @@ export default function Gallery() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="masonry-gallery"
           >
-            {activeEvent.images.map((filename, idx) => (
-              <div 
-                key={filename} 
-                className="masonry-item"
-                onClick={() => setSelectedImage(`/gallery/${filename}`)}
-              >
-                <img 
-                  src={`/gallery/${filename}`} 
-                  alt={`${activeEvent.title} highlight ${idx + 1}`}
-                  loading="lazy"
-                />
+            <div className="masonry-gallery">
+              {activeEvent.images.slice(0, visibleCount).map((filename, idx) => (
+                <div 
+                  key={filename} 
+                  className="masonry-item"
+                  onClick={() => setSelectedImage(`/gallery/${filename}`)}
+                >
+                  <img 
+                    src={`/gallery/${filename}`} 
+                    alt={`${activeEvent.title} highlight ${idx + 1}`}
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
+
+            {visibleCount < activeEvent.images.length && (
+              <div style={{ textAlign: 'center', marginTop: '3rem' }}>
+                <button 
+                  onClick={() => setVisibleCount(prev => prev + 12)}
+                  className="button button-outline"
+                >
+                  Load More Highlights
+                </button>
               </div>
-            ))}
+            )}
           </motion.div>
 
           {activeEvent.id === 'ids' && (
