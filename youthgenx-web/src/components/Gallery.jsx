@@ -118,7 +118,7 @@ export default function Gallery() {
 
   return (
     <section id="gallery" style={{ 
-      background: 'var(--soft)', 
+      background: 'var(--line)', // Darker background to make the white glass wheel pop
       display: 'flex', 
       flexDirection: isMobile ? 'column' : 'row',
       position: 'relative'
