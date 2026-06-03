@@ -79,7 +79,7 @@ export default function AboutPage() {
   return (
     <div style={{ background: 'var(--white)', minHeight: '100vh', overflow: 'hidden' }}>
       <SEO title="About Us" description="YouthGenex started with a simple belief — young people deserve platforms that help them grow beyond academics. Learn more about our story and mission." />
-      
+
       {/* Dynamic Red Gradient Flow Element */}
 
       <MouseGlow />
@@ -112,9 +112,6 @@ export default function AboutPage() {
         <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at center, rgba(192,0,26,0.15) 0%, transparent 60%)' }} />
 
         <div className="container" style={{ position: 'relative', zIndex: 10, textAlign: 'center', color: 'var(--white)' }}>
-          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} style={{ color: 'var(--red)', fontWeight: 800, letterSpacing: '3px', textTransform: 'uppercase', margin: '0 0 1rem' }}>
-            WHO WE ARE
-          </motion.p>
           <motion.h1 className="about-hero-title" initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} style={{ fontFamily: '"Playfair Display"', margin: '0 0 2rem', lineHeight: 1.1 }}>
             Building Opportunities For The Next Generation
           </motion.h1>
@@ -200,15 +197,15 @@ export default function AboutPage() {
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '3rem' }}>
             <div>
-              <div className="about-counter-num"><Counter to={10000} suffix="+" /></div>
+              <div className="about-counter-num"><Counter to={5000} suffix="+" /></div>
               <div style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.7)', marginTop: '1rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Students Engaged</div>
             </div>
             <div>
-              <div className="about-counter-num"><Counter to={100} suffix="+" /></div>
+              <div className="about-counter-num"><Counter to={25} suffix="+" /></div>
               <div style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.7)', marginTop: '1rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Events Conducted</div>
             </div>
             <div>
-              <div className="about-counter-num"><Counter to={10} suffix="+" /></div>
+              <div className="about-counter-num"><Counter to={5} suffix="+" /></div>
               <div style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.7)', marginTop: '1rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Partner Institutions</div>
             </div>
             <div>

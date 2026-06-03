@@ -64,6 +64,11 @@ section { scroll-margin-top: 84px; }
   color: var(--muted);
   font-size: 1.03rem;
   line-height: 1.75;
+  text-align: justify;
+}
+
+p {
+  text-align: justify;
 }
 
 .button {
