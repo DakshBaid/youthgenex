@@ -53,7 +53,7 @@ export default function Gallery() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
   
-  const activeIndex = rotationIndex % rouletteEvents.length;
+  const activeIndex = ((rotationIndex % rouletteEvents.length) + rouletteEvents.length) % rouletteEvents.length;
   const currentDuration = rouletteEvents[activeIndex].id === 'ids' ? 15000 : 10000;
 
   const goToNext = () => {
@@ -112,9 +112,9 @@ export default function Gallery() {
     ? (90 - rotationIndex * anglePerItem) 
     : (-rotationIndex * anglePerItem);
 
-  const wheelRadius = isMobile ? 220 : 300; 
-  const itemRadius = isMobile ? 180 : 250;  
-  const logoSize = isMobile ? 50 : 60;
+  const wheelRadius = isMobile ? 260 : 360; 
+  const itemRadius = isMobile ? 210 : 300;  
+  const logoSize = isMobile ? 55 : 80;
 
   return (
     <section id="gallery" style={{ 
@@ -129,8 +129,8 @@ export default function Gallery() {
         position: isMobile ? 'relative' : 'sticky',
         top: isMobile ? 0 : 'calc(50vh - 250px)', // Centers the 500px container perfectly vertically
         left: 0,
-        width: isMobile ? '100%' : '350px', 
-        height: isMobile ? '300px' : '500px',
+        width: isMobile ? '100%' : '420px', 
+        height: isMobile ? '350px' : '500px',
         zIndex: 10,
         overflow: 'hidden',
         display: 'flex',
@@ -178,13 +178,13 @@ export default function Gallery() {
           {/* DECORATIVE: Active Event Title inside the wheel's visible arc */}
           <div style={{
             position: 'absolute',
-            left: isMobile ? '50%' : '140px',
-            top: isMobile ? '140px' : '50%',
-            transform: 'translate(-50%, -50%)',
+            left: isMobile ? '50%' : '20px',
+            right: isMobile ? 'auto' : '160px',
+            top: isMobile ? '160px' : '50%',
+            transform: isMobile ? 'translate(-50%, -50%)' : 'translateY(-50%)',
             pointerEvents: 'none',
             zIndex: 5,
-            width: '180px',
-            textAlign: 'center'
+            textAlign: isMobile ? 'center' : 'right'
           }}>
             <AnimatePresence mode="wait">
               <motion.div
@@ -194,10 +194,10 @@ export default function Gallery() {
                 exit={{ opacity: 0, scale: 0.8, y: -10 }}
                 transition={{ duration: 0.3 }}
               >
-                <h4 style={{ margin: 0, color: 'var(--red)', fontFamily: '"Playfair Display"', fontSize: isMobile ? '1.2rem' : '1.5rem', lineHeight: 1.2 }}>
+                <h4 style={{ margin: 0, color: 'var(--red)', fontFamily: '"Playfair Display"', fontSize: isMobile ? '1.4rem' : '1.8rem', lineHeight: 1.1 }}>
                   {activeEvent.title}
                 </h4>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', marginTop: '0.8rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: isMobile ? 'center' : 'flex-end', gap: '6px', marginTop: '0.8rem' }}>
                   <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--red)' }} />
                   <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--muted)', letterSpacing: '1px', textTransform: 'uppercase' }}>
                     Gallery
