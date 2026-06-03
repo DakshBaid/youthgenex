@@ -16,6 +16,19 @@ export default function Footer() {
       window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`, '_blank');
     }
   };
+  const [copyText, setCopyText] = useState("Call Us");
+
+  const handlePhoneClick = (e) => {
+    e.preventDefault();
+    const isMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    if (isMobile) {
+      window.location.href = "tel:9685136436";
+    } else {
+      navigator.clipboard.writeText("9685136436");
+      setCopyText("Copied!");
+      setTimeout(() => setCopyText("Call Us"), 2000);
+    }
+  };
 
   return (
     <footer id="contact" style={{ background: 'var(--ink)', color: 'var(--white)', padding: '5.5rem 0 2rem' }}>
@@ -64,8 +77,8 @@ export default function Footer() {
               <a href="#" onClick={(e) => handleEmailClick(e, 'indoredemocraticsummit@gmail.com', 'IDS 2026 Inquiry', 'Hi IDS Team,\n\nI am interested in the Indore Democratic Summit and have a query about...')} className="button button-outline" style={{ width: '100%', justifyContent: 'flex-start', borderColor: 'rgba(255,255,255,0.2)', color: 'var(--white)' }}>
                 <Mail size={18} /> Email IDS Team
               </a>
-              <a href="tel:9685136436" className="button button-outline" style={{ width: '100%', justifyContent: 'flex-start', borderColor: 'rgba(255,255,255,0.2)', color: 'var(--white)' }}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> Call Us (+91 96851 36436)
+              <a href="#" onClick={handlePhoneClick} className="button button-outline" style={{ width: '100%', justifyContent: 'flex-start', borderColor: 'rgba(255,255,255,0.2)', color: 'var(--white)' }}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> {copyText}
               </a>
             </div>
           </div>

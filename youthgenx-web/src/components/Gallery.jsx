@@ -4,33 +4,32 @@ import galleryList from '../data/gallery-images.json';
 import AfterMovies from './AfterMovies';
 
 const rouletteEvents = [
-  { id: 'genxmun', title: 'GENxMUN', images: galleryList.slice(0, 7) },
-  { id: 'ids', title: 'Indore Democratic Summit', images: galleryList.slice(28, 36) },
-  { id: 'cwm', title: 'Coffee with Mayor', images: galleryList.slice(7, 14) },
-  { id: 'kghk', title: 'Kho Gaye Hum Kahan?', images: galleryList.slice(14, 21) },
-  { id: 'ah', title: 'About Her', images: galleryList.slice(21, 28) }
+  { id: 'genxmun', title: 'GENxMUN', icon: '/gxm-logo.png', images: galleryList.slice(0, 7) },
+  { id: 'ids', title: 'Indore Democratic Summit', icon: '/ids-logo.png', images: galleryList.slice(28, 36) },
+  { id: 'cwm', title: 'Coffee with Mayor', icon: '/cwm-logo.png', images: galleryList.slice(7, 14) },
+  { id: 'kghk', title: 'Kho Gaye Hum Kahan?', icon: '/kghk-logo.png', images: galleryList.slice(14, 21) },
+  { id: 'ah', title: 'About Her', icon: '/ah-logo.png', images: galleryList.slice(21, 28) }
 ];
 
-// Circular progress SVG
-const CircularProgress = ({ progress, isActive }) => {
-  if (!isActive) return null;
-  const radius = 24;
+// Circular progress SVG that wraps around the active logo
+const CircularProgress = ({ progress }) => {
+  const radius = 48; // Slightly larger than the 40px logo radius
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference - (progress / 100) * circumference;
 
   return (
-    <svg style={{ position: 'absolute', top: '50%', left: '-40px', transform: 'translateY(-50%) rotate(-90deg)', width: '60px', height: '60px', pointerEvents: 'none' }}>
+    <svg style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%) rotate(-90deg)', width: '100px', height: '100px', pointerEvents: 'none' }}>
       <circle
-        cx="30" cy="30" r={radius}
+        cx="50" cy="50" r={radius}
         fill="transparent"
-        stroke="rgba(192,0,26,0.1)"
-        strokeWidth="4"
+        stroke="rgba(192,0,26,0.15)"
+        strokeWidth="3"
       />
       <circle
-        cx="30" cy="30" r={radius}
+        cx="50" cy="50" r={radius}
         fill="transparent"
         stroke="var(--red)"
-        strokeWidth="4"
+        strokeWidth="3"
         strokeDasharray={circumference}
         strokeDashoffset={strokeDashoffset}
         style={{ transition: 'stroke-dashoffset 0.1s linear' }}
@@ -44,6 +43,14 @@ export default function Gallery() {
   const [progress, setProgress] = useState(0);
   const timerRef = useRef(null);
   const startTimeRef = useRef(Date.now());
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 900);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   
   const currentDuration = rouletteEvents[activeIndex].id === 'ids' ? 15000 : 10000;
 
@@ -60,7 +67,6 @@ export default function Gallery() {
   };
 
   useEffect(() => {
-    // Animation loop for progress bar
     const updateProgress = () => {
       const now = Date.now();
       const elapsed = now - startTimeRef.current;
@@ -79,187 +85,209 @@ export default function Gallery() {
     return () => {
       if (timerRef.current) cancelAnimationFrame(timerRef.current);
     };
-  }, [activeIndex, currentDuration]); // Re-run when index changes
+  }, [activeIndex, currentDuration]);
 
   const activeEvent = rouletteEvents[activeIndex];
+  
+  // Angle calculations for the massive wheel
+  const itemsCount = rouletteEvents.length;
+  const anglePerItem = 360 / itemsCount;
+  
+  // For Desktop: Active item is at 0 degrees (3 o'clock). The wheel is on the left (-X).
+  // For Mobile: Active item is at 90 degrees (6 o'clock). The wheel is on the top (-Y).
+  const targetRotation = isMobile 
+    ? (90 - activeIndex * anglePerItem) 
+    : (-activeIndex * anglePerItem);
 
-  // Calculate positions for Roulette (Previous, Current, Next)
-  const getVisibleEvents = () => {
-    const prev = (activeIndex - 1 + rouletteEvents.length) % rouletteEvents.length;
-    const next = (activeIndex + 1) % rouletteEvents.length;
-    return [
-      { ...rouletteEvents[prev], pos: -1, origIndex: prev },
-      { ...rouletteEvents[activeIndex], pos: 0, origIndex: activeIndex },
-      { ...rouletteEvents[next], pos: 1, origIndex: next }
-    ];
-  };
-
-  const visibleEvents = getVisibleEvents();
+  const wheelRadius = isMobile ? 300 : 400; // Size of the massive circle
+  const itemRadius = isMobile ? 260 : 340;  // Distance of logos from the center of the massive circle
 
   return (
-    <section id="gallery" className="section-padding bg-soft" style={{ paddingBottom: '6rem', overflow: 'hidden' }}>
-      <div className="container">
-        
-        <div className="gallery-layout">
-          {/* Left Column - Roulette */}
-          <div className="gallery-roulette-column">
-            <div className="roulette-container">
-              <AnimatePresence initial={false}>
-                {visibleEvents.map((ev) => {
-                  const isActive = ev.pos === 0;
-                  return (
-                    <motion.div
-                      key={ev.id}
-                      initial={{ opacity: 0, y: ev.pos > 0 ? 50 : -50, scale: 0.8 }}
-                      animate={{ 
-                        opacity: isActive ? 1 : 0.4, 
-                        y: ev.pos * 80, // Vertical spacing
-                        scale: isActive ? 1.1 : 0.9,
-                        x: isActive ? 20 : 0 // Push active item slightly to right
-                      }}
-                      exit={{ opacity: 0, scale: 0.8 }}
-                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                      className="roulette-item"
-                      onClick={() => handleManualClick(ev.origIndex)}
-                    >
-                      <CircularProgress progress={progress} isActive={isActive} />
-                      <h3 style={{ 
-                        margin: 0, 
-                        fontFamily: '"Playfair Display"', 
-                        fontSize: isActive ? '1.8rem' : '1.3rem',
-                        color: isActive ? 'var(--red)' : 'var(--ink)',
-                        transition: 'all 0.3s ease'
-                      }}>
-                        {ev.title}
-                      </h3>
-                    </motion.div>
-                  );
-                })}
-              </AnimatePresence>
-            </div>
-            <p style={{ marginTop: '2rem', color: 'var(--muted)', fontSize: '0.9rem', textAlign: 'center' }}>
-              Click an event or wait to explore.
-            </p>
-          </div>
+    <section id="gallery" style={{ 
+      background: 'var(--soft)', 
+      minHeight: '100vh', 
+      display: 'flex', 
+      flexDirection: isMobile ? 'column' : 'row',
+      overflow: 'hidden'
+    }}>
+      
+      {/* LEFT / TOP: The Massive Rotating Wheel */}
+      <div style={{ 
+        position: isMobile ? 'relative' : 'fixed',
+        left: 0, 
+        top: isMobile ? 0 : '72px', // below navbar
+        width: isMobile ? '100%' : '400px', 
+        height: isMobile ? '280px' : 'calc(100vh - 72px)',
+        zIndex: 10,
+        overflow: 'hidden',
+        borderRight: isMobile ? 'none' : '1px solid rgba(0,0,0,0.05)',
+        borderBottom: isMobile ? '1px solid rgba(0,0,0,0.05)' : 'none',
+        background: 'var(--white)',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+      }}>
+        <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+          
+          <motion.div 
+            animate={{ rotate: targetRotation }}
+            transition={{ type: "spring", stiffness: 60, damping: 20 }}
+            style={{
+              position: 'absolute',
+              width: `${wheelRadius * 2}px`,
+              height: `${wheelRadius * 2}px`,
+              borderRadius: '50%',
+              border: '1px dashed rgba(0,0,0,0.1)',
+              // Position the massive circle so its center is exactly on the left edge (desktop) or top edge (mobile)
+              left: isMobile ? '50%' : '0px',
+              top: isMobile ? '0px' : '50%',
+              x: '-50%',
+              y: '-50%'
+            }}
+          >
+            {rouletteEvents.map((ev, i) => {
+              const angleDeg = i * anglePerItem;
+              const angleRad = angleDeg * (Math.PI / 180);
+              
+              const x = wheelRadius + itemRadius * Math.cos(angleRad) - 40; // 40 is half of logo size
+              const y = wheelRadius + itemRadius * Math.sin(angleRad) - 40;
+              
+              const isActive = i === activeIndex;
 
-          {/* Right Column - Content */}
-          <div className="gallery-content-column">
-            <h2 className="section-title mobile-only-title" style={{ marginBottom: '2rem', textAlign: 'center', display: 'none' }}>
-              {activeEvent.title}
-            </h2>
-            
-            <motion.div 
-              key={activeEvent.id}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.4 }}
-              className="masonry-gallery"
-            >
-              {activeEvent.images.map((filename, idx) => (
-                <div key={filename} className="masonry-item">
-                  <img 
-                    src={`/gallery/${filename}`} 
-                    alt={`${activeEvent.title} highlight ${idx + 1}`}
-                    loading="lazy"
+              return (
+                <div 
+                  key={ev.id}
+                  style={{
+                    position: 'absolute',
+                    left: `${x}px`,
+                    top: `${y}px`,
+                    width: '80px',
+                    height: '80px',
+                  }}
+                >
+                  {/* Counter-rotate the logos so they always stay perfectly upright */}
+                  <motion.div
+                    animate={{ rotate: -targetRotation }}
+                    transition={{ type: "spring", stiffness: 60, damping: 20 }}
                     style={{
                       width: '100%',
-                      borderRadius: '12px',
-                      boxShadow: 'var(--shadow)',
-                      objectFit: 'cover'
+                      height: '100%',
+                      position: 'relative',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center'
                     }}
-                  />
-                </div>
-              ))}
-            </motion.div>
+                    onClick={() => handleManualClick(i)}
+                  >
+                    {isActive && <CircularProgress progress={progress} />}
+                    
+                    <motion.div
+                      animate={{ 
+                        scale: isActive ? 1.1 : 0.8,
+                        opacity: isActive ? 1 : 0.5,
+                        boxShadow: isActive ? '0 10px 25px rgba(192,0,26,0.3)' : '0 5px 10px rgba(0,0,0,0.1)'
+                      }}
+                      style={{
+                        width: '80px',
+                        height: '80px',
+                        borderRadius: '50%',
+                        background: '#FFF',
+                        overflow: 'hidden',
+                        cursor: 'pointer',
+                        border: isActive ? '2px solid var(--red)' : '1px solid rgba(0,0,0,0.1)'
+                      }}
+                    >
+                      <img src={ev.icon} alt={ev.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    </motion.div>
 
-            {activeEvent.id === 'ids' && (
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.5 }}
-                style={{ marginTop: '4rem' }}
-              >
-                <AfterMovies />
-              </motion.div>
-            )}
-          </div>
+                    {/* Show title dynamically near the active logo */}
+                    <AnimatePresence>
+                      {isActive && (
+                        <motion.div
+                          initial={{ opacity: 0, x: isMobile ? 0 : -20, y: isMobile ? -20 : 0 }}
+                          animate={{ opacity: 1, x: isMobile ? 0 : 70, y: isMobile ? 70 : 0 }}
+                          exit={{ opacity: 0 }}
+                          style={{
+                            position: 'absolute',
+                            whiteSpace: 'nowrap',
+                            background: 'rgba(255,255,255,0.95)',
+                            padding: '0.5rem 1rem',
+                            borderRadius: '30px',
+                            boxShadow: 'var(--shadow)',
+                            fontFamily: '"Playfair Display"',
+                            fontSize: '1.2rem',
+                            color: 'var(--red)',
+                            fontWeight: 700,
+                            pointerEvents: 'none',
+                            zIndex: 100
+                          }}
+                        >
+                          {ev.title}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+
+                  </motion.div>
+                </div>
+              );
+            })}
+          </motion.div>
+
+        </div>
+      </div>
+
+      {/* RIGHT / BOTTOM: Scrollable Content Area */}
+      <div style={{ 
+        flex: 1, 
+        marginLeft: isMobile ? 0 : '400px', // Push content past the fixed left bar
+        padding: isMobile ? '2rem 1rem' : '4rem',
+        overflowY: 'auto',
+        height: isMobile ? 'auto' : 'calc(100vh - 72px)',
+        paddingTop: isMobile ? '2rem' : '100px'
+      }}>
+        
+        <div className="container" style={{ maxWidth: '1000px', margin: '0 auto' }}>
+          
+          <motion.div 
+            key={activeEvent.id}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="masonry-gallery"
+          >
+            {activeEvent.images.map((filename, idx) => (
+              <div key={filename} className="masonry-item">
+                <img 
+                  src={`/gallery/${filename}`} 
+                  alt={`${activeEvent.title} highlight ${idx + 1}`}
+                  loading="lazy"
+                  style={{
+                    width: '100%',
+                    borderRadius: '12px',
+                    boxShadow: 'var(--shadow)',
+                    objectFit: 'cover'
+                  }}
+                />
+              </div>
+            ))}
+          </motion.div>
+
+          {activeEvent.id === 'ids' && (
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+              style={{ marginTop: '4rem' }}
+            >
+              <AfterMovies />
+            </motion.div>
+          )}
+
+          <div style={{ height: '4rem' }} /> {/* Spacer at bottom */}
         </div>
 
       </div>
 
-      <style>{`
-        .gallery-layout {
-          display: grid;
-          grid-template-columns: 300px 1fr;
-          gap: 4rem;
-          align-items: start;
-        }
-        
-        .gallery-roulette-column {
-          position: sticky;
-          top: 120px;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          height: 400px;
-          border-right: 1px solid rgba(0,0,0,0.05);
-        }
-
-        .roulette-container {
-          position: relative;
-          height: 240px; /* Space for 3 items (80px each) */
-          display: flex;
-          align-items: center;
-        }
-
-        .roulette-item {
-          position: absolute;
-          left: 40px;
-          width: 100%;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-        }
-
-        @media (max-width: 900px) {
-          .gallery-layout {
-            grid-template-columns: 1fr;
-            gap: 2rem;
-          }
-          .gallery-roulette-column {
-            position: relative;
-            top: 0;
-            height: auto;
-            border-right: none;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            padding-bottom: 2rem;
-          }
-          .roulette-container {
-            height: 200px;
-            justify-content: center;
-          }
-          .roulette-item {
-            left: auto;
-            justify-content: center;
-          }
-          .roulette-item svg {
-            left: 50% !important;
-            transform: translate(-50%, -50%) rotate(-90deg) !important;
-            width: 80px !important;
-            height: 80px !important;
-          }
-          .roulette-item h3 {
-            text-align: center;
-            background: rgba(255,255,255,0.8);
-            padding: 5px 15px;
-            border-radius: 20px;
-            z-index: 10;
-          }
-          .mobile-only-title {
-            display: block !important;
-          }
-        }
-      `}</style>
     </section>
   );
 }
