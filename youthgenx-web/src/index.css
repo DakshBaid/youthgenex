@@ -76,6 +76,7 @@ section { scroll-margin-top: 84px; }
 /* Explicit exceptions to ensure no overlap */
 p.eyebrow { text-align: inherit !important; }
 .section-heading.center, .section-heading.center p.eyebrow { text-align: center !important; }
+.text-center p, [style*="text-align: center"] p { text-align: center !important; }
 
 .button {
   display: inline-flex;
