@@ -130,7 +130,7 @@ export default function Gallery() {
         top: isMobile ? 0 : 'calc(50vh - 300px)', // Centers the 600px container perfectly vertically
         left: 0,
         width: isMobile ? '100%' : '420px', 
-        height: isMobile ? '350px' : '600px',
+        height: isMobile ? '320px' : '600px',
         zIndex: 10,
         overflow: 'hidden',
         display: 'flex',
@@ -178,14 +178,14 @@ export default function Gallery() {
           {/* DECORATIVE: Active Event Title inside the wheel's visible arc */}
           <div style={{
             position: 'absolute',
-            left: isMobile ? '50%' : '30px',
+            left: isMobile ? '50%' : '20px',
             right: isMobile ? 'auto' : '200px',
-            top: isMobile ? '160px' : '50%',
-            transform: isMobile ? 'translate(-50%, -50%)' : 'translateY(-50%)',
+            top: isMobile ? '250px' : '50%',
+            transform: isMobile ? 'translateX(-50%)' : 'translateY(-50%)',
             pointerEvents: 'none',
             zIndex: 5,
-            textAlign: isMobile ? 'center' : 'left',
-            width: isMobile ? '250px' : 'auto'
+            textAlign: isMobile ? 'center' : 'right',
+            width: isMobile ? '90%' : 'auto'
           }}>
             <AnimatePresence mode="wait">
               <motion.div
