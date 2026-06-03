@@ -15,7 +15,7 @@ export default function AfterMovies() {
           <p className="section-copy" style={{ margin: '1rem auto 0' }}>Relive the memories, the debates, and the massive impact of our past Indore Democratic Summits.</p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2.5rem', maxWidth: '1000px', margin: '0 auto' }}>
           {movies.map((movie, idx) => (
             <motion.div 
               key={idx}
