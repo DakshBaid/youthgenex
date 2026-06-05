@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import SEO from './SEO';
@@ -30,6 +31,7 @@ const eventDetails = {
 export default function EventGalleryPage() {
   const { eventId } = useParams();
   const eventInfo = eventDetails[eventId];
+  const [selectedImage, setSelectedImage] = useState(null);
 
   if (!eventInfo) {
     return (
@@ -69,6 +71,7 @@ export default function EventGalleryPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: (index % 10) * 0.05 }}
+                onClick={() => setSelectedImage(`/gallery/${filename}`)}
               >
                 <img 
                   src={`/gallery/${filename}`} 
@@ -77,19 +80,53 @@ export default function EventGalleryPage() {
                   style={{
                     width: '100%',
                     borderRadius: '12px',
-                    display: 'block',
-                    boxShadow: 'var(--shadow)',
-                    transition: 'transform 0.3s ease',
-                    cursor: 'pointer'
+                    display: 'block'
                   }}
-                  onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.02)'}
-                  onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
                 />
               </motion.div>
             ))}
           </AnimatePresence>
         </div>
       </div>
+
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedImage(null)}
+            style={{
+              position: 'fixed',
+              inset: 0,
+              background: 'rgba(0,0,0,0.85)',
+              backdropFilter: 'blur(5px)',
+              zIndex: 99999,
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              padding: '2rem',
+              cursor: 'zoom-out'
+            }}
+          >
+            <motion.img
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ type: "spring", stiffness: 300, damping: 25 }}
+              src={selectedImage}
+              alt="Zoomed highlight"
+              style={{
+                maxWidth: '100%',
+                maxHeight: '100%',
+                objectFit: 'contain',
+                borderRadius: '12px',
+                boxShadow: '0 25px 50px rgba(0,0,0,0.5)'
+              }}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
