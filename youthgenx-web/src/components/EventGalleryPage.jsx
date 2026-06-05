@@ -1,29 +1,29 @@
 import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import SEO from './SEO';
-import galleryList from '../data/gallery-images.json';
+import galleryData from '../data/gallery-images.json';
 import { ArrowLeft } from 'lucide-react';
 
 const eventDetails = {
   'genxmun': {
     title: 'GENxMUN Gallery',
     desc: 'Moments from our Model United Nations platform.',
-    images: galleryList.slice(0, 7)
+    images: galleryData.genxmun || []
   },
   'coffee-with-mayor': {
     title: 'Coffee with Mayor Gallery',
     desc: 'Interactive sessions connecting students with policymakers.',
-    images: galleryList.slice(7, 14)
+    images: galleryData.cwm || []
   },
   'kho-gaye-hum-kahan': {
     title: 'Kho Gaye Hum Kahan? Gallery',
     desc: 'Open conversations around self-growth and personal identity.',
-    images: galleryList.slice(14, 21)
+    images: galleryData.kghk || []
   },
   'about-her': {
     title: 'About Her Gallery',
     desc: 'Celebrating women, leadership, and empowerment.',
-    images: galleryList.slice(21, 28)
+    images: galleryData.ah || []
   }
 };
 

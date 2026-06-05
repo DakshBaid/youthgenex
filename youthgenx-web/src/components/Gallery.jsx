@@ -1,14 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import galleryList from '../data/gallery-images.json';
+import galleryData from '../data/gallery-images.json';
 import AfterMovies from './AfterMovies';
 
 const rouletteEvents = [
-  { id: 'genxmun', title: 'GENxMUN', icon: '/gxm-logo.png', images: galleryList.slice(0, 7) },
-  { id: 'ids', title: 'Indore Democratic Summit', icon: '/ids-logo.png', images: galleryList.slice(28, 36) },
-  { id: 'cwm', title: 'Coffee with Mayor', icon: '/cwm-logo.png', images: galleryList.slice(7, 14) },
-  { id: 'kghk', title: 'Kho Gaye Hum Kahan?', icon: '/kghk-logo.png', images: galleryList.slice(14, 21) },
-  { id: 'ah', title: 'About Her', icon: '/ah-logo.png', images: galleryList.slice(21, 28) }
+  { id: 'genxmun', title: 'GENxMUN', icon: '/gxm-logo.png', images: galleryData.genxmun || [] },
+  { id: 'ids', title: 'Indore Democratic Summit', icon: '/ids-logo.png', images: galleryData.ids || [] },
+  { id: 'cwm', title: 'Coffee with Mayor', icon: '/cwm-logo.png', images: galleryData.cwm || [] },
+  { id: 'kghk', title: 'Kho Gaye Hum Kahan?', icon: '/kghk-logo.png', images: galleryData.kghk || [] },
+  { id: 'ah', title: 'About Her', icon: '/ah-logo.png', images: galleryData.ah || [] }
 ];
 
 const CircularProgress = ({ progress, size }) => {

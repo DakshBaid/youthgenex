@@ -34,10 +34,16 @@ const ImageSlider = ({ images }) => {
   );
 };
 
+import galleryData from '../data/gallery-images.json';
+
 export default function IDSPage() {
-  const data2025 = ['/gallery/1.JPG', '/gallery/2.JPG', '/gallery/3.JPG'];
-  const data2024 = ['/gallery/4.JPG', '/gallery/5.JPG', '/gallery/6.JPG'];
-  const data2023 = ['/gallery/7.JPG', '/gallery/8.JPG', '/gallery/9.JPG'];
+  const idsImages = galleryData.ids || [];
+  
+  // We take the first 9 images and divide them across the 3 sections 
+  // If there are less than 9 images, we use placeholders or empty arrays which is handled gracefully
+  const data2025 = idsImages.slice(0, 3).map(img => `/gallery/${img}`);
+  const data2024 = idsImages.slice(3, 6).map(img => `/gallery/${img}`);
+  const data2023 = idsImages.slice(6, 9).map(img => `/gallery/${img}`);
 
   return (
     <div style={{ paddingTop: '80px', background: 'var(--soft)', minHeight: '100vh', paddingBottom: '6rem', overflowX: 'hidden' }}>
