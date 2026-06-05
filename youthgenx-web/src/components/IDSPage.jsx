@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FileText, MapPin } from 'lucide-react';
+import { FileText, MapPin, Building2, Users, MessageSquare } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from './SEO';
 
@@ -76,10 +76,56 @@ export default function IDSPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            style={{ fontSize: '1.25rem', color: 'var(--muted)', maxWidth: '800px', margin: '0 auto', lineHeight: 1.8, textAlign: 'justify' }}
+            style={{ fontSize: '1.25rem', color: 'var(--muted)', maxWidth: '800px', margin: '0 auto', lineHeight: 1.8, textAlign: 'center' }}
           >
             A premier platform for young minds to engage in diplomatic discourse, civic awareness, and impactful debates. Bringing together youth from across the nation to shape the future.
           </motion.p>
+        </div>
+      </section>
+
+      {/* About IDS Section */}
+      <section style={{ padding: '2rem 0 6rem', background: 'var(--soft)' }}>
+        <div className="container">
+          <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+              <h3 style={{ color: 'var(--red)', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '1rem', fontSize: '1rem', textAlign: 'center' }}>About IDS</h3>
+              <h2 style={{ fontSize: '3rem', fontFamily: '"Playfair Display"', color: 'var(--ink)', margin: '0 0 2rem', lineHeight: 1.2, textAlign: 'center' }}>
+                The Indore Democratic Summit
+              </h2>
+            </motion.div>
+            
+            <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.2 }} style={{ fontSize: '1.25rem', color: 'var(--muted)', lineHeight: 1.8, marginBottom: '5rem', textAlign: 'center' }}>
+              <p style={{ marginBottom: '1.5rem' }}>The Indore Democratic Summit (IDS) is Central India's premier youth conference that brings together brilliant young minds to deliberate, debate, and develop dynamic solutions for the world's most pressing challenges.</p>
+              <p>Since its inception, IDS has emerged as a platform where students experience the functioning of democratic institutions, cultivate leadership skills, and engage in intellectual discourse that shapes their worldview.</p>
+            </motion.div>
+
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.4 }}>
+              <h3 style={{ fontSize: '2.5rem', fontFamily: '"Playfair Display"', color: 'var(--ink)', marginBottom: '3rem', textAlign: 'center' }}>Key Pillars</h3>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '2rem' }}>
+                <div style={{ background: 'var(--white)', padding: '2.5rem', borderRadius: '24px', border: '1px solid rgba(0,0,0,0.05)', boxShadow: '0 10px 30px rgba(0,0,0,0.02)', textAlign: 'center' }}>
+                  <div style={{ color: 'var(--red)', marginBottom: '1.5rem', display: 'flex', justifyContent: 'center' }}><Building2 size={40} /></div>
+                  <h4 style={{ fontSize: '1.3rem', fontFamily: '"Playfair Display"', margin: '0 0 1rem', color: 'var(--ink)' }}>Democratic Experience</h4>
+                  <p style={{ color: 'var(--muted)', margin: 0, lineHeight: 1.6, fontSize: '1.05rem' }}>Students engage with real governance and democratic institutional frameworks firsthand.</p>
+                </div>
+                <div style={{ background: 'var(--white)', padding: '2.5rem', borderRadius: '24px', border: '1px solid rgba(0,0,0,0.05)', boxShadow: '0 10px 30px rgba(0,0,0,0.02)', textAlign: 'center' }}>
+                  <div style={{ color: 'var(--red)', marginBottom: '1.5rem', display: 'flex', justifyContent: 'center' }}><Users size={40} /></div>
+                  <h4 style={{ fontSize: '1.3rem', fontFamily: '"Playfair Display"', margin: '0 0 1rem', color: 'var(--ink)' }}>Leadership Development</h4>
+                  <p style={{ color: 'var(--muted)', margin: 0, lineHeight: 1.6, fontSize: '1.05rem' }}>Cultivating the skills, mindset, and vision of tomorrow's changemakers.</p>
+                </div>
+                <div style={{ background: 'var(--white)', padding: '2.5rem', borderRadius: '24px', border: '1px solid rgba(0,0,0,0.05)', boxShadow: '0 10px 30px rgba(0,0,0,0.02)', textAlign: 'center' }}>
+                  <div style={{ color: 'var(--red)', marginBottom: '1.5rem', display: 'flex', justifyContent: 'center' }}><MessageSquare size={40} /></div>
+                  <h4 style={{ fontSize: '1.3rem', fontFamily: '"Playfair Display"', margin: '0 0 1rem', color: 'var(--ink)' }}>Intellectual Discourse</h4>
+                  <p style={{ color: 'var(--muted)', margin: 0, lineHeight: 1.6, fontSize: '1.05rem' }}>Rigorous debate and deliberation on the world's most pressing challenges.</p>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.6 }} style={{ marginTop: '5rem', textAlign: 'center' }}>
+              <p style={{ fontSize: '1.6rem', fontFamily: '"Playfair Display"', color: 'var(--ink)', fontStyle: 'italic', padding: '2.5rem', background: 'var(--white)', borderRadius: '24px', border: '1px solid rgba(192,0,26,0.1)', boxShadow: '0 20px 40px rgba(192,0,26,0.05)' }}>
+                "Driven by the vision of nurturing future changemakers, IDS is not just an event — it is a movement."
+              </p>
+            </motion.div>
+          </div>
         </div>
       </section>
 
