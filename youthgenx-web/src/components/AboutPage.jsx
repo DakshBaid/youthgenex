@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, useInView, useTransform } from 'framer-motion';
-import { Mic, Building2, Users, Rocket, ArrowDown, ChevronRight } from 'lucide-react';
+import { Mic, Building2, Users, Rocket, ArrowDown, ChevronRight, MapPin, Phone, Mail } from 'lucide-react';
 import SEO from './SEO';
 
 // Word-by-word text reveal component
@@ -270,7 +270,7 @@ export default function AboutPage() {
             {/* The Drawing Line */}
             <motion.div
               initial={{ height: 0 }} whileInView={{ height: '100%' }} viewport={{ once: true, margin: "-20%" }} transition={{ duration: 2, ease: "easeInOut" }}
-              style={{ position: 'absolute', left: '50px', top: 0, width: '2px', background: 'var(--red)' }}
+              style={{ position: 'absolute', left: '0px', top: 0, width: '2px', background: 'var(--red)' }}
             />
 
             {[
@@ -286,13 +286,13 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-10%" }}
                 transition={{ delay: i * 0.2 + 0.5, duration: 0.6 }}
-                style={{ display: 'flex', alignItems: 'center', gap: '3rem', marginBottom: '4rem', paddingLeft: '40px', position: 'relative' }}
+                style={{ display: 'flex', alignItems: 'flex-start', gap: '3rem', marginBottom: '4rem', paddingLeft: '40px', position: 'relative' }}
               >
                 {/* Dot */}
-                <div style={{ position: 'absolute', left: '7px', top: '50%', transform: 'translateY(-50%)', width: '12px', height: '12px', background: 'var(--red)', borderRadius: '50%', border: '4px solid var(--soft)' }} />
+                <div style={{ position: 'absolute', left: '-5px', top: '15px', width: '12px', height: '12px', background: 'var(--red)', borderRadius: '50%', border: '4px solid var(--soft)' }} />
 
-                <div style={{ fontSize: '2rem', fontWeight: 900, color: 'var(--ink)' }}>{item.year}</div>
-                <div style={{ fontSize: '1.25rem', color: 'var(--muted)' }}>{item.text}</div>
+                <div style={{ fontSize: '2rem', fontWeight: 900, color: 'var(--ink)', lineHeight: 1 }}>{item.year}</div>
+                <div style={{ fontSize: '1.25rem', color: 'var(--muted)', marginTop: '-3px' }}>{item.text}</div>
               </motion.div>
             ))}
           </div>
@@ -309,10 +309,22 @@ export default function AboutPage() {
           <motion.h3 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} style={{ fontSize: '2.5rem', fontFamily: '"Playfair Display"', margin: '0 0 3rem', color: '#FFCED5' }}>
             Get Involved
           </motion.h3>
-          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.4 }} style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.8)', maxWidth: '600px', margin: '0 auto', lineHeight: 1.8, background: 'rgba(0,0,0,0.3)', padding: '2.5rem', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)' }}>
-            <p style={{ margin: '0 0 1rem' }}><strong>Address:</strong> 307, The View, 1 Lad Colony, Y.N. Road, Near High Court, Indore (MP)</p>
-            <p style={{ margin: '0 0 1rem' }}><strong>Phone:</strong> <a href="tel:9685136436" style={{ color: 'var(--red)', textDecoration: 'none' }}>9685136436</a></p>
-            <p style={{ margin: 0 }}><strong>Email:</strong> <a href="mailto:youthgenex.org@gmail.com" style={{ color: 'var(--red)', textDecoration: 'none' }}>youthgenex.org@gmail.com</a></p>
+          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.4 }} style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '2rem', marginTop: '4rem' }}>
+            <a href="https://maps.google.com/?q=307,+The+View,+1+Lad+Colony,+Y.N.+Road,+Near+High+Court,+Indore+(MP)" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '2.5rem 2rem', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', flex: '1 1 280px', borderRadius: '16px', textDecoration: 'none', transition: 'all 0.3s ease' }} onMouseOver={e => {e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.transform = 'translateY(-5px)'}} onMouseOut={e => {e.currentTarget.style.background = 'rgba(255,255,255,0.03)'; e.currentTarget.style.transform = 'translateY(0)'}}>
+               <MapPin size={36} color="var(--red)" style={{ marginBottom: '1.5rem' }} />
+               <h4 style={{ margin: '0 0 0.5rem', color: '#fff', fontSize: '1.3rem', fontFamily: '"Playfair Display"' }}>Visit Us</h4>
+               <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1.1rem', lineHeight: 1.6 }}>307, The View, 1 Lad Colony<br/>Y.N. Road, Indore (MP)</span>
+            </a>
+            <a href="tel:9685136436" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '2.5rem 2rem', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', flex: '1 1 280px', borderRadius: '16px', textDecoration: 'none', transition: 'all 0.3s ease' }} onMouseOver={e => {e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.transform = 'translateY(-5px)'}} onMouseOut={e => {e.currentTarget.style.background = 'rgba(255,255,255,0.03)'; e.currentTarget.style.transform = 'translateY(0)'}}>
+               <Phone size={36} color="var(--red)" style={{ marginBottom: '1.5rem' }} />
+               <h4 style={{ margin: '0 0 0.5rem', color: '#fff', fontSize: '1.3rem', fontFamily: '"Playfair Display"' }}>Call Us</h4>
+               <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1.1rem', lineHeight: 1.6 }}><br/>+91 9685136436</span>
+            </a>
+            <a href="mailto:youthgenex.org@gmail.com" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '2.5rem 2rem', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', flex: '1 1 280px', borderRadius: '16px', textDecoration: 'none', transition: 'all 0.3s ease' }} onMouseOver={e => {e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.transform = 'translateY(-5px)'}} onMouseOut={e => {e.currentTarget.style.background = 'rgba(255,255,255,0.03)'; e.currentTarget.style.transform = 'translateY(0)'}}>
+               <Mail size={36} color="var(--red)" style={{ marginBottom: '1.5rem' }} />
+               <h4 style={{ margin: '0 0 0.5rem', color: '#fff', fontSize: '1.3rem', fontFamily: '"Playfair Display"' }}>Email Us</h4>
+               <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1.1rem', lineHeight: 1.6 }}><br/>youthgenex.org@gmail.com</span>
+            </a>
           </motion.div>
         </div>
       </section>
