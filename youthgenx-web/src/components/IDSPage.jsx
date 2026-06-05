@@ -151,7 +151,7 @@ export default function IDSPage() {
           <h2 style={{ fontSize: '2.5rem', fontFamily: '"Playfair Display"', color: 'var(--ink)', margin: 0 }}>IDS 2025</h2>
           <div style={{ height: '2px', background: 'var(--line)', flexGrow: 1 }} />
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem', alignItems: 'center' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem', alignItems: 'flex-start' }}>
           <div>
             <ImageSlider images={data2025} />
           </div>
@@ -177,7 +177,7 @@ export default function IDSPage() {
           <h2 style={{ fontSize: '2.5rem', fontFamily: '"Playfair Display"', color: 'var(--ink)', margin: 0 }}>IDS 2024</h2>
           <div style={{ height: '2px', background: 'var(--line)', flexGrow: 1 }} />
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem', alignItems: 'center' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem', alignItems: 'flex-start' }}>
           <div style={{ order: 2 }}>
             <ImageSlider images={data2024} />
           </div>
@@ -203,7 +203,7 @@ export default function IDSPage() {
           <h2 style={{ fontSize: '2.5rem', fontFamily: '"Playfair Display"', color: 'var(--ink)', margin: 0 }}>IDS 2023</h2>
           <div style={{ height: '2px', background: 'var(--line)', flexGrow: 1 }} />
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem', alignItems: 'center' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem', alignItems: 'flex-start' }}>
           <div>
             <ImageSlider images={data2023} />
           </div>
