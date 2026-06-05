@@ -195,12 +195,15 @@ p.eyebrow { text-align: inherit !important; }
 }
 
 .masonry-gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 1.5rem;
 }
 
 .masonry-item {
+  flex: 1 1 200px;
+  max-width: 320px;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: var(--shadow);

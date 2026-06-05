@@ -3,9 +3,17 @@ import { motion, AnimatePresence } from 'framer-motion';
 import galleryData from '../data/gallery-images.json';
 import AfterMovies from './AfterMovies';
 
+const flatIdsImages = galleryData.ids 
+  ? [
+      ...(galleryData.ids['2025'] || []),
+      ...(galleryData.ids['2024'] || []),
+      ...(galleryData.ids['2023'] || [])
+    ]
+  : [];
+
 const rouletteEvents = [
   { id: 'genxmun', title: 'GENxMUN', icon: '/gxm-logo.png', images: galleryData.genxmun || [] },
-  { id: 'ids', title: 'Indore Democratic Summit', icon: '/ids-logo.png', images: galleryData.ids || [] },
+  { id: 'ids', title: 'Indore Democratic Summit', icon: '/ids-logo.png', images: flatIdsImages },
   { id: 'cwm', title: 'Coffee with Mayor', icon: '/cwm-logo.png', images: galleryData.cwm || [] },
   { id: 'kghk', title: 'Kho Gaye Hum Kahan?', icon: '/kghk-logo.png', images: galleryData.kghk || [] },
   { id: 'ah', title: 'About Her', icon: '/ah-logo.png', images: galleryData.ah || [] }
@@ -46,7 +54,7 @@ export default function Gallery() {
   const startTimeRef = useRef(Date.now());
   const [isMobile, setIsMobile] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
-  const [visibleCount, setVisibleCount] = useState(12);
+  const [visibleCount, setVisibleCount] = useState(16);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 900);
@@ -107,7 +115,7 @@ export default function Gallery() {
 
   // Reset image visibility count when the active event changes
   useEffect(() => {
-    setVisibleCount(12);
+    setVisibleCount(16);
   }, [activeIndex]);
 
   const activeEvent = rouletteEvents[activeIndex];
@@ -324,7 +332,7 @@ export default function Gallery() {
             {visibleCount < activeEvent.images.length && (
               <div style={{ textAlign: 'center', marginTop: '3rem' }}>
                 <button 
-                  onClick={() => setVisibleCount(prev => prev + 12)}
+                  onClick={() => setVisibleCount(prev => prev + 16)}
                   className="button button-outline"
                 >
                   Load More Highlights

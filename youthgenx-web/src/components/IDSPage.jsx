@@ -43,13 +43,12 @@ const ImageSlider = ({ images }) => {
 import galleryData from '../data/gallery-images.json';
 
 export default function IDSPage() {
-  const idsImages = galleryData.ids || [];
+  const idsImages = galleryData.ids || {};
   
-  // We take the first 9 images and divide them across the 3 sections 
-  // If there are less than 9 images, we use placeholders or empty arrays which is handled gracefully
-  const data2025 = idsImages.slice(0, 3).map(img => `/gallery/${img}`);
-  const data2024 = idsImages.slice(3, 6).map(img => `/gallery/${img}`);
-  const data2023 = idsImages.slice(6, 9).map(img => `/gallery/${img}`);
+  // Pull up to 3 images per year for the sliders
+  const data2025 = (idsImages['2025'] || []).slice(0, 3).map(img => `/gallery/${img}`);
+  const data2024 = (idsImages['2024'] || []).slice(0, 3).map(img => `/gallery/${img}`);
+  const data2023 = (idsImages['2023'] || []).slice(0, 3).map(img => `/gallery/${img}`);
 
   return (
     <div style={{ paddingTop: '80px', background: 'var(--soft)', minHeight: '100vh', paddingBottom: '6rem', overflowX: 'hidden' }}>
