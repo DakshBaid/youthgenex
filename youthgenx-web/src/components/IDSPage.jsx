@@ -18,7 +18,7 @@ const ImageSlider = ({ images }) => {
   if (images.length === 0) return <div style={{ height: '300px', background: 'var(--line)', borderRadius: '12px' }} />;
 
   return (
-    <Link to="/gallery/ids" style={{ display: 'block', position: 'relative', width: '100%', paddingBottom: '56.25%', height: 0, borderRadius: '16px', overflow: 'hidden', boxShadow: 'var(--shadow)', cursor: 'pointer' }} className="ids-slider">
+    <Link to="/event-gallery/ids" style={{ display: 'block', position: 'relative', width: '100%', paddingBottom: '56.25%', height: 0, borderRadius: '16px', overflow: 'hidden', boxShadow: 'var(--shadow)', cursor: 'pointer' }} className="ids-slider">
       <AnimatePresence mode="wait">
         <motion.img
           key={currentIndex}

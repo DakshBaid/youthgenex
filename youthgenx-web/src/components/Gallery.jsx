@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import galleryData from '../data/gallery-images.json';
 import AfterMovies from './AfterMovies';
@@ -329,16 +330,19 @@ export default function Gallery() {
               ))}
             </div>
 
-            {visibleCount < activeEvent.images.length && (
-              <div style={{ textAlign: 'center', marginTop: '3rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '3rem', flexWrap: 'wrap' }}>
+              {visibleCount < activeEvent.images.length && (
                 <button 
                   onClick={() => setVisibleCount(prev => prev + 16)}
                   className="button button-outline"
                 >
                   Load More Highlights
                 </button>
-              </div>
-            )}
+              )}
+              <Link to={`/event-gallery/${activeEvent.id}`} className="button button-red">
+                View Full {activeEvent.title} Gallery
+              </Link>
+            </div>
           </motion.div>
 
           {activeEvent.id === 'ids' && (
