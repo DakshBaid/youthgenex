@@ -156,14 +156,14 @@ export default function AboutPage() {
         <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at center, rgba(192,0,26,0.15) 0%, transparent 60%)' }} />
 
         <div className="container" style={{ position: 'relative', zIndex: 10, textAlign: 'center', color: 'var(--white)' }}>
-          <motion.h1 className="about-hero-title" initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} style={{ fontFamily: '"Playfair Display"', margin: '0 0 2rem', lineHeight: 1.1 }}>
-            Youth on the Move
-          </motion.h1>
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4, duration: 1 }} style={{ maxWidth: '800px', margin: '0 auto', fontSize: '1.25rem', color: 'rgba(255,255,255,0.7)', lineHeight: 1.8 }}>
-            <p style={{ marginBottom: '1.5rem' }}>YouthGenex is a youth empowerment organization dedicated to connecting and strengthening young individuals through events, workshops, and activism. Founded in May 2021, we have grown from a small virtual platform into one of Central India's most recognized youth-driven movements.</p>
-            <p>We believe every young individual holds the power to ignite positive change. We create the space, skills, and community to help them realize it.</p>
-          </motion.div>
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }} style={{ marginTop: '4rem' }}>
+          <h1 className="about-hero-title" style={{ fontFamily: '"Playfair Display"', margin: '0 0 2rem', lineHeight: 1.1 }}>
+            <RevealText text="Youth on the Move" />
+          </h1>
+          <div style={{ maxWidth: '800px', margin: '0 auto', fontSize: '1.25rem', color: 'rgba(255,255,255,0.7)', lineHeight: 1.8 }}>
+            <p style={{ marginBottom: '1.5rem' }}><RevealText text="YouthGenex is a youth empowerment organization dedicated to connecting and strengthening young individuals through events, workshops, and activism. Founded in May 2021, we have grown from a small virtual platform into one of Central India's most recognized youth-driven movements." /></p>
+            <p><RevealText text="We believe every young individual holds the power to ignite positive change. We create the space, skills, and community to help them realize it." /></p>
+          </div>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5 }} style={{ marginTop: '4rem' }}>
             <a href="#who-we-are" style={{ color: 'var(--white)', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none', borderBottom: '1px solid var(--red)', paddingBottom: '0.5rem', fontSize: '1.1rem', fontWeight: 600 }}>
               Who We Are <ArrowDown size={20} color="var(--red)" />
             </a>
@@ -174,13 +174,13 @@ export default function AboutPage() {
       {/* Section 2 - Who We Are */}
       <section id="who-we-are" style={{ padding: '8rem 0', background: 'var(--white)' }}>
         <div className="container" style={{ maxWidth: '900px', textAlign: 'center' }}>
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-20%" }} transition={{ duration: 0.8 }}>
-            <h2 className="about-section-title" style={{ fontFamily: '"Playfair Display"', margin: '0 0 2rem' }}>Who We Are</h2>
+          <div>
+            <h2 className="about-section-title" style={{ fontFamily: '"Playfair Display"', margin: '0 0 2rem' }}><RevealText text="Who We Are" /></h2>
             <div style={{ fontSize: '1.25rem', color: 'var(--muted)', lineHeight: 1.8 }}>
-              <p>We bring together aspiring leaders, student changemakers, and young professionals through experiences designed to spark curiosity, build confidence, and develop the next generation of civic and social leaders — from Model UN conferences and youth summits to open mics, health dialogues, and community events.</p>
-              <p style={{ marginTop: '1.5rem', fontWeight: 600, color: 'var(--ink)' }}>Based in Indore, our work spans across states — and our ambitions are global.</p>
+              <p><RevealText text="We bring together aspiring leaders, student changemakers, and young professionals through experiences designed to spark curiosity, build confidence, and develop the next generation of civic and social leaders — from Model UN conferences and youth summits to open mics, health dialogues, and community events." /></p>
+              <p style={{ marginTop: '1.5rem', fontWeight: 600, color: 'var(--ink)' }}><RevealText text="Based in Indore, our work spans across states — and our ambitions are global." /></p>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -264,7 +264,7 @@ export default function AboutPage() {
       {/* Section 6 - Interactive Timeline */}
       <section style={{ padding: '8rem 0', background: 'var(--soft)', position: 'relative' }}>
         <div className="container">
-          <h2 className="about-section-title" style={{ fontFamily: '"Playfair Display"', textAlign: 'center', margin: '0 0 6rem' }}>Our Journey</h2>
+          <h2 className="about-section-title" style={{ fontFamily: '"Playfair Display"', textAlign: 'center', margin: '0 0 6rem' }}><RevealText text="Our Journey" /></h2>
 
           <div style={{ position: 'relative', maxWidth: '800px', margin: '0 auto' }}>
             {/* The Drawing Line */}
@@ -303,9 +303,9 @@ export default function AboutPage() {
       {/* Section 8 - Get Involved */}
       <section style={{ padding: '10rem 0', background: 'linear-gradient(135deg, #0a0a0a, #300005)', color: 'var(--white)', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
         <div className="container" style={{ position: 'relative', zIndex: 10 }}>
-          <motion.h2 className="about-hero-title" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ fontFamily: '"Playfair Display"', margin: '0 0 1rem' }}>
-            This journey is just the beginning.
-          </motion.h2>
+          <h2 className="about-hero-title" style={{ fontFamily: '"Playfair Display"', margin: '0 0 1rem' }}>
+            <RevealText text="This journey is just the beginning." />
+          </h2>
           <motion.h3 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} style={{ fontSize: '2.5rem', fontFamily: '"Playfair Display"', margin: '0 0 3rem', color: '#FFCED5' }}>
             Get Involved
           </motion.h3>
