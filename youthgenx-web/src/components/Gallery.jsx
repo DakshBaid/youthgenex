@@ -52,7 +52,7 @@ const CircularProgress = ({ progress, size }) => {
         strokeWidth="3"
         strokeDasharray={circumference}
         strokeDashoffset={strokeDashoffset}
-        style={{ transition: 'stroke-dashoffset 0.1s linear' }}
+        style={{ transition: 'stroke-dashoffset 0.2s linear' }}
       />
     </svg>
   );
@@ -103,7 +103,8 @@ export default function Gallery() {
 
   useEffect(() => {
     lastTimeRef.current = Date.now();
-    const updateProgress = () => {
+    
+    timerRef.current = setInterval(() => {
       const now = Date.now();
       const delta = now - lastTimeRef.current;
       lastTimeRef.current = now;
@@ -118,14 +119,10 @@ export default function Gallery() {
           return np;
         });
       }
-
-      timerRef.current = requestAnimationFrame(updateProgress);
-    };
-
-    timerRef.current = requestAnimationFrame(updateProgress);
+    }, 200);
 
     return () => {
-      if (timerRef.current) cancelAnimationFrame(timerRef.current);
+      if (timerRef.current) clearInterval(timerRef.current);
     };
   }, [rotationIndex, currentDuration, selectedImage]);
 
