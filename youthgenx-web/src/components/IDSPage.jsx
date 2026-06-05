@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FileText, MapPin } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import SEO from './SEO';
 
 const ImageSlider = ({ images }) => {
@@ -17,7 +18,7 @@ const ImageSlider = ({ images }) => {
   if (images.length === 0) return <div style={{ height: '300px', background: 'var(--line)', borderRadius: '12px' }} />;
 
   return (
-    <div style={{ position: 'relative', width: '100%', height: '350px', borderRadius: '16px', overflow: 'hidden', boxShadow: 'var(--shadow)' }}>
+    <Link to="/gallery/ids" style={{ display: 'block', position: 'relative', width: '100%', paddingBottom: '56.25%', height: 0, borderRadius: '16px', overflow: 'hidden', boxShadow: 'var(--shadow)', cursor: 'pointer' }} className="ids-slider">
       <AnimatePresence mode="wait">
         <motion.img
           key={currentIndex}
@@ -30,7 +31,12 @@ const ImageSlider = ({ images }) => {
           alt="IDS Event Slider"
         />
       </AnimatePresence>
-    </div>
+      <div className="ids-slider-overlay" style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', opacity: 0, transition: 'opacity 0.3s ease', zIndex: 10 }}>
+        <span style={{ color: 'white', fontWeight: 600, fontSize: '1.2rem', padding: '0.8rem 1.5rem', border: '2px solid white', borderRadius: '50px', background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(4px)' }}>
+          View Full Gallery
+        </span>
+      </div>
+    </Link>
   );
 };
 
@@ -174,6 +180,7 @@ export default function IDSPage() {
 
       <style>{`
         .ids-hero-title { font-size: 4rem; }
+        .ids-slider:hover .ids-slider-overlay { opacity: 1 !important; }
         @media (max-width: 768px) {
           .ids-hero-title { font-size: 2.5rem; }
           section { padding: 3rem 0 !important; }

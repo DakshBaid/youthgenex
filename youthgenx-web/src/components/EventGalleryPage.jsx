@@ -25,6 +25,15 @@ const eventDetails = {
     title: 'About Her Gallery',
     desc: 'Celebrating women, leadership, and empowerment.',
     images: galleryData.ah || []
+  },
+  'ids': {
+    title: 'Indore Democratic Summit Gallery',
+    desc: 'Moments from Central India\'s premier youth conference.',
+    sections: [
+      { title: 'IDS 2025', images: galleryData.ids['2025'] || [] },
+      { title: 'IDS 2024', images: galleryData.ids['2024'] || [] },
+      { title: 'IDS 2023', images: galleryData.ids['2023'] || [] }
+    ]
   }
 };
 
@@ -62,31 +71,69 @@ export default function EventGalleryPage() {
           </motion.p>
         </div>
 
-        <div className="masonry-gallery">
-          <AnimatePresence>
-            {eventInfo.images.map((filename, index) => (
-              <motion.div 
-                key={filename} 
-                className="masonry-item"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: (index % 10) * 0.05 }}
-                onClick={() => setSelectedImage(`/gallery/${filename}`)}
-              >
-                <img 
-                  src={`/gallery/${filename}`} 
-                  alt={`${eventInfo.title} - ${index + 1}`} 
-                  loading="lazy"
-                  style={{
-                    width: '100%',
-                    borderRadius: '12px',
-                    display: 'block'
-                  }}
-                />
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </div>
+        {eventInfo.sections ? (
+          eventInfo.sections.map((section, secIdx) => (
+            section.images.length > 0 && (
+              <div key={section.title} style={{ marginBottom: '5rem' }}>
+                <h2 style={{ fontSize: '2.5rem', fontFamily: '"Playfair Display"', color: 'var(--ink)', marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                  {section.title}
+                  <div style={{ height: '2px', background: 'var(--line)', flexGrow: 1 }} />
+                </h2>
+                <div className="masonry-gallery">
+                  <AnimatePresence>
+                    {section.images.map((filename, index) => (
+                      <motion.div 
+                        key={filename} 
+                        className="masonry-item"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.4, delay: (index % 10) * 0.05 }}
+                        onClick={() => setSelectedImage(`/gallery/${filename}`)}
+                      >
+                        <img 
+                          src={`/gallery/${filename}`} 
+                          alt={`${section.title} - ${index + 1}`} 
+                          loading="lazy"
+                          style={{
+                            width: '100%',
+                            borderRadius: '12px',
+                            display: 'block'
+                          }}
+                        />
+                      </motion.div>
+                    ))}
+                  </AnimatePresence>
+                </div>
+              </div>
+            )
+          ))
+        ) : (
+          <div className="masonry-gallery">
+            <AnimatePresence>
+              {eventInfo.images.map((filename, index) => (
+                <motion.div 
+                  key={filename} 
+                  className="masonry-item"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: (index % 10) * 0.05 }}
+                  onClick={() => setSelectedImage(`/gallery/${filename}`)}
+                >
+                  <img 
+                    src={`/gallery/${filename}`} 
+                    alt={`${eventInfo.title} - ${index + 1}`} 
+                    loading="lazy"
+                    style={{
+                      width: '100%',
+                      borderRadius: '12px',
+                      display: 'block'
+                    }}
+                  />
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </div>
+        )}
       </div>
 
       <AnimatePresence>
