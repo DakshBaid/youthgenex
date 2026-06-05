@@ -41,6 +41,7 @@ export default function EventGalleryPage() {
   const { eventId } = useParams();
   const eventInfo = eventDetails[eventId];
   const [selectedImage, setSelectedImage] = useState(null);
+  const [visibleCount, setVisibleCount] = useState(16);
 
   if (!eventInfo) {
     return (
@@ -81,7 +82,7 @@ export default function EventGalleryPage() {
                 </h2>
                 <div className="masonry-gallery">
                   <AnimatePresence>
-                    {section.images.map((filename, index) => (
+                    {section.images.slice(0, visibleCount).map((filename, index) => (
                       <motion.div 
                         key={filename} 
                         className="masonry-item"
@@ -94,45 +95,59 @@ export default function EventGalleryPage() {
                           src={`/gallery/${filename}`} 
                           alt={`${section.title} - ${index + 1}`} 
                           loading="lazy"
-                          style={{
-                            width: '100%',
-                            borderRadius: '12px',
-                            display: 'block'
-                          }}
+                          style={{ width: '100%', borderRadius: '12px', display: 'block' }}
                         />
                       </motion.div>
                     ))}
                   </AnimatePresence>
                 </div>
+                {visibleCount < section.images.length && (
+                  <div style={{ textAlign: 'center', marginTop: '3rem' }}>
+                    <button 
+                      onClick={() => setVisibleCount(prev => prev + 16)}
+                      className="button button-outline"
+                    >
+                      Load More {section.title}
+                    </button>
+                  </div>
+                )}
               </div>
             )
           ))
         ) : (
-          <div className="masonry-gallery">
-            <AnimatePresence>
-              {eventInfo.images.map((filename, index) => (
-                <motion.div 
-                  key={filename} 
-                  className="masonry-item"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: (index % 10) * 0.05 }}
-                  onClick={() => setSelectedImage(`/gallery/${filename}`)}
+          <>
+            <div className="masonry-gallery">
+              <AnimatePresence>
+                {eventInfo.images.slice(0, visibleCount).map((filename, index) => (
+                  <motion.div 
+                    key={filename} 
+                    className="masonry-item"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: (index % 10) * 0.05 }}
+                    onClick={() => setSelectedImage(`/gallery/${filename}`)}
+                  >
+                    <img 
+                      src={`/gallery/${filename}`} 
+                      alt={`${eventInfo.title} - ${index + 1}`} 
+                      loading="lazy"
+                      style={{ width: '100%', borderRadius: '12px', display: 'block' }}
+                    />
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </div>
+            {visibleCount < eventInfo.images.length && (
+              <div style={{ textAlign: 'center', marginTop: '3rem' }}>
+                <button 
+                  onClick={() => setVisibleCount(prev => prev + 16)}
+                  className="button button-outline"
                 >
-                  <img 
-                    src={`/gallery/${filename}`} 
-                    alt={`${eventInfo.title} - ${index + 1}`} 
-                    loading="lazy"
-                    style={{
-                      width: '100%',
-                      borderRadius: '12px',
-                      display: 'block'
-                    }}
-                  />
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </div>
+                  Load More Highlights
+                </button>
+              </div>
+            )}
+          </>
         )}
       </div>
 
