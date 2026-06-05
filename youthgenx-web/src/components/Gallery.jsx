@@ -31,20 +31,23 @@ const rouletteEvents = [
 ];
 
 const CircularProgress = ({ progress, size }) => {
-  const radius = (size / 2) + 6; 
-  const center = (size / 2) + 10;
-  const svgSize = size + 20;
+  const radius = (size / 2) + 8; // Moved slightly out to clear the white border
+  const center = (size / 2) + 12;
+  const svgSize = size + 24;
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference - (progress / 100) * circumference;
 
   return (
-    <svg style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%) rotate(-90deg)', width: `${svgSize}px`, height: `${svgSize}px`, pointerEvents: 'none' }}>
+    <svg style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%) rotate(-90deg)', width: `${svgSize}px`, height: `${svgSize}px`, pointerEvents: 'none', zIndex: 0 }}>
+      {/* The dotted track */}
       <circle
         cx={center} cy={center} r={radius}
         fill="transparent"
-        stroke="rgba(192,0,26,0.15)"
-        strokeWidth="3"
+        stroke="rgba(192,0,26,0.25)"
+        strokeWidth="2"
+        strokeDasharray="4 6"
       />
+      {/* The smooth solid progress line */}
       <circle
         cx={center} cy={center} r={radius}
         fill="transparent"
@@ -52,6 +55,7 @@ const CircularProgress = ({ progress, size }) => {
         strokeWidth="3"
         strokeDasharray={circumference}
         strokeDashoffset={strokeDashoffset}
+        strokeLinecap="round"
         style={{ transition: 'stroke-dashoffset 0.2s linear' }}
       />
     </svg>
@@ -296,7 +300,9 @@ export default function Gallery() {
                         background: '#FFF',
                         overflow: 'hidden',
                         cursor: 'pointer',
-                        border: isActive ? '2px solid var(--red)' : '2px solid #FFF'
+                        border: '2px solid #FFF',
+                        position: 'relative',
+                        zIndex: 2
                       }}
                     >
                       <img src={ev.icon} alt={ev.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
