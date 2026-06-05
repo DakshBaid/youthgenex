@@ -60,9 +60,9 @@ export default function Footer() {
 
             <div style={{ marginTop: '2.5rem' }}>
               <h4 style={{ color: 'var(--white)', fontSize: '1.8rem', marginBottom: '0.5rem', fontFamily: '"Playfair Display"' }}>Youth<span style={{ color: 'var(--red)' }}>Genex</span> Office</h4>
-              <p style={{ margin: 0, color: 'rgba(255,255,255,0.8)', fontSize: '1.1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <MapPin size={20} color="var(--red)" /> 307, The View, 1 Laad Colony, YN Road- Indore (MP)- 452001
-              </p>
+              <a href="https://maps.google.com/?q=307,+The+View,+1+Lad+Colony,+Y.N.+Road,+Near+High+Court,+Indore+(MP)" target="_blank" rel="noopener noreferrer" style={{ margin: 0, color: 'rgba(255,255,255,0.8)', fontSize: '1.1rem', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none', transition: 'color 0.2s ease' }} onMouseOver={e => e.currentTarget.style.color = 'var(--white)'} onMouseOut={e => e.currentTarget.style.color = 'rgba(255,255,255,0.8)'}>
+                <MapPin size={20} color="var(--red)" style={{ flexShrink: 0 }} /> <span style={{ textDecoration: 'underline', textUnderlineOffset: '4px' }}>307, The View, 1 Laad Colony, YN Road- Indore (MP)- 452001</span>
+              </a>
             </div>
           </div>
 

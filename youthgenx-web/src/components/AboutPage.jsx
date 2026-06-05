@@ -320,10 +320,18 @@ export default function AboutPage() {
                <h4 style={{ margin: '0 0 0.5rem', color: '#fff', fontSize: '1.3rem', fontFamily: '"Playfair Display"' }}>Call Us</h4>
                <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1.1rem', lineHeight: 1.6 }}><br/>+91 9685136436</span>
             </a>
-            <a href="mailto:youthgenex.org@gmail.com" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '2.5rem 2rem', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', flex: '1 1 280px', borderRadius: '16px', textDecoration: 'none', transition: 'all 0.3s ease' }} onMouseOver={e => {e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.transform = 'translateY(-5px)'}} onMouseOut={e => {e.currentTarget.style.background = 'rgba(255,255,255,0.03)'; e.currentTarget.style.transform = 'translateY(0)'}}>
+            <a href="#" onClick={(e) => {
+              e.preventDefault();
+              const isMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+              if (isMobile) {
+                window.location.href = "mailto:youthgenex.org@gmail.com";
+              } else {
+                window.open("https://mail.google.com/mail/?view=cm&fs=1&to=youthgenex.org@gmail.com", "_blank");
+              }
+            }} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '2.5rem 1.5rem', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', flex: '1 1 280px', borderRadius: '16px', textDecoration: 'none', transition: 'all 0.3s ease', cursor: 'pointer' }} onMouseOver={e => {e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.transform = 'translateY(-5px)'}} onMouseOut={e => {e.currentTarget.style.background = 'rgba(255,255,255,0.03)'; e.currentTarget.style.transform = 'translateY(0)'}}>
                <Mail size={36} color="var(--red)" style={{ marginBottom: '1.5rem' }} />
                <h4 style={{ margin: '0 0 0.5rem', color: '#fff', fontSize: '1.3rem', fontFamily: '"Playfair Display"' }}>Email Us</h4>
-               <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1.1rem', lineHeight: 1.6 }}><br/>youthgenex.org@gmail.com</span>
+               <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1.1rem', lineHeight: 1.6, wordBreak: 'break-all' }}><br/>youthgenex.org@gmail.com</span>
             </a>
           </motion.div>
         </div>
