@@ -76,6 +76,50 @@ const MouseGlow = () => {
 };
 
 export default function AboutPage() {
+  useEffect(() => {
+    let animationFrameId;
+    let isAutoScrolling = true;
+
+    const autoScroll = () => {
+      if (!isAutoScrolling) return;
+      // Scroll exactly 1 pixel per frame for a smooth, slow descent
+      window.scrollBy({ top: 1, behavior: 'auto' });
+      
+      // Stop automatically if we reach the bottom of the page
+      if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+        isAutoScrolling = false;
+        return;
+      }
+      
+      animationFrameId = requestAnimationFrame(autoScroll);
+    };
+
+    const stopAutoScroll = () => {
+      isAutoScrolling = false;
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+    };
+
+    // Wait 2.5 seconds before starting the cinematic scroll
+    const timeoutId = setTimeout(() => {
+      animationFrameId = requestAnimationFrame(autoScroll);
+    }, 2500);
+
+    // Immediately stop auto-scrolling if the user attempts to take control
+    window.addEventListener('wheel', stopAutoScroll, { passive: true });
+    window.addEventListener('touchmove', stopAutoScroll, { passive: true });
+    window.addEventListener('mousedown', stopAutoScroll, { passive: true });
+    window.addEventListener('keydown', stopAutoScroll, { passive: true });
+
+    return () => {
+      clearTimeout(timeoutId);
+      stopAutoScroll();
+      window.removeEventListener('wheel', stopAutoScroll);
+      window.removeEventListener('touchmove', stopAutoScroll);
+      window.removeEventListener('mousedown', stopAutoScroll);
+      window.removeEventListener('keydown', stopAutoScroll);
+    };
+  }, []);
+
   return (
     <div style={{ background: 'var(--white)', minHeight: '100vh', overflow: 'hidden' }}>
       <SEO title="About Us" description="YouthGenex started with a simple belief — young people deserve platforms that help them grow beyond academics. Learn more about our story and mission." />
