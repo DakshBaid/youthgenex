@@ -157,56 +157,45 @@ export default function AboutPage() {
 
         <div className="container" style={{ position: 'relative', zIndex: 10, textAlign: 'center', color: 'var(--white)' }}>
           <motion.h1 className="about-hero-title" initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} style={{ fontFamily: '"Playfair Display"', margin: '0 0 2rem', lineHeight: 1.1 }}>
-            Building Opportunities For The Next Generation
+            Youth on the Move
           </motion.h1>
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4, duration: 1 }} style={{ maxWidth: '700px', margin: '0 auto', fontSize: '1.25rem', color: 'rgba(255,255,255,0.7)', lineHeight: 1.8 }}>
-            <p style={{ marginBottom: '1.5rem' }}>YouthGenex started with a simple belief — young people deserve platforms that help them grow beyond academics.</p>
-            <p>Today, we bring together students, educators, and future leaders through experiences that encourage learning, collaboration, and meaningful conversations.</p>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4, duration: 1 }} style={{ maxWidth: '800px', margin: '0 auto', fontSize: '1.25rem', color: 'rgba(255,255,255,0.7)', lineHeight: 1.8 }}>
+            <p style={{ marginBottom: '1.5rem' }}>YouthGenex is a youth empowerment organization dedicated to connecting and strengthening young individuals through events, workshops, and activism. Founded in May 2021, we have grown from a small virtual platform into one of Central India's most recognized youth-driven movements.</p>
+            <p>We believe every young individual holds the power to ignite positive change. We create the space, skills, and community to help them realize it.</p>
           </motion.div>
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }} style={{ marginTop: '4rem' }}>
-            <a href="#journey" style={{ color: 'var(--white)', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none', borderBottom: '1px solid var(--red)', paddingBottom: '0.5rem', fontSize: '1.1rem', fontWeight: 600 }}>
-              Our Journey <ArrowDown size={20} color="var(--red)" />
+            <a href="#who-we-are" style={{ color: 'var(--white)', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none', borderBottom: '1px solid var(--red)', paddingBottom: '0.5rem', fontSize: '1.1rem', fontWeight: 600 }}>
+              Who We Are <ArrowDown size={20} color="var(--red)" />
             </a>
           </motion.div>
         </div>
       </section>
 
-      {/* Section 2 - The Beginning Story */}
-      <section id="journey" style={{ padding: '8rem 0', background: 'var(--white)' }}>
-        <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem', alignItems: 'center' }}>
-            <motion.div
-              className="about-huge-year"
-              initial={{ scale: 0.8, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true, margin: "-20%" }} transition={{ duration: 0.8, ease: "easeOut" }}
-              style={{ fontWeight: 900, color: 'var(--soft)', lineHeight: 0.8, letterSpacing: '-5px' }}
-            >
-              2021
-            </motion.div>
-            <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-20%" }} transition={{ duration: 0.8 }}>
-              <h2 className="about-section-title" style={{ fontFamily: '"Playfair Display"', margin: '0 0 1.5rem' }}>It Started With An Idea</h2>
-              <div style={{ fontSize: '1.2rem', color: 'var(--muted)', lineHeight: 1.8 }}>
-                <p style={{ fontWeight: 700, color: 'var(--ink)' }}>Every student has potential.</p>
-                <p>But potential grows only when opportunities exist.</p>
-                <p style={{ marginTop: '1rem' }}>YouthGenex was created to provide those opportunities through events, discussions, leadership experiences, and communities where students can learn from one another.</p>
-              </div>
-            </motion.div>
-          </div>
+      {/* Section 2 - Who We Are */}
+      <section id="who-we-are" style={{ padding: '8rem 0', background: 'var(--white)' }}>
+        <div className="container" style={{ maxWidth: '900px', textAlign: 'center' }}>
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-20%" }} transition={{ duration: 0.8 }}>
+            <h2 className="about-section-title" style={{ fontFamily: '"Playfair Display"', margin: '0 0 2rem' }}>Who We Are</h2>
+            <div style={{ fontSize: '1.25rem', color: 'var(--muted)', lineHeight: 1.8 }}>
+              <p>We bring together aspiring leaders, student changemakers, and young professionals through experiences designed to spark curiosity, build confidence, and develop the next generation of civic and social leaders — from Model UN conferences and youth summits to open mics, health dialogues, and community events.</p>
+              <p style={{ marginTop: '1.5rem', fontWeight: 600, color: 'var(--ink)' }}>Based in Indore, our work spans across states — and our ambitions are global.</p>
+            </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Section 3 - What We Actually Do */}
+      {/* Section 3 - Vision, Mission & Values */}
       <section style={{ padding: '8rem 0', background: 'var(--soft)' }}>
         <div className="container">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <h2 className="about-section-title" style={{ fontFamily: '"Playfair Display"', textAlign: 'center', margin: '0 0 4rem' }}>We Create Experiences</h2>
+            <h2 className="about-section-title" style={{ fontFamily: '"Playfair Display"', textAlign: 'center', margin: '0 0 4rem' }}>Our Purpose</h2>
           </motion.div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
             {[
-              { icon: <Mic size={32} color="var(--red)" />, title: 'Leadership Summits', text: 'Helping students learn from experts and industry leaders.' },
-              { icon: <Building2 size={32} color="var(--red)" />, title: 'Youth Parliaments', text: 'Building awareness, confidence, and public speaking skills.' },
-              { icon: <Users size={32} color="var(--red)" />, title: 'Community Building', text: 'Connecting ambitious young minds across institutions.' },
-              { icon: <Rocket size={32} color="var(--red)" />, title: 'Skill Development', text: 'Creating opportunities to learn beyond classrooms.' }
+              { icon: <Rocket size={32} color="var(--red)" />, title: 'Our Vision', text: 'To become a global leader in youth empowerment, offering life-changing opportunities that enable young individuals to confront real-world challenges and drive positive societal impact.' },
+              { icon: <Users size={32} color="var(--red)" />, title: 'Our Mission', text: 'We inspire, educate, mentor, and develop future leaders. We equip young individuals with the tools, confidence, and community to thrive — and the courage to make a difference.' },
+              { icon: <Building2 size={32} color="var(--red)" />, title: 'Our Values', text: 'Integrity · Inclusivity · Collaboration · Innovation · Passion' }
             ].map((card, i) => (
               <motion.div
                 key={i}
@@ -229,7 +218,7 @@ export default function AboutPage() {
                   {card.icon}
                 </div>
                 <h3 style={{ fontSize: '1.5rem', fontFamily: '"Playfair Display"', margin: '0 0 1rem' }}>{card.title}</h3>
-                <p style={{ color: 'var(--muted)', fontSize: '1.05rem', lineHeight: 1.6, margin: 0 }}>{card.text}</p>
+                <p style={{ color: 'var(--muted)', fontSize: '1.1rem', lineHeight: 1.6, margin: 0, fontWeight: card.title === 'Our Values' ? 600 : 400 }}>{card.text}</p>
               </motion.div>
             ))}
           </div>
@@ -285,12 +274,11 @@ export default function AboutPage() {
             />
 
             {[
-              { year: '2021', text: 'YouthGenex Founded' },
-              { year: '2022', text: 'First Major Event' },
-              { year: '2023', text: 'Community Expansion' },
-              { year: '2024', text: 'Leadership Programs' },
-              { year: '2025', text: 'Growing Across Institutions' },
-              { year: '2026', text: 'IDS 2026' }
+              { year: '2021', text: 'Founded with Polity, a virtual open mic, followed by webinars, the Liberture Independence Day celebration, and the Youth Edge Series.' },
+              { year: '2022', text: 'First offline event (About Her), youth magazine launch (RevolYuva), and first Model UN (LedXMUN 2022).' },
+              { year: '2023', text: 'GENxMUN Edition 1 drew 200+ participants across three states. Indore Democratic Summit 2023 (Edition 1) — the country\'s first Urban Local Body Collaborated Conference — hosted with the Indore Municipal Corporation.' },
+              { year: '2024', text: 'Indore Democratic Summit 2024 (Edition 2) at SVKM\'s NMIMS Indore became Central India\'s biggest youth parliament. Coffee with Mayor connected young individuals directly with Indore\'s Mayor Shri Pushyamitra Bhargav.' },
+              { year: '2025', text: 'Indore Democratic Summit 2025 (Edition 3) — continuing to grow India\'s most impactful youth governance platform.' }
             ].map((item, i) => (
               <motion.div
                 key={i}
@@ -312,15 +300,20 @@ export default function AboutPage() {
       </section>
 
 
-      {/* Section 8 - Vision For Future */}
+      {/* Section 8 - Get Involved */}
       <section style={{ padding: '10rem 0', background: 'linear-gradient(135deg, #0a0a0a, #300005)', color: 'var(--white)', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
         <div className="container" style={{ position: 'relative', zIndex: 10 }}>
-          <motion.h2 className="about-hero-title" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ fontFamily: '"Playfair Display"', margin: '0 0 2rem' }}>
-            The Journey Has Just Begun.
+          <motion.h2 className="about-hero-title" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ fontFamily: '"Playfair Display"', margin: '0 0 1rem' }}>
+            This journey is just the beginning.
           </motion.h2>
-          <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.2 }} style={{ fontSize: '1.3rem', color: 'rgba(255,255,255,0.8)', maxWidth: '700px', margin: '0 auto 4rem', lineHeight: 1.8 }}>
-            We envision a future where every student has access to opportunities that inspire growth, leadership, and meaningful impact.
-          </motion.p>
+          <motion.h3 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} style={{ fontSize: '2.5rem', fontFamily: '"Playfair Display"', margin: '0 0 3rem', color: '#FFCED5' }}>
+            Get Involved
+          </motion.h3>
+          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.4 }} style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.8)', maxWidth: '600px', margin: '0 auto', lineHeight: 1.8, background: 'rgba(0,0,0,0.3)', padding: '2.5rem', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)' }}>
+            <p style={{ margin: '0 0 1rem' }}><strong>Address:</strong> 307, The View, 1 Lad Colony, Y.N. Road, Near High Court, Indore (MP)</p>
+            <p style={{ margin: '0 0 1rem' }}><strong>Phone:</strong> <a href="tel:9685136436" style={{ color: 'var(--red)', textDecoration: 'none' }}>9685136436</a></p>
+            <p style={{ margin: 0 }}><strong>Email:</strong> <a href="mailto:youthgenex.org@gmail.com" style={{ color: 'var(--red)', textDecoration: 'none' }}>youthgenex.org@gmail.com</a></p>
+          </motion.div>
         </div>
       </section>
 
