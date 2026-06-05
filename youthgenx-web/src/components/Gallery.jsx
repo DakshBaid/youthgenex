@@ -14,7 +14,17 @@ const flatIdsImages = galleryData.ids
 
 const rouletteEvents = [
   { id: 'genxmun', title: 'GENxMUN', icon: '/gxm-logo.png', images: galleryData.genxmun || [] },
-  { id: 'ids', title: 'Indore Democratic Summit', icon: '/ids-logo.png', images: flatIdsImages },
+  { 
+    id: 'ids', 
+    title: 'Indore Democratic Summit', 
+    icon: '/ids-logo.png', 
+    images: flatIdsImages,
+    sections: [
+      { title: 'IDS 2025', images: galleryData.ids['2025'] || [] },
+      { title: 'IDS 2024', images: galleryData.ids['2024'] || [] },
+      { title: 'IDS 2023', images: galleryData.ids['2023'] || [] }
+    ]
+  },
   { id: 'cwm', title: 'Coffee with Mayor', icon: '/cwm-logo.png', images: galleryData.cwm || [] },
   { id: 'kghk', title: 'Kho Gaye Hum Kahan?', icon: '/kghk-logo.png', images: galleryData.kghk || [] },
   { id: 'ah', title: 'About Her', icon: '/ah-logo.png', images: galleryData.ah || [] }
@@ -65,22 +75,19 @@ export default function Gallery() {
   }, []);
   
   const activeIndex = ((rotationIndex % rouletteEvents.length) + rouletteEvents.length) % rouletteEvents.length;
-  const currentDuration = rouletteEvents[activeIndex].id === 'ids' ? 15000 : 10000;
+  const currentDuration = rouletteEvents[activeIndex].id === 'ids' ? 40000 : 25000;
 
   const goToNext = () => {
     setRotationIndex(prev => prev + 1);
-    startTimeRef.current = Date.now();
     setProgress(0);
   };
 
   const handleManualClick = (clickedIndex) => {
     const currentMod = rotationIndex % rouletteEvents.length;
-    // Handle negative modulo correctly
     const normalizedMod = currentMod < 0 ? currentMod + rouletteEvents.length : currentMod;
     
     let diff = clickedIndex - normalizedMod;
     
-    // Shortest path calculation
     const half = rouletteEvents.length / 2;
     if (diff > half) {
       diff -= rouletteEvents.length;
@@ -89,22 +96,30 @@ export default function Gallery() {
     }
     
     setRotationIndex(prev => prev + diff);
-    startTimeRef.current = Date.now();
     setProgress(0);
   };
 
+  const lastTimeRef = useRef(Date.now());
+
   useEffect(() => {
+    lastTimeRef.current = Date.now();
     const updateProgress = () => {
       const now = Date.now();
-      const elapsed = now - startTimeRef.current;
-      const newProgress = Math.min((elapsed / currentDuration) * 100, 100);
-      setProgress(newProgress);
+      const delta = now - lastTimeRef.current;
+      lastTimeRef.current = now;
 
-      if (elapsed >= currentDuration) {
-        goToNext();
-      } else {
-        timerRef.current = requestAnimationFrame(updateProgress);
+      if (!selectedImage) {
+        setProgress(prev => {
+          const np = prev + (delta / currentDuration) * 100;
+          if (np >= 100) {
+            goToNext();
+            return 0;
+          }
+          return np;
+        });
       }
+
+      timerRef.current = requestAnimationFrame(updateProgress);
     };
 
     timerRef.current = requestAnimationFrame(updateProgress);
@@ -112,7 +127,7 @@ export default function Gallery() {
     return () => {
       if (timerRef.current) cancelAnimationFrame(timerRef.current);
     };
-  }, [rotationIndex, currentDuration]);
+  }, [rotationIndex, currentDuration, selectedImage]);
 
   // Reset image visibility count when the active event changes
   useEffect(() => {
@@ -314,21 +329,49 @@ export default function Gallery() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="masonry-gallery">
-              {activeEvent.images.slice(0, visibleCount).map((filename, idx) => (
-                <div 
-                  key={filename} 
-                  className="masonry-item"
-                  onClick={() => setSelectedImage(`/gallery/${filename}`)}
-                >
-                  <img 
-                    src={`/gallery/${filename}`} 
-                    alt={`${activeEvent.title} highlight ${idx + 1}`}
-                    loading="lazy"
-                  />
-                </div>
-              ))}
-            </div>
+            {activeEvent.sections ? (
+              activeEvent.sections.map((section, secIdx) => (
+                section.images.length > 0 && (
+                  <div key={section.title} style={{ marginBottom: '4rem' }}>
+                    <h3 style={{ fontSize: '1.8rem', fontFamily: '"Playfair Display"', color: 'var(--ink)', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                      {section.title}
+                      <div style={{ height: '1px', background: 'var(--line)', flexGrow: 1 }} />
+                    </h3>
+                    <div className="masonry-gallery">
+                      {section.images.slice(0, visibleCount).map((filename, idx) => (
+                        <div 
+                          key={filename} 
+                          className="masonry-item"
+                          onClick={() => setSelectedImage(`/gallery/${filename}`)}
+                        >
+                          <img 
+                            src={`/gallery/${filename}`} 
+                            alt={`${section.title} highlight ${idx + 1}`}
+                            loading="lazy"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )
+              ))
+            ) : (
+              <div className="masonry-gallery">
+                {activeEvent.images.slice(0, visibleCount).map((filename, idx) => (
+                  <div 
+                    key={filename} 
+                    className="masonry-item"
+                    onClick={() => setSelectedImage(`/gallery/${filename}`)}
+                  >
+                    <img 
+                      src={`/gallery/${filename}`} 
+                      alt={`${activeEvent.title} highlight ${idx + 1}`}
+                      loading="lazy"
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
 
             <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '3rem', flexWrap: 'wrap' }}>
               {visibleCount < activeEvent.images.length && (
