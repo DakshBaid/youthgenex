@@ -41,7 +41,10 @@ export default function EventGalleryPage() {
   const { eventId } = useParams();
   const eventInfo = eventDetails[eventId];
   const [selectedImage, setSelectedImage] = useState(null);
-  const [visibleCount, setVisibleCount] = useState(16);
+  const [visibleCounts, setVisibleCounts] = useState({});
+
+  const getVisibleCount = (key) => visibleCounts[key] || 8;
+  const handleLoadMore = (key) => setVisibleCounts(prev => ({ ...prev, [key]: getVisibleCount(key) + 8 }));
 
   if (!eventInfo) {
     return (
@@ -82,13 +85,13 @@ export default function EventGalleryPage() {
                 </h2>
                 <div className="masonry-gallery">
                   <AnimatePresence>
-                    {section.images.slice(0, visibleCount).map((filename, index) => (
+                    {section.images.slice(0, getVisibleCount(section.title)).map((filename, index) => (
                       <motion.div 
                         key={filename} 
                         className="masonry-item"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.4, delay: (index % 10) * 0.05 }}
+                        transition={{ duration: 0.4, delay: (index % 8) * 0.05 }}
                         onClick={() => setSelectedImage(`/gallery/${filename}`)}
                       >
                         <img 
@@ -101,10 +104,10 @@ export default function EventGalleryPage() {
                     ))}
                   </AnimatePresence>
                 </div>
-                {visibleCount < section.images.length && (
+                {getVisibleCount(section.title) < section.images.length && (
                   <div style={{ textAlign: 'center', marginTop: '3rem' }}>
                     <button 
-                      onClick={() => setVisibleCount(prev => prev + 16)}
+                      onClick={() => handleLoadMore(section.title)}
                       className="button button-outline"
                     >
                       Load More {section.title}
@@ -118,13 +121,13 @@ export default function EventGalleryPage() {
           <>
             <div className="masonry-gallery">
               <AnimatePresence>
-                {eventInfo.images.slice(0, visibleCount).map((filename, index) => (
+                {eventInfo.images.slice(0, getVisibleCount('default')).map((filename, index) => (
                   <motion.div 
                     key={filename} 
                     className="masonry-item"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: (index % 10) * 0.05 }}
+                    transition={{ duration: 0.4, delay: (index % 8) * 0.05 }}
                     onClick={() => setSelectedImage(`/gallery/${filename}`)}
                   >
                     <img 
@@ -137,10 +140,10 @@ export default function EventGalleryPage() {
                 ))}
               </AnimatePresence>
             </div>
-            {visibleCount < eventInfo.images.length && (
+            {getVisibleCount('default') < eventInfo.images.length && (
               <div style={{ textAlign: 'center', marginTop: '3rem' }}>
                 <button 
-                  onClick={() => setVisibleCount(prev => prev + 16)}
+                  onClick={() => handleLoadMore('default')}
                   className="button button-outline"
                 >
                   Load More Highlights
