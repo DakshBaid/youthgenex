@@ -84,13 +84,13 @@ export default function AboutPage() {
       if (!isAutoScrolling) return;
       // Scroll exactly 1 pixel per frame for a smooth, slow descent
       window.scrollBy({ top: 1, behavior: 'auto' });
-      
+
       // Stop automatically if we reach the bottom of the page
       if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
         isAutoScrolling = false;
         return;
       }
-      
+
       animationFrameId = requestAnimationFrame(autoScroll);
     };
 
@@ -164,9 +164,6 @@ export default function AboutPage() {
             <p><RevealText text="We believe every young individual holds the power to ignite positive change. We create the space, skills, and community to help them realize it." /></p>
           </div>
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5 }} style={{ marginTop: '4rem' }}>
-            <a href="#who-we-are" style={{ color: 'var(--white)', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none', borderBottom: '1px solid var(--red)', paddingBottom: '0.5rem', fontSize: '1.1rem', fontWeight: 600 }}>
-              Who We Are <ArrowDown size={20} color="var(--red)" />
-            </a>
           </motion.div>
         </div>
       </section>
@@ -175,7 +172,7 @@ export default function AboutPage() {
       <section id="who-we-are" style={{ padding: '8rem 0', background: 'var(--white)' }}>
         <div className="container" style={{ maxWidth: '900px', textAlign: 'center' }}>
           <div>
-            <h2 className="about-section-title" style={{ fontFamily: '"Playfair Display"', margin: '0 0 2rem' }}><RevealText text="Who We Are" /></h2>
+            <h2 className="about-section-title" style={{ fontFamily: '"Playfair Display"', margin: '0 0 2rem' }}><RevealText text="Who Are We" /></h2>
             <div style={{ fontSize: '1.25rem', color: 'var(--muted)', lineHeight: 1.8 }}>
               <p><RevealText text="We bring together aspiring leaders, student changemakers, and young professionals through experiences designed to spark curiosity, build confidence, and develop the next generation of civic and social leaders — from Model UN conferences and youth summits to open mics, health dialogues, and community events." /></p>
               <p style={{ marginTop: '1.5rem', fontWeight: 600, color: 'var(--ink)' }}><RevealText text="Based in Indore, our work spans across states — and our ambitions are global." /></p>
@@ -195,7 +192,7 @@ export default function AboutPage() {
             {[
               { icon: <Rocket size={32} color="var(--red)" />, title: 'Our Vision', text: 'To become a global leader in youth empowerment, offering life-changing opportunities that enable young individuals to confront real-world challenges and drive positive societal impact.' },
               { icon: <Users size={32} color="var(--red)" />, title: 'Our Mission', text: 'We inspire, educate, mentor, and develop future leaders. We equip young individuals with the tools, confidence, and community to thrive — and the courage to make a difference.' },
-              { icon: <Building2 size={32} color="var(--red)" />, title: 'Our Values', text: 'Integrity · Inclusivity · Collaboration · Innovation · Passion' }
+              { icon: <Building2 size={32} color="var(--red)" />, title: 'Our Values', text: 'Integrity \n· Inclusivity \n· Collaboration \n· Innovation \n· Passion' }
             ].map((card, i) => (
               <motion.div
                 key={i}
@@ -303,37 +300,9 @@ export default function AboutPage() {
       {/* Section 8 - Get Involved */}
       <section style={{ padding: '10rem 0', background: 'linear-gradient(135deg, #0a0a0a, #300005)', color: 'var(--white)', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
         <div className="container" style={{ position: 'relative', zIndex: 10 }}>
-          <h2 className="about-hero-title" style={{ fontFamily: '"Playfair Display"', margin: '0 0 1rem' }}>
+          <h2 className="about-hero-title" style={{ fontFamily: '"Playfair Display"', margin: 0 }}>
             <RevealText text="This journey is just the beginning." />
           </h2>
-          <motion.h3 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} style={{ fontSize: '2.5rem', fontFamily: '"Playfair Display"', margin: '0 0 3rem', color: '#FFCED5' }}>
-            Get Involved
-          </motion.h3>
-          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.4 }} style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '2rem', marginTop: '4rem' }}>
-            <a href="https://maps.google.com/?q=307,+The+View,+1+Lad+Colony,+Y.N.+Road,+Near+High+Court,+Indore+(MP)" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '2.5rem 2rem', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', flex: '1 1 280px', borderRadius: '16px', textDecoration: 'none', transition: 'all 0.3s ease' }} onMouseOver={e => {e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.transform = 'translateY(-5px)'}} onMouseOut={e => {e.currentTarget.style.background = 'rgba(255,255,255,0.03)'; e.currentTarget.style.transform = 'translateY(0)'}}>
-               <MapPin size={36} color="var(--red)" style={{ marginBottom: '1.5rem' }} />
-               <h4 style={{ margin: '0 0 0.5rem', color: '#fff', fontSize: '1.3rem', fontFamily: '"Playfair Display"' }}>Visit Us</h4>
-               <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1.1rem', lineHeight: 1.6 }}>307, The View, 1 Lad Colony<br/>Y.N. Road, Indore (MP)</span>
-            </a>
-            <a href="tel:9685136436" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '2.5rem 2rem', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', flex: '1 1 280px', borderRadius: '16px', textDecoration: 'none', transition: 'all 0.3s ease' }} onMouseOver={e => {e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.transform = 'translateY(-5px)'}} onMouseOut={e => {e.currentTarget.style.background = 'rgba(255,255,255,0.03)'; e.currentTarget.style.transform = 'translateY(0)'}}>
-               <Phone size={36} color="var(--red)" style={{ marginBottom: '1.5rem' }} />
-               <h4 style={{ margin: '0 0 0.5rem', color: '#fff', fontSize: '1.3rem', fontFamily: '"Playfair Display"' }}>Call Us</h4>
-               <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1.1rem', lineHeight: 1.6 }}><br/>+91 9685136436</span>
-            </a>
-            <a href="#" onClick={(e) => {
-              e.preventDefault();
-              const isMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-              if (isMobile) {
-                window.location.href = "mailto:youthgenex.org@gmail.com";
-              } else {
-                window.open("https://mail.google.com/mail/?view=cm&fs=1&to=youthgenex.org@gmail.com", "_blank");
-              }
-            }} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '2.5rem 1.5rem', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', flex: '1 1 280px', borderRadius: '16px', textDecoration: 'none', transition: 'all 0.3s ease', cursor: 'pointer' }} onMouseOver={e => {e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.transform = 'translateY(-5px)'}} onMouseOut={e => {e.currentTarget.style.background = 'rgba(255,255,255,0.03)'; e.currentTarget.style.transform = 'translateY(0)'}}>
-               <Mail size={36} color="var(--red)" style={{ marginBottom: '1.5rem' }} />
-               <h4 style={{ margin: '0 0 0.5rem', color: '#fff', fontSize: '1.3rem', fontFamily: '"Playfair Display"' }}>Email Us</h4>
-               <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1.1rem', lineHeight: 1.6, wordBreak: 'break-all' }}><br/>youthgenex.org@gmail.com</span>
-            </a>
-          </motion.div>
         </div>
       </section>
 
