@@ -69,7 +69,10 @@ export default function Gallery() {
   const startTimeRef = useRef(Date.now());
   const [isMobile, setIsMobile] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
-  const [visibleCount, setVisibleCount] = useState(16);
+  const [visibleCounts, setVisibleCounts] = useState({});
+
+  const getVisibleCount = (key) => visibleCounts[key] || 8;
+  const handleLoadMore = (key) => setVisibleCounts(prev => ({ ...prev, [key]: getVisibleCount(key) + 8 }));
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 900);
@@ -132,7 +135,7 @@ export default function Gallery() {
 
   // Reset image visibility count when the active event changes
   useEffect(() => {
-    setVisibleCount(16);
+    setVisibleCounts({});
   }, [activeIndex]);
 
   const activeEvent = rouletteEvents[activeIndex];
@@ -341,7 +344,7 @@ export default function Gallery() {
                       <div style={{ height: '1px', background: 'var(--line)', flexGrow: 1 }} />
                     </h3>
                     <div className="masonry-gallery">
-                      {section.images.slice(0, visibleCount).map((filename, idx) => (
+                      {section.images.slice(0, getVisibleCount(section.title)).map((filename, idx) => (
                         <div 
                           key={filename} 
                           className="masonry-item"
@@ -355,12 +358,22 @@ export default function Gallery() {
                         </div>
                       ))}
                     </div>
+                    {getVisibleCount(section.title) < section.images.length && (
+                      <div style={{ textAlign: 'center', marginTop: '3rem' }}>
+                        <button 
+                          onClick={() => handleLoadMore(section.title)}
+                          className="button button-outline"
+                        >
+                          Load More {section.title}
+                        </button>
+                      </div>
+                    )}
                   </div>
                 )
               ))
             ) : (
               <div className="masonry-gallery">
-                {activeEvent.images.slice(0, visibleCount).map((filename, idx) => (
+                {activeEvent.images.slice(0, getVisibleCount('default')).map((filename, idx) => (
                   <div 
                     key={filename} 
                     className="masonry-item"
@@ -377,9 +390,9 @@ export default function Gallery() {
             )}
 
             <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '3rem', flexWrap: 'wrap' }}>
-              {visibleCount < activeEvent.images.length && (
+              {!activeEvent.sections && getVisibleCount('default') < activeEvent.images.length && (
                 <button 
-                  onClick={() => setVisibleCount(prev => prev + 16)}
+                  onClick={() => handleLoadMore('default')}
                   className="button button-outline"
                 >
                   Load More Highlights
