@@ -282,11 +282,11 @@ export default function AboutPage() {
             />
 
             {[
-              { year: '2021', text: 'Founded with Polity, a virtual open mic, followed by webinars, the Liberture Independence Day celebration, and the Youth Edge Series.' },
-              { year: '2022', text: 'First offline event (About Her), youth magazine launch (RevolYuva), and first Model UN (LedXMUN 2022).' },
-              { year: '2023', text: 'GENxMUN Edition 1 drew 200+ participants across three states. Indore Democratic Summit 2023 (Edition 1) — the country\'s first Urban Local Body Collaborated Conference — hosted with the Indore Municipal Corporation.' },
-              { year: '2024', text: 'Indore Democratic Summit 2024 (Edition 2) at SVKM\'s NMIMS Indore became Central India\'s biggest youth parliament. Coffee with Mayor connected young individuals directly with Indore\'s Mayor Shri Pushyamitra Bhargav.' },
-              { year: '2025', text: 'Indore Democratic Summit 2025 (Edition 3) — continuing to grow India\'s most impactful youth governance platform.' }
+              { year: '2021', text: 'YouthGenex was founded with a vision to empower young individuals across India. The seeds of a movement were planted.' },
+              { year: '2022', text: "We hosted About Her, our first offline event focused on women's empowerment, followed by Kho Gaye Hum Kahan, a community-building event, and GENxMUN, our first Model United Nations conference." },
+              { year: '2023', text: "The Indore Democratic Summit 2023 (Edition 1) — the country's first Urban Local Body Collaborated Conference — was hosted in partnership with the Indore Municipal Corporation, empowering young individuals to engage in governance and leadership." },
+              { year: '2024', text: "Indore Democratic Summit 2024 (Edition 2) at SVKM's NMIMS Indore became Central India's biggest youth parliament. Coffee with Mayor connected young individuals directly with Indore's Mayor Shri Pushyamitra Bhargav." },
+              { year: '2025', text: "Indore Democratic Summit 2025 (Edition 3) — continuing to grow India's most impactful youth governance platform." }
             ].map((item, i) => (
               <motion.div
                 key={i}
