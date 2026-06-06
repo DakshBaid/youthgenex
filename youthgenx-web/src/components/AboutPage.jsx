@@ -215,7 +215,7 @@ export default function AboutPage() {
                   {card.icon}
                 </div>
                 <h3 style={{ fontSize: '1.5rem', fontFamily: '"Playfair Display"', margin: '0 0 1rem' }}>{card.title}</h3>
-                <p style={{ color: 'var(--muted)', fontSize: '1.1rem', lineHeight: 1.6, margin: 0, fontWeight: card.title === 'Our Values' ? 600 : 400 }}>{card.text}</p>
+                <p style={{ color: 'var(--muted)', fontSize: '1.1rem', lineHeight: 1.6, margin: 0, fontWeight: card.title === 'Our Values' ? 600 : 400, whiteSpace: 'pre-line' }}>{card.text}</p>
               </motion.div>
             ))}
           </div>
