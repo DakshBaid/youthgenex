@@ -192,7 +192,7 @@ export default function AboutPage() {
             {[
               { icon: <Rocket size={32} color="var(--red)" />, title: 'Our Vision', text: 'To become a global leader in youth empowerment, offering life-changing opportunities that enable young individuals to confront real-world challenges and drive positive societal impact.' },
               { icon: <Users size={32} color="var(--red)" />, title: 'Our Mission', text: 'We inspire, educate, mentor, and develop future leaders. We equip young individuals with the tools, confidence, and community to thrive — and the courage to make a difference.' },
-              { icon: <Building2 size={32} color="var(--red)" />, title: 'Our Values', text: 'Integrity \n· Inclusivity \n· Collaboration \n· Innovation \n· Passion' }
+              { icon: <Building2 size={32} color="var(--red)" />, title: 'Our Values', values: ['Integrity', 'Inclusivity', 'Collaboration', 'Innovation', 'Passion'] }
             ].map((card, i) => (
               <motion.div
                 key={i}
@@ -208,14 +208,25 @@ export default function AboutPage() {
                   boxShadow: 'var(--shadow)',
                   border: '1px solid rgba(0,0,0,0.03)',
                   transformStyle: 'preserve-3d',
-                  perspective: '1000px'
+                  perspective: '1000px',
+                  display: 'flex',
+                  flexDirection: 'column'
                 }}
               >
-                <div style={{ marginBottom: '1.5rem', background: 'rgba(192,0,26,0.05)', display: 'inline-block', padding: '1rem', borderRadius: '16px' }}>
+                <div style={{ marginBottom: '1.5rem', background: 'rgba(192,0,26,0.05)', display: 'inline-block', padding: '1rem', borderRadius: '16px', alignSelf: 'flex-start' }}>
                   {card.icon}
                 </div>
                 <h3 style={{ fontSize: '1.5rem', fontFamily: '"Playfair Display"', margin: '0 0 1rem' }}>{card.title}</h3>
-                <p style={{ color: 'var(--muted)', fontSize: '1.1rem', lineHeight: 1.6, margin: 0, fontWeight: card.title === 'Our Values' ? 600 : 400, whiteSpace: 'pre-line' }}>{card.text}</p>
+                {card.text && <p style={{ color: 'var(--muted)', fontSize: '1.1rem', lineHeight: 1.6, margin: 0 }}>{card.text}</p>}
+                {card.values && (
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem' }}>
+                    {card.values.map((v, i) => (
+                      <span key={i} style={{ padding: '0.5rem 1rem', background: 'rgba(192,0,26,0.05)', color: 'var(--red)', borderRadius: '50px', fontSize: '0.95rem', fontWeight: 700, border: '1px solid rgba(192,0,26,0.1)' }}>
+                        {v}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </motion.div>
             ))}
           </div>
